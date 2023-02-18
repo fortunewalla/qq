@@ -1,0 +1,26 @@
+project:
+  type: website
+  #output-dir: docs
+website:
+  title: "oeuvre"
+  site-url: "http://localhost:3221/"
+  navbar:
+    right:
+      - text: "?"
+        # icon: question-circle
+        href: about.qmd
+      - icon: rss
+        href: index.xml
+      #- icon: github
+      #  href: https://github.com/
+      #- icon: twitter
+      #  href: https://twitter.com
+format:
+  html:
+    theme: 
+      light: flatly
+      dark: darkly
+    css: styles.css
+
+
+

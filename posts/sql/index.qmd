@@ -1,0 +1,14 @@
+---
+title: "SQL"
+#author: "Harlow Malloc"
+date: "2027-02-16"
+date-modified: "2/17/2029"
+categories: [guide, sql]
+image: "image.jpg"
+#draft: true
+---
+
+
+
+
+This is a post with executable code.
