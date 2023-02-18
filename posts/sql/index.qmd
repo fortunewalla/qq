@@ -1,14 +1,11 @@
 ---
-title: "SQL"
+title: "This is a long guide to mastering SQL in a long way."
 #author: "Harlow Malloc"
-date: "2027-02-16"
-date-modified: "2/17/2029"
+date: "2023-02-18"
+date-modified: "2/18/2023"
 categories: [guide, sql]
 image: "image.jpg"
 #draft: true
 ---
 
-
-
-
-This is a post with executable code.
+This is a long guide to mastering SQL.

@@ -1,12 +1,12 @@
 ---
 listing:
   contents: posts
-  sort: "date desc"
+  sort: "date-modified desc"
   type: table
   categories: true
   sort-ui: true
   filter-ui: true
-  fields: [title,date-modified]
+  fields: [title,date-modified,date]
   page-size: 9999
   feed: true
 description: "Explore data science, product management, coding & the Metaverse."

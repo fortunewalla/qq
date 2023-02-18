@@ -73,7 +73,7 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-date-modified',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      valueNames: ['listing-title','listing-date-modified','listing-date',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
       
       searchColumns: ["listing-date","listing-title","listing-author"],
     };
@@ -156,6 +156,12 @@ ul.task-list li input[type="checkbox"] {
      <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
        <option value="" disabled="" selected="" hidden="">Order By</option>
        <option value="index" data-direction="asc">Default</option>
+         <option value="listing-date-sort" data-direction="asc">
+          Date - Oldest
+        </option>
+         <option value="listing-date-sort" data-direction="desc">
+          Date - Newest
+        </option>
          <option value="listing-title-sort" data-direction="asc">
           Title
         </option>
@@ -176,31 +182,43 @@ ul.task-list li input[type="checkbox"] {
 <th>
 Modified
 </th>
+<th>
+<a class="sort" data-sort="listing-date-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Date</a>
+</th>
 </tr>
 </thead>
 <tbody class="list">
-<tr data-index="0" data-categories="guide,sql" data-listing-date-sort="1802716200000" data-listing-file-modified-sort="1676733989411" data-listing-date-modified-sort="1865961000000" data-listing-reading-time-sort="0.035" data-listing-title-sort="SQL" data-listing-filename-sort="index.qmd">
-<td class="listing-title">
-<a href="./posts/sql/index.html" class="title">SQL</a>
-</td>
-<td class="listing-date-modified">
-Feb 17, 2029
-</td>
-</tr>
-<tr data-index="1" data-categories="news" data-listing-date-sort="1675708200000" data-listing-file-modified-sort="1676733989409" data-listing-date-modified-sort="1708108200000" data-listing-reading-time-sort="0.16" data-listing-title-sort="Welcome To My Blog" data-listing-filename-sort="index.qmd">
-<td class="listing-title">
-<a href="./posts/welcome/index.html" class="title">Welcome To My Blog</a>
-</td>
-<td class="listing-date-modified">
-Feb 17, 2024
-</td>
-</tr>
-<tr data-index="2" data-categories="news,code,analysis" data-listing-date-sort="950121000000" data-listing-file-modified-sort="1676733989410" data-listing-date-modified-sort="950725800000" data-listing-reading-time-sort="0.035" data-listing-title-sort="Post With Code" data-listing-filename-sort="index.qmd">
+<tr data-index="0" data-categories="news,code,analysis" data-listing-date-sort="1676572200000" data-listing-file-modified-sort="1676744081928" data-listing-date-modified-sort="1866047400000" data-listing-reading-time-sort="0.035" data-listing-title-sort="Post With Code" data-listing-filename-sort="index.qmd">
 <td class="listing-title">
 <a href="./posts/post-with-code/index.html" class="title">Post With Code</a>
 </td>
 <td class="listing-date-modified">
-Feb 17, 2000
+Feb 18, 2029
+</td>
+<td class="listing-date">
+Feb 17, 2023
+</td>
+</tr>
+<tr data-index="1" data-categories="news" data-listing-date-sort="1676572200000" data-listing-file-modified-sort="1676744081927" data-listing-date-modified-sort="1771353000000" data-listing-reading-time-sort="0.16" data-listing-title-sort="Welcome To My Blog" data-listing-filename-sort="index.qmd">
+<td class="listing-title">
+<a href="./posts/welcome/index.html" class="title">Welcome To My Blog</a>
+</td>
+<td class="listing-date-modified">
+Feb 18, 2026
+</td>
+<td class="listing-date">
+Feb 17, 2023
+</td>
+</tr>
+<tr data-index="2" data-categories="guide,sql" data-listing-date-sort="1676658600000" data-listing-file-modified-sort="1676743930711" data-listing-date-modified-sort="1676658600000" data-listing-reading-time-sort="0.04" data-listing-title-sort="This is a long guide to mastering SQL in a long way." data-listing-filename-sort="index.qmd">
+<td class="listing-title">
+<a href="./posts/sql/index.html" class="title">This is a long guide to mastering SQL in a long way.</a>
+</td>
+<td class="listing-date-modified">
+Feb 18, 2023
+</td>
+<td class="listing-date">
+Feb 18, 2023
 </td>
 </tr>
 </tbody>
