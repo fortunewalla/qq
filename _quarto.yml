@@ -1,6 +1,6 @@
 project:
   type: website
-  #output-dir: docs
+  output-dir: docs
 website:
   title: "oeuvre"
   site-url: "http://localhost:3221/"
