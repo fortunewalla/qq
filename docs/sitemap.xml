@@ -1,39 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://localhost:3221/about.html</loc>
-    <lastmod>2023-03-23T06:44:26.503Z</lastmod>
-  </url>
-  <url>
-    <loc>http://localhost:3221/index.html</loc>
-    <lastmod>2023-03-23T06:53:33.397Z</lastmod>
-  </url>
-  <url>
-    <loc>http://localhost:3221/posts/post-with-code/index.html</loc>
-    <lastmod>2023-02-22T10:23:03.114Z</lastmod>
-  </url>
-  <url>
-    <loc>http://localhost:3221/posts/sql/index.html</loc>
-    <lastmod>2023-02-22T09:31:13.309Z</lastmod>
-  </url>
-  <url>
-    <loc>http://localhost:3221/posts/welcome/index.html</loc>
-    <lastmod>2023-02-18T18:14:43.096Z</lastmod>
-  </url>
-  <url>
-    <loc>http://localhost:3221/test.html</loc>
-    <lastmod>2023-03-23T05:28:52.310Z</lastmod>
-  </url>
-  <url>
-    <loc>http://localhost:3221/p2p.html</loc>
-    <lastmod>2023-03-23T05:28:15.973Z</lastmod>
-  </url>
-  <url>
-    <loc>http://localhost:3221/sql-mode.html</loc>
-    <lastmod>2023-03-23T05:28:19.795Z</lastmod>
+    <loc>fortunewalla.net/about.html</loc>
+    <lastmod>2023-03-23T07:49:00.464Z</lastmod>
   </url>
   <url>
     <loc>fortunewalla.net/index.html</loc>
-    <lastmod>2023-03-23T06:58:08.149Z</lastmod>
+    <lastmod>2023-03-23T07:49:02.117Z</lastmod>
+  </url>
+  <url>
+    <loc>fortunewalla.net/p2p.html</loc>
+    <lastmod>2023-03-23T07:27:43.586Z</lastmod>
+  </url>
+  <url>
+    <loc>fortunewalla.net/posts/post-with-code/index.html</loc>
+    <lastmod>2023-03-23T07:29:14.371Z</lastmod>
+  </url>
+  <url>
+    <loc>fortunewalla.net/posts/sql/index.html</loc>
+    <lastmod>2023-03-23T07:30:13.827Z</lastmod>
+  </url>
+  <url>
+    <loc>fortunewalla.net/posts/welcome/index.html</loc>
+    <lastmod>2023-03-23T07:29:26.770Z</lastmod>
+  </url>
+  <url>
+    <loc>fortunewalla.net/sql-mode.html</loc>
+    <lastmod>2023-03-23T07:27:50.957Z</lastmod>
+  </url>
+  <url>
+    <loc>fortunewalla.net/test.html</loc>
+    <lastmod>2023-03-23T07:27:52.104Z</lastmod>
   </url>
 </urlset>

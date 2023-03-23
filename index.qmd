@@ -10,14 +10,14 @@ listing:
   page-size: 9999
   feed:
     title: "L'Œuvre"
-    description: "Explore data analytics, product management, behavioural science & the metaverse."
+    description: "Explore product management, data analytics, & the metaverse."
 items: 9999
 page-layout: full
 title-block-banner: false
 ---
 
-*Explore data analytics, product management, behavioural science & the metaverse.*
+*Explore product management, data analytics, & the metaverse.*
 
 ![](index.jpg){fig-alt="'Laila and Majnun at School', Folio from a Khamsa (Quintet) of Nizami of Ganja. Calligrapher Ja'far Baisunghuri Iranian. Author Nizami A.H. 835/ 1431–32 CE " width="100%" fig-align="center" }
 
-List of all work done and ongoing projects.
+Below is a list of all work done and ongoing projects.

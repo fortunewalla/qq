@@ -3,6 +3,7 @@ project:
   output-dir: docs
 website:
   title: "L'Œuvre"
+  #title: "Oeuvre"
   #site-url: "http://localhost:3221/"
   site-url: "fortunewalla.net"
   favicon: favicon.png

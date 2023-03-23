@@ -20,7 +20,7 @@ about:
 
 ---
 
-*Explore product management, data analytics & the metaverse.*
+*Explore product management, data analytics, & the metaverse.*
 
 ![](intro.jpg){fig-alt="Portrait of a young Indian scholar, Mughal miniature by Mir Sayyid Ali, c. 1550." width="80%" fig-align="center" }
 
