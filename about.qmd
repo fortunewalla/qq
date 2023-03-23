@@ -2,6 +2,7 @@
 #title: "About"
 # image: profile.jpg
 about:
+  id: hero-heading
   template: jolla
   links:
     - icon: twitter
@@ -19,11 +20,25 @@ about:
 
 ---
 
-*Explore data science, product management, coding & the Metaverse.*
+*Explore product management, data analytics & the metaverse.*
 
-![](intro.jpg){fig-alt="Portrait of a young Indian scholar, Mughal miniature by Mir Sayyid Ali, c. 1550." width="70%" fig-align="center" }
+![](intro.jpg){fig-alt="Portrait of a young Indian scholar, Mughal miniature by Mir Sayyid Ali, c. 1550." width="80%" fig-align="center" }
 
 *“Turn yourself not away from three best things: Good Thought, Good Word, and Good Deed.” \~ [Zarathushtra](https://www.britannica.com/biography/Zarathustra)*
 
-[List of Articles, Guides, & Programming Portfolio](index.qmd)
+[Home - List of Articles, Guides, & Programming Portfolio](index.qmd)
 
+* Content is divided into four main types:
+* [Projects](/#category=project): Longer term and more complex work involving code, and other software websites.
+* [Articles](/#category=article): Shorter term work involving coding and analysis and opinion. Reviews would come under articles.
+* [Guides](/#category=guide): Longer term and frequently updated notes for learning topics.
+* [Misc](/#category=misc): Random stuff that does not fit anything formal.
+
+### This is how it happens.
+
+
+
+
+:::{#hero-heading}
+
+:::

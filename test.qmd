@@ -1,0 +1,148 @@
+---
+title: "Mastering myself"
+#author: "Harlow Malloc"
+date: "2020-02-22"
+date-modified: "2/22/2023"
+#categories: [personal]
+#image: "image.jpg"
+#draft: true
+---
+
+### This is a test page to experiment with Quarto features.
+
+What does the day look like?
+
+
+Trello: Making use of daily.
+
+Revise daily useful skills. Data Science, Analytics, ML.
+
+
+
+What main projects do you have?
+
+Inor: Design, PM, Coding?
+OTT: Design, PM, Coding?
+Balkani: Analytics
+SuperStore: Analytics / scrum
+sakila 
+DAC: BigQuery, Looker, Google Analytics pandas Tableau R Shiny
+
+
+
+Build foundations about AI/ML & Product Management.
+
+
+
+
+Trello: For all tasks that come up in Distraction.
+
+Jira: Full Projects
+
+Spreadsheets: Data Entry for projects & tasks
+
+So Spreadsheets track hours of waste/productive time.
+Trello is a dump for tasks to be done and completed.
+Jira is for work oriented and learning about Jira github etc...
+
+Study pattern:
+
+Don't proceed further until you revise your mental fullness.
+
+Slow hard road out of hell.
+
+If you can't think deeply about the code or the problem. You need rest. Anxiety or burn out may be happening.
+
+Revise revise revise.
+
+Increase attention span.
+
+
+You are 44, don't do any simple stuff documentation. Time is over. Only do complex articles and stuff.
+
+
+
+
+Work pattern:
+
+1) How to use QMD?
+
+qmd is for documenting and running code you know would work already.
+
+ipynb to qmd
+
+using visual studio.
+
+2) Skills: VS Code
+
+
+
+
+### How to use this website:
+
+asdf `a`
+```
+`http://localhost:3221/#category=analysis`
+`http://localhost:3221/#category=analysis`
+`http://localhost:3221/#category=analysis`
+
+```
+
+
+### Trello Embed
+
+```{=html}
+<blockquote class="trello-board-compact">
+  <a href="https://trello.com/b/tBmYPSYe/">Trello Board</a>
+</blockquote>
+<script src="https://p.trellocdn.com/embed.min.js"></script>
+```
+
+### Tableau Embed 3
+
+```{=html}
+
+<div class='tableauPlaceholder' id='viz1677066609153' style='position: relative'><noscript><a href='http:&#47;&#47;localhost:3221&#47;'><img alt='Profitability Overview ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Su&#47;Superstore_embedded_800x800&#47;Overview&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Superstore_embedded_800x800&#47;Overview' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Su&#47;Superstore_embedded_800x800&#47;Overview&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /></object></div>         
+<script type='text/javascript'>                    var divElement = document.getElementById('viz1677066609153');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='800px';vizElement.style.height='827px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+```
+
+### Tableau Embed 2
+
+```{=html}
+
+<script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
+
+
+<tableau-viz id="tableauViz"       
+  src='https://public.tableau.com/views/Superstore_embedded_800x800/Overview'      
+  height="700" width="700" device="phone">
+</tableau-viz>
+
+
+```
+### Tableau Embed
+
+```{=html}
+<iframe src="https://public.tableau.com/views/Superstore_embedded_800x800/Overview?:showVizHome=no&:embed=true" height=800 width=800></iframe>
+```
+
+```python
+1 + 1
+```
+
+```{python}
+import numpy as np
+import pandas as pd
+import matplotlib as plt
+
+s=pd.Series([1,3,5,np.nan,6,8])
+print(s)
+print(type(s))
+```
+
+I'll just put another example of this.
+
+```{python}
+dates=pd.date_range('20141101',periods=6)
+dates
+```

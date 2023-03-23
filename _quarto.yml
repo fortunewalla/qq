@@ -2,12 +2,15 @@ project:
   type: website
   output-dir: docs
 website:
-  title: "oeuvre"
-  site-url: "http://localhost:3221/"
+  title: "L'Œuvre"
+  #site-url: "http://localhost:3221/"
+  site-url: "fortunewalla.net"
+  favicon: favicon.png
+  
   navbar:
     right:
-      - text: "?"
-        # icon: question-circle
+      - text: " "
+        icon: question-circle
         href: about.qmd
       - icon: rss
         href: index.xml

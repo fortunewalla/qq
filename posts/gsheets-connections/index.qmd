@@ -1,0 +1,52 @@
+---
+title: "Connecting Google Sheets files to different software."
+#author: "Harlow Malloc"
+date: "2023-02-21"
+date-modified: "2/21/2023"
+categories: [post, python, r, gsheets]
+#image: "image.jpg"
+draft: true
+---
+
+We explore different ways to connect files stored in GSheets.
+
+### Publish a Google Spreadsheet as a CSV or XLSX file on the web
+
+```python
+import pandas as pd
+ssds = pd.read_csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vTVb5isYAH-YjERNaAABDFy5UOgFMzxpCEDv6Wh5DxxdbA-YZRdXIch6jfYYMPrhg/pub?gid=830343388&single=true&output=csv') 
+ssdf=pd.DataFrame(ssds)
+ssdf.head()
+```
+
+```r
+ssds <- read.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vTVb5isYAH-YjERNaAABDFy5UOgFMzxpCEDv6Wh5DxxdbA-YZRdXIch6jfYYMPrhg/pub?gid=830343388&single=true&output=csv")
+head(ssds)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```python
+ssds = pd.read_csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vTVb5isYAH-YjERNaAABDFy5UOgFMzxpCEDv6Wh5DxxdbA-YZRdXIch6jfYYMPrhg/pub?gid=830343388&single=true&output=csv')
+```
+
+
+```python
+ssdf=pd.DataFrame(ssds)
+```
+
+```python
+ssdf.head()
+```

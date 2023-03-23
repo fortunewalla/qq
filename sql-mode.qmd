@@ -1,0 +1,1840 @@
+## mode.com SQL Notes
+
+*This uses PGSQL for syntax*
+
+-- Show version information of the database
+`select Version()`
+
+version
+PostgreSQL 13.7 on aarch64-unknown-linux-gnu, compiled by gcc (GCC) 7.3.1 20180712 (Red Hat 7.3.1-6), 64-bit
+
+
+-- Show all tables in a particular Schema
+`SELECT * FROM pg_catalog.pg_tables WHERE schemaname='tutorial'`
+
+schemaname	tablename	tableowner	tablespace	hasindexes	hasrules	hastriggers	rowsecurity
+tutorial	animial_crossing_accessories_9067b7cc3b49da87072a3ca5	mode_admin		false	false	false	false
+tutorial	animal_crossing_achievements_28e4e04e975e4f27cb9be9e1	mode_admin		false	false	false	false
+tutorial	animal_crossing_art_3a053143a5a8c3ae9b75d0ed	mode_admin		false	false	false	false
+tutorial	animal_crossing_bags_9de2101d615e87fd86a3e478	mode_admin		false	false	false	false
+tutorial	animal_crossing_bottoms_7b62ddba747aef4ef8c8d8a2	mode_admin		false	false	false	false
+
+-- Describe table details
+
+```
+SELECT * FROM information_schema.columns
+WHERE table_schema = 'tutorial' AND table_name   = 'us_housing_units'
+```   
+   
+table_catalog	table_schema	table_name	column_name	ordinal_position	column_default	is_nullable	data_type	character_maximum_length	character_octet_length	numeric_precision	numeric_precision_radix	numeric_scale	datetime_precision	interval_type	interval_precision	character_set_catalog	character_set_schema	character_set_name	collation_catalog	collation_schema	collation_name	domain_catalog	domain_schema	domain_name	udt_catalog	udt_schema	udt_name	scope_catalog	scope_schema	scope_name	maximum_cardinality	dtd_identifier	is_self_referencing	is_identity	identity_generation	identity_start	identity_increment	identity_maximum	identity_minimum	identity_cycle	is_generated	generation_expression	is_updatable
+d5b78k6rg4etlv	tutorial	us_housing_units	year	1		YES	double precision			53	2														d5b78k6rg4etlv	pg_catalog	float8					1	NO	NO						NO	NEVER		YES
+d5b78k6rg4etlv	tutorial	us_housing_units	month	2		YES	double precision			53	2														d5b78k6rg4etlv	pg_catalog	float8					2	NO	NO						NO	NEVER		YES
+d5b78k6rg4etlv	tutorial	us_housing_units	month_name	3		YES	text		1073741824																d5b78k6rg4etlv	pg_catalog	text					3	NO	NO						NO	NEVER		YES
+d5b78k6rg4etlv	tutorial	us_housing_units	south	4		YES	double precision			53	2														d5b78k6rg4etlv	pg_catalog	float8					4	NO	NO						NO	NEVER		YES
+d5b78k6rg4etlv	tutorial	us_housing_units	west	5		YES	double precision			53	2														d5b78k6rg4etlv	pg_catalog	float8					5	NO	NO						NO	NEVER		YES
+d5b78k6rg4etlv	tutorial	us_housing_units	midwest	6		YES	double precision			53	2														d5b78k6rg4etlv	pg_catalog	float8					6	NO	NO						NO	NEVER		YES
+d5b78k6rg4etlv	tutorial	us_housing_units	northeast	7		YES	double precision			53	2														d5b78k6rg4etlv	pg_catalog	float8					7	NO	NO						NO	NEVER		YES
+SQL Tutorial
+
+    Basic SQL
+        The SQL Tutorial for Data Analysis
+        Using SQL in Mode
+        SQL SELECT
+        SQL LIMIT
+        SQL WHERE
+        SQL Comparison Operators
+        SQL Logical Operators
+        SQL LIKE
+        SQL IN
+        SQL BETWEEN
+        SQL IS NULL
+        SQL AND
+        SQL OR
+        SQL NOT
+        SQL ORDER BY
+
+-- Note: the clauses always need to be in this order: SELECT, FROM, WHERE.
+
+-- Comparison operators on numerical data: =, <> or !=, >, <, >=, <=
+
+-- Comparison operators on non-numerical data: Same as above. = and != make perfect sense—they allow you to select rows that match or don't match any string value, respectively. Query in which none of the January rows show up:
+
+SELECT * FROM tutorial.us_housing_units WHERE month_name != 'January'
+
+-- If you're using an operator with values that are non-numeric, you need to put the value in single quotes: 'value'.
+
+Note: SQL uses single quotes to reference column values.
+
+-- ?? You can use >, <, and the rest of the comparison operators on non-numeric columns as well—they filter based on alphabetical order.
+
+-- In the above query that selecting month_name > 'J' will yield only rows in which month_name starts with "j" or later in the alphabet. "Wait a minute," you might say. "January is included in the results—shouldn't I have to use month_name >= 'J' to make that happen?" SQL considers 'Ja' to be greater than 'J' because it has an extra letter. It's worth noting that most dictionaries would list 'Ja' after 'J' as well.
+
+SELECT * FROM tutorial.us_housing_units WHERE month_name > 'January'
+
+If you're using >, <, >=, or <=, you don't necessarily need to be too specific about how you filter. Try this:
+
+SELECT * FROM tutorial.us_housing_units WHERE month_name > 'J'
+ 
+SELECT * FROM tutorial.us_housing_units WHERE month_name = 'February'
+
+-- Write a query that only shows rows for which the month_name starts with the letter "N" or an earlier letter in the alphabet. 
+
+SELECT * FROM tutorial.us_housing_units WHERE month_name < 'o' 
+ 
+-- Below won't work as it excluded November as n is before November.
+ 
+SELECT * FROM tutorial.us_housing_units WHERE month_name <= 'n'
+ 
+-- Arithmetic in SQL
+
+Unlike Excel, in SQL you can only perform arithmetic across columns on values in a given row. To clarify, you can only add values in multiple columns from the same row together using +—. If you want to add values across multiple rows, you'll need to use aggregate functions. 
+
+SELECT year, month, west, south, west + south - 4 * year AS nonsense_column FROM tutorial.us_housing_units
+
+The columns that contain the arithmetic functions are called "derived columns" because they are generated by modifying the information that exists in the underlying data.
+
+-- Write a query that calculates the percentage of all houses completed in the United States represented by each region. Only return results from the year 2000 and later.
+
+Hint: There should be four columns of percentages.
+
+SELECT year, month, west/(west + south + midwest + northeast)*100 AS west_pct, south/(west + south + midwest + northeast)*100 AS south_pct, midwest/(west + south + midwest + northeast)*100 AS midwest_pct, northeast/(west + south + midwest + northeast)*100 AS northeast_pct FROM tutorial.us_housing_units WHERE year >= 2000
+ 
+-- Logical operators allow you to use multiple comparison operators in one query: LIKE, IN, BETWEEN, IS NULL, AND, OR, NOT
+
+=======================================
+
+The SQL LIKE operator
+
+LIKE is a logical operator in SQL that allows you to match on similar values rather than exact ones.
+
+SELECT * FROM tutorial.billboard_top_100_year_end WHERE "group" LIKE 'Snoop%'
+
+Note: "group" appears in quotations above because GROUP is actually the name of a function in SQL. The double quotes (as opposed to single: ') are a way of indicating that you are referring to the column name "group", not the SQL function. In general, putting double quotes around a word or phrase will indicate that you are referring to that column name.
+
+Wildcards and ILIKE
+
+The % used above represents any character or set of characters. In the type of SQL that Mode uses, LIKE is case-sensitive & ILIKE is case-insensitive:
+
+SELECT * FROM tutorial.billboard_top_100_year_end WHERE "group" ILIKE 'snoop%'
+
+You can also use _ (a single underscore) to substitute for an individual character:
+
+SELECT * FROM tutorial.billboard_top_100_year_end WHERE artist ILIKE 'dr_ke'
+
+-- Write a query that returns all rows for which Ludacris was a member of the group. 
+
+SELECT * FROM tutorial.billboard_top_100_year_end WHERE group_name LIKE 'Ludacris'
+ 
+===========================
+The SQL IN operator
+
+SELECT * FROM tutorial.billboard_top_100_year_end WHERE year_rank IN (1, 2, 3)
+
+As with comparison operators, you can use non-numerical values, but they need to go inside single quotes. Regardless of the data type, the values in the list must be separated by commas. 
+
+SELECT * FROM tutorial.billboard_top_100_year_end WHERE artist IN ('Taylor Swift', 'Usher', 'Ludacris')
+
+==================================
+
+-- Write a query that shows all of the entries for Elvis and M.C. Hammer.
+
+Hint: M.C. Hammer is actually on the list under multiple names, so you may need to first write a query to figure out exactly how M.C. Hammer is listed. You're likely to face similar problems that require some exploration in many real-life scenarios. 
+
+SELECT * FROM tutorial.billboard_top_100_year_end WHERE artist like '%Hammer%' or artist like '%Elvis%'
+  
+SELECT * FROM tutorial.billboard_top_100_year_end WHERE "group" IN ('M.C. Hammer', 'Hammer', 'Elvis Presley')
+ 
+======================================= 
+The SQL BETWEEN operator
+
+BETWEEN is a logical operator in SQL that allows you to select only rows that are within a specific range. It has to be paired with the AND operator. BETWEEN includes the range bounds (in this case, 5 and 10)
+
+SELECT * FROM tutorial.billboard_top_100_year_end WHERE year_rank BETWEEN 5 AND 10
+
+SELECT * FROM tutorial.billboard_top_100_year_end WHERE year_rank >= 5 AND year_rank <= 10
+
+Some people prefer the latter example because it more explicitly shows what the query is doing (it's easy to forget whether or not BETWEEN includes the range bounds).
+
+-- Write a query that shows all top 100 songs from January 1, 1985 through December 31, 1990. 
+
+SELECT * FROM tutorial.billboard_top_100_year_end WHERE year >= 1985 AND year <= 1990
+ 
+SELECT * FROM tutorial.billboard_top_100_year_end WHERE year BETWEEN 1985 AND 1990
+
+=================================
+ 
+SQL IS NULL You can select rows that contain no data in a given column by using IS NULL. 
+
+SELECT * FROM tutorial.billboard_top_100_year_end WHERE artist IS NULL
+
+-- WHERE artist = NULL will not work—you can't perform arithmetic on NULL values.
+
+SELECT * FROM tutorial.billboard_top_100_year_end WHERE song_name is NULL
+
+-- Write a query that surfaces the top-ranked records in 1990, 2000, and 2010.
+
+SELECT * FROM tutorial.billboard_top_100_year_end
+WHERE year_rank = 1 AND year IN (1990, 2000, 2010) 
+
+=============================================
+-- SQL OR You will notice that the conditional statement year = 2013 will be fulfilled for every row returned. In this case, OR must be satisfied in addition to the first statement of year = 2013.
+
+SELECT * FROM tutorial.billboard_top_100_year_end
+WHERE year = 2013 AND ("group" ILIKE '%macklemore%' OR "group" ILIKE '%timberlake%')
+
+-- Write a query that returns all rows for top-10 songs that featured either Katy Perry or Bon Jovi.
+
+SELECT * FROM tutorial.billboard_top_100_year_end
+WHERE year_rank <= 10 AND ("group" ILIKE '%katy perry%' OR "group" ILIKE '%bon jovi%')
+
+-- Group??? instead of artist???
+
+-- Write a query that returns all songs with titles that contain the word "California" in either the 1970s or 1990s.
+
+SELECT *
+  FROM tutorial.billboard_top_100_year_end
+  where title ilike '%California%' and ((year between 1970 and 1979) or (year between 1990 and 1999))
+  
+SELECT *
+  FROM tutorial.billboard_top_100_year_end
+ WHERE song_name LIKE '%California%'
+   AND (year BETWEEN 1970 AND 1979 OR year BETWEEN 1990 AND 1999)
+   
+-- brackets priority???? Yes, here the BETWEEN 	makes sure
+
+-- Write a query that lists all top-100 recordings that feature Dr. Dre before 2001 or after 2009.
+
+SELECT * FROM tutorial.billboard_top_100_year_end
+WHERE "group" ILIKE '%dr. dre%' AND (year <= 2000 OR year >= 2010)
+ 
+SELECT * FROM tutorial.billboard_top_100_year_end
+where artist ilike '%Dr. Dre%' and (year <2001 or year > 2009)
+   
+-- Dates attention to wording????? Possible confusion here.
+
+=====================
+-- The SQL NOT operator
+
+NOT is a logical operator in SQL that you can put before any conditional statement to select rows for which that statement is false.
+
+SELECT * FROM tutorial.billboard_top_100_year_end
+WHERE year = 2013 AND year_rank NOT BETWEEN 2 AND 3
+
+In the above case, you can see that results for which year_rank is equal to 2 or 3 are not included
+
+d.
+
+Using NOT with < and > usually doesn't make sense because you can simply use the opposite comparative operator instead. For example, this query will return an error:
+
+SELECT * FROM tutorial.billboard_top_100_year_end
+ WHERE year = 2013 AND year_rank NOT > 3
+
+Instead, you would just write that as:
+
+SELECT * FROM tutorial.billboard_top_100_year_end
+ WHERE year = 2013 AND year_rank <= 3
+
+NOT is commonly used with LIKE. Run this query and check out how Macklemore magically disappears!
+
+SELECT * FROM tutorial.billboard_top_100_year_end
+ WHERE year = 2013 AND "group" NOT ILIKE '%macklemore%'
+
+NOT is also frequently used to identify non-null rows, but the syntax is somewhat special—you need to include IS beforehand. Here's how that looks:
+
+SELECT * FROM tutorial.billboard_top_100_year_end
+ WHERE year = 2013 AND artist IS NOT NULL
+
+====================================================
+Sorting data with SQL ORDER BY
+
+You'll notice that the results are now ordered alphabetically from a to z based on the content in the artist column. This is referred to as ascending order, and it's SQL's default. If you order a numerical column in ascending order, it will start with smaller (or most negative) numbers, with each successive row having a higher numerical value than the previous. Here's an example using a numerical column:
+
+SELECT * FROM tutorial.billboard_top_100_year_end
+WHERE year = 2012
+ORDER BY song_name DESC
+ 
+===================================
+Ordering data by multiple columns. This example query makes the most recent years come first but orders top-ranks songs before lower-ranked songs:
+
+SELECT * FROM tutorial.billboard_top_100_year_end
+WHERE year_rank <= 3
+ORDER BY year DESC, year_rank
+
+You can see a couple things from the above query: First, columns in the ORDER BY clause must be separated by commas. Second, the DESC operator is only applied to the column that precedes it. Finally, the results are sorted by the first column mentioned (year), then by year_rank afterward. You can see the difference the order makes by running the following query:
+
+SELECT * FROM tutorial.billboard_top_100_year_end
+WHERE year_rank <= 3
+ORDER BY year_rank, year DESC
+
+Finally, you can make your life a little easier by substituting numbers for column names in the ORDER BY clause. The numbers will correspond to the order in which you list columns in the SELECT clause. For example, the following query is exactly equivalent to the previous query:
+
+SELECT * FROM tutorial.billboard_top_100_year_end
+WHERE year_rank <= 3
+ORDER BY 2, 1 DESC
+
+Note: this functionality (numbering columns instead of using names) is supported by ModedotCom, but not by every flavor of SQL, so if you're using another system or connected to certain types of databases, it may not work.
+
+When using ORDER BY with a row limit (either through the check box on the query editor or by typing in LIMIT), the ordering clause is executed first. This means that the results are ordered before limiting to only a few rows, so if you were to order by year_rank, for example, you can be sure that you are getting the lowest values of year_rank in the entire table, not just in the first 100 rows of the table. i.e. ORDER BY executes first before LIMIT.
+
+
+    @sqlchallenge1 / accounts
+    @sqlchallenge1 / orders
+    @sqlchallenge1 / region
+    @sqlchallenge1 / sales_reps
+
+ 
+    @sqlchallenge1 / accounts
+    
+    Name 	Data Type
+id 	Number
+name 	String
+website 	String
+lat 	Number
+long 	Number
+primary_poc 	String
+sales_rep_id 	Number
+
+
+
+    @sqlchallenge1 / orders
+    Name 	Data Type
+id 	Number
+account_id 	Number
+occurred_at 	Date/Time
+standard_qty 	Number
+gloss_qty 	Number
+poster_qty 	Number
+total 	Number
+standard_amt_usd 	Number
+gloss_amt_usd 	Number
+poster_amt_usd 	Number
+total_amt_usd 	Number
+
+    @sqlchallenge1 / region
+    Name 	Data Type
+id 	Number
+name 	String
+    
+    @sqlchallenge1 / sales_reps
+    
+    Name 	Data Type
+id 	Number
+name 	String
+region_id 	Number 
+ 
+ 
+Beginner level
+
+Q1. WHich company website has the longest url?
+
+SELECT website, LENgth(website) as lenw
+   FROM sqlchallenge1.accounts order by lenw desc LIMIT 4 
+ 
+SELECT website, LENgth(website)
+   FROM sqlchallenge1.accounts order by length(website) desc LIMIT 4  
+   
+   website	length
+www.unitedcontinentalholdings.com	33
+ 
+Q2. How many sales reps have letter 'e' in their names?
+ 
+select count(name) from sqlchallenge1.sales_reps where name like '%e%'
+
+39
+ 
+Q3. What is the alphabetically first account name that contains an ampersand ("&")?
+
+SELECT name
+   FROM sqlchallenge1.accounts where name like '%&%' order by name LIMIT 4 
+   
+Air Products & Chemicals
+
+Q4. What is the id of the Sales Rep that sold the last order in May 2016?
+
+The dataset was incorrect and hence had to reverse-engineer the answer.
+
+select id,account_id,occurred_at
+from sqlchallenge1.orders 
+where to_char(occurred_at,'yyyy-mm-dd') like '2016-05-31'
+order by occurred_at desc
+limit 10
+
+-- select id,sales_rep_id from sqlchallenge1.accounts where id=1441
+
+-- didn't work as `occurred_at` is datetime and not a string.
+-- select account_id, occurred_at from sqlchallenge1.orders 
+-- where occurred_at like '2015-05-31%'
+-- limit 2
+
+-- not proper as we need `occurred_at` time also to determine the last order.
+-- select id,account_id,to_char(occurred_at,'yyyy-mm-dd') as dd 
+-- from sqlchallenge1.orders 
+-- where to_char(occurred_at,'yyyy-mm-dd') like '2016-05-31'
+-- limit 2
+
+
+-- reverse engineering from existing answers
+-- select id,sales_rep_id from sqlchallenge1.accounts 
+-- where sales_rep_id in (321740,321510,321760,321520)
+-- order by sales_rep_id
+
+-- this gives that 1441 as the proper answer according to the answers but actually incorrect at 3rd place according to orders dataset.
+-- select id,account_id,occurred_at
+-- from sqlchallenge1.orders 
+-- where account_id in (1011, 1021, 1221, 1231, 1431, 1441, 1641, 1651, 1671, 1681, 1701, 1711, 1971, 2091, 2111, 2181, 2201, 2271, 2291, 2331, 2351, 2391, 2411, 2451, 2471, 2481, 2501, 2511)
+-- and to_char(occurred_at,'yyyy-mm') like '2016-05'
+-- order by occurred_at desc
+
+
+Q4. How many sales reps represent the Northeast Region?
+
+select region_id,count(id) from sqlchallenge1.sales_reps
+group by region_id;
+
+select * from sqlchallenge1.region 
+ 
+ 
+ 
+ 
+ region_id	count
+3	10
+4	10
+1	21
+2	9
+ 
+ id	name
+1	Northeast
+2	Midwest
+3	Southeast
+4	West
+ 
+ 
+ ============================================================
+ 
+ SQL Aggregate Functions:
+ 
+ Here's a quick preview:
+
+COUNT counts how many rows are in a particular column.
+SUM adds together all the values in a particular column.
+MIN and MAX return the lowest and highest values in a particular column, respectively.
+AVG calculates the average of a group of selected values.
+
+Intermediate SQL
+    Putting it together
+    SQL Aggregate Functions
+    SQL COUNT
+    SQL SUM
+    SQL MIN/MAX
+    SQL AVG
+    SQL GROUP BY
+    SQL HAVING
+    SQL CASE
+    SQL DISTINCT
+    SQL Joins
+    SQL INNER JOIN
+    SQL Outer Joins
+    SQL LEFT JOIN
+    SQL RIGHT JOIN
+    SQL Joins Using WHERE or ON
+    SQL FULL OUTER JOIN
+    SQL UNION
+    SQL Joins with Comparison Operators
+    SQL Joins on Multiple Keys
+    SQL Self Joins
+
+SELECT COUNT(*)
+  FROM tutorial.aapl_historical_stock_price
+
+Note: Typing COUNT(1) has the same effect as COUNT(*). Which one you use is a matter of personal preference.
+
+The following code will provide a count of all of rows in which the high column is not null. COUNT cannot count NULL i.e. will not include NULL rows in the count.
+
+SELECT COUNT(high)
+  FROM tutorial.aapl_historical_stock_price
+
+You'll notice that this result is lower than what you got with COUNT(*). That's because high has some NULLs. In this case, we've deleted some data to make the lesson interesting, but analysts often run into naturally-occurring null rows.
+ 
+ ===========================
+ 
+ SELECT COUNT(date) AS count_of_date
+  FROM tutorial.aapl_historical_stock_price
+
+If you must use spaces, you will need to use double quotes.
+
+SELECT COUNT(date) AS "Count Of Date"
+  FROM tutorial.aapl_historical_stock_price
+
+Note: This is really the only place in which you'll ever want to use double quotes in SQL. Single quotes for everything else.
+
+-- In pgsql, double quotes for column names and derived column names. Everything else can be single quotes including strings.
+
+-- Write a query that determines counts of every single column. With these counts, can you tell which column has the most null values?
+
+SELECT COUNT(date) as date, 
+count(year) as year,count(month) as month,
+count(open) as open,count(high) as high, 
+count(low) as low,count(close) as close,
+count(volume) as volume, count(id) as id
+  FROM tutorial.aapl_historical_stock_price limit 1
+ 
+ =========================================================================
+ 
+ The SQL SUM function
+
+SUM is a SQL aggregate function. that totals the values in a given column. Unlike COUNT, you can only use SUM on columns containing numerical values.
+
+The query below selects the sum of the volume column from the Apple stock prices dataset:
+
+SELECT SUM(volume)
+  FROM tutorial.aapl_historical_stock_price
+
+An important thing to remember: aggregators only aggregate vertically. If you want to perform a calculation across rows, you would do this with simple arithmetic.
+
+You don't need to worry as much about the presence of nulls with SUM as you would with COUNT, as SUM treats nulls as 0. i.e. COUNT skips NULLs but SUM treats them as 0.
+
+-- Write a query to calculate the average opening price (hint: you will need to use both COUNT and SUM, as well as some simple arithmetic.). 
+
+SELECT sum(open)/count(open),sum(open)/count(1)
+  FROM tutorial.aapl_historical_stock_price limit 1
+    
+-- This says that sum(open)/count(open) is right but there are events where there is no opening price? so should not sum(open)/count(1) be proper?
+
+The SQL MIN and MAX functions
+
+MIN and MAX are SQL aggregation functions that return the lowest and highest values in a particular column.
+
+They're similar to COUNT in that they can be used on non-numerical columns. Depending on the column type, MIN will return the lowest number, earliest date, or non-numerical value as close alphabetically to "A" as possible. As you might suspect, MAX does the opposite—it returns the highest number, the latest date, or the non-numerical value closest alphabetically to "Z."
+
+-- > COUNT, MIN, MAX can be used in non-numerical columns.
+
+The SQL AVG function
+
+AVG is a SQL aggregate function that calculates the average of a selected group of values. It's very useful, but has some limitations. First, it can only be used on numerical columns. Second, it ignores nulls completely. You can see this by comparing these two queries of the Apple stock prices dataset:
+
+SELECT AVG(high)
+  FROM tutorial.aapl_historical_stock_price
+ WHERE high IS NOT NULL
+
+The above query produces the same result as the following query:
+
+SELECT AVG(high)
+  FROM tutorial.aapl_historical_stock_price
+
+There are some cases in which you'll want to treat null values as 0. For these cases, you'll want to write a statement that changes the nulls to 0 (covered in a later lesson.
+
+??? Make examples of all Aggregate functions with and without NULL condition and check.
+
+The SQL GROUP BY clause
+
+SQL aggregate function like COUNT, AVG, and SUM have something in common: they all aggregate across the entire table. But what if you want to aggregate only part of a table? For example, you might want to count the number of entries for each year.
+
+In situations like this, you'd need to use the GROUP BY clause. GROUP BY allows you to separate data into groups, which can be aggregated independently of one another. Here's an example using the Apple stock prices dataset:
+
+SELECT year,
+       COUNT(*) AS count
+  FROM tutorial.aapl_historical_stock_price
+ GROUP BY year
+
+(You can group by multiple columns, but you have to separate column names with commas—just as with ORDER BY):
+
+SELECT year,
+       month,
+       COUNT(*) AS count
+  FROM tutorial.aapl_historical_stock_price
+ GROUP BY year, month
+
+Practice Problem
+-------------------
+Calculate the total number of shares traded each month. Order your results chronologically.
+Try it out See the answer
+GROUP BY column numbers
+
+As with ORDER BY, you can substitute numbers for column names in the GROUP BY clause. It's generally recommended to do this only when you're grouping many columns, or if something else is causing the text in the GROUP BY clause to be excessively long:
+
+SELECT year,
+       month,
+       COUNT(*) AS count
+  FROM tutorial.aapl_historical_stock_price
+ GROUP BY 1, 2
+
+Note: this functionality (numbering columns instead of using names) is supported by Mode, but not by every flavor of SQL, so if you're using another system or connected to certain types of databases, it may not work.
+
+-- Using GROUP BY with ORDER BY
+
+>> The order of column names in your GROUP BY clause doesn't matter—the results will be the same regardless. If you want to control how the aggregations are grouped together, use ORDER BY. 
+
+-- > Try running the query below, then reverse the column names in the ORDER BY statement and see how it looks:
+
+SELECT year,
+       month,
+       COUNT(*) AS count
+  FROM tutorial.aapl_historical_stock_price
+ GROUP BY year, month
+ ORDER BY month, year
+ 
+ year	month	count
+2000	1	20
+2001	1	21
+2002	1	21
+2003	1	21
+
+SELECT year,
+       month,
+       COUNT(*) AS count
+  FROM tutorial.aapl_historical_stock_price
+ GROUP BY year, month
+ ORDER BY year, month
+ 
+ year	month	count
+2000	1	20
+2000	2	20
+2000	3	23
+2000	4	19
+
+
+
+ 
+-- GROUP BY column numbers
+
+As with ORDER BY, you can substitute numbers for column names in the GROUP BY clause. It's generally recommended to do this only when you're grouping many columns, or if something else is causing the text in the GROUP BY clause to be excessively long:
+
+SELECT year,
+       month,
+       COUNT(*) AS count
+  FROM tutorial.aapl_historical_stock_price
+ GROUP BY 1, 2
+
+Note: this functionality (numbering columns instead of using names) is supported by Mode, but not by every flavor of SQL, so if you're using another system or connected to certain types of databases, it may not work.
+
+-- Using GROUP BY with LIMIT
+
+There's one thing to be aware of as you group by multiple columns: SQL evaluates the aggregations before the LIMIT clause. If you don't group by any columns, you'll get a 1-row result—no problem there. If you group by a column with enough unique values that it exceeds the LIMIT number, the aggregates will be calculated, and then some rows will simply be omitted from the results.
+
+This is actually a nice way to do things because you know you're going to get the correct aggregates. If SQL cuts the table down to 100 rows, then performed the aggregations, your results would be substantially different. The above query's results exceed 100 rows, so it's a perfect example. Try removing the limit and running it again to see what changes.
+
+-- >> LIMIT only limitst the final results and not the aggregrate count. So it is useful for quickly scanning the top rows of the results to check for correctness.
+ 
+ 
+ 
+-- The SQL HAVING clause
+
+In the previous lesson, you learned how to use the GROUP BY clause to aggregate stats from the Apple stock prices dataset by month and year.
+
+However, you'll often encounter datasets where GROUP BY isn't enough to get what you're looking for. Let's say that it's not enough just to know aggregated stats by month. After all, there are a lot of months in this dataset. Instead, you might want to find every month during which AAPL stock worked its way over $400/share. The WHERE clause won't work for this because it doesn't allow you to filter on aggregate columns—that's where the HAVING clause comes in:
+
+SELECT year,
+       month,
+       MAX(high) AS month_high
+  FROM tutorial.aapl_historical_stock_price
+ GROUP BY year, month
+HAVING MAX(high) > 400
+ ORDER BY year, month
+
+Note: HAVING is the "clean" way to filter a query that has been aggregated, but this is also commonly done using a subquery, which you will learn about in a later lesson.
+Query clause order
+
+-- >> ?? Need to learn the difference between when to use HAVING and WHERE in aggregated columns.
+
+As mentioned in prior lessons, the order in which you write the clauses is important. Here's the order for everything you've learned so far:
+
+    SELECT
+    FROM
+    WHERE
+    GROUP BY
+    HAVING
+    ORDER BY
+
+-- The SQL CASE statement
+
+The CASE statement is SQL's way of handling if/then logic. The CASE statement is followed by at least one pair of WHEN and THEN statements—SQL's equivalent of IF/THEN in Excel. Because of this pairing, you might be tempted to call this SQL CASE WHEN, but CASE is the accepted term.
+
+Every CASE statement must end with the END statement. The ELSE statement is optional, and provides a way to capture values not specified in the WHEN/THEN statements. CASE is easiest to understand in the context of an example:
+
+SELECT player_name,
+       year,
+       CASE WHEN year = 'SR' THEN 'yes'
+            ELSE NULL END AS is_a_senior
+  FROM benn.college_football_players
+
+In plain English, here's what's happening:
+
+    The CASE statement checks each row to see if the conditional statement—year = 'SR' is true.
+    For any given row, if that conditional statement is true, the word "yes" gets printed in the column that we have named is_a_senior.
+    In any row for which the conditional statement is false, nothing happens in that row, leaving a null value in the is_a_senior column.
+    At the same time all this is happening, SQL is retrieving and displaying all the values in the player_name and year columns.
+
+The above query makes it pretty easy to see what's happening because we've included the CASE statement along with the year column itself. You can check each row to see whether year meets the condition year = 'SR' and then see the result in the column generated using the CASE statement.
+
+But what if you don't want null values in the is_a_senior column? The following query replaces those nulls with "no":
+
+SELECT player_name,
+       year,
+       CASE WHEN year = 'SR' THEN 'yes'
+            ELSE 'no' END AS is_a_senior
+  FROM benn.college_football_players
+  
+  
+-- Practice Problem
+
+-- Write a query that includes a column that is flagged "yes" when a player is from California, and sort the results with those players first. 
+
+SELECT player_name,
+       state,
+       CASE WHEN state = 'CA' THEN 'yes'
+            ELSE NULL END AS from_california
+  FROM benn.college_football_players
+ ORDER BY 3
+        
+
+Adding multiple conditions to a CASE statement
+
+You can also define a number of outcomes in a CASE statement by including as many WHEN/THEN statements as you'd like:
+
+SELECT player_name,
+       weight,
+       CASE WHEN weight > 250 THEN 'over 250'
+            WHEN weight > 200 THEN '201-250'
+            WHEN weight > 175 THEN '176-200'
+            ELSE '175 or under' END AS weight_group
+  FROM benn.college_football_players
+
+In the above example, the WHEN/THEN statements will get evaluated in the order that they're written. So if the value in the weight column of a given row is 300, it will produce a result of "over 250." Here's what happens if the value in the weight column is 180, SQL will do the following:
+
+    Check to see if weight is greater than 250. 180 is not greater than 250, so move on to the next WHEN/THEN
+    Check to see if weight is greater than 200. 180 is not greater than 200, so move on to the next WHEN/THEN
+    Check to see if weight is greater than 175. 180 is greater than 175, so record "175-200" in the weight_group column.
+
+While the above works, it's really best practice to create statements that don't overlap. WHEN weight > 250 and WHEN weight > 200 overlap for every value greater than 250, which is a little confusing. A better way to write the above would be:
+
+SELECT player_name,
+       weight,
+       CASE WHEN weight > 250 THEN 'over 250'
+            WHEN weight > 200 AND weight <= 250 THEN '201-250'
+            WHEN weight > 175 AND weight <= 200 THEN '176-200'
+            ELSE '175 or under' END AS weight_group
+  FROM benn.college_football_players
+
+-- gives error that in count(poss), poss is not recognized.
+SELECT  CASE
+when position = '?' then 'Question'
+when position like 'D%' then 'D-Type'
+when position like 'C%' then 'C-Type'
+else 'Others' end as poss,
+count(poss)
+  FROM benn.college_football_players
+  group by poss
+  
+-- works
+
+SELECT  CASE
+when position = '?' then 'Question'
+when position like 'D%' then 'D-Type'
+when position like 'C%' then 'C-Type'
+else 'Others' end as poss,
+count(1)
+  FROM benn.college_football_players
+  group by poss  
+
+-- Practice Problem
+
+-- Write a query that includes players' names and a column that classifies them into four categories based on height. Keep in mind that the answer we provide is only one of many possible answers, since you could divide players' heights in many ways. 
+
+SELECT player_name,
+       height,
+       CASE WHEN height > 74 THEN 'over 74'
+            WHEN height > 72 AND height <= 74 THEN '73-74'
+            WHEN height > 70 AND height <= 72 THEN '71-72'
+            ELSE 'under 70' END AS height_group
+  FROM benn.college_football_players
+  
+  -- attempted answer
+SELECT CASE when height > 74 and height <=100 then '75+'
+            WHEN height > 72 and height <=74 THEN '73-74'
+            WHEN height > 70 and height <=70 THEN '71-72'
+            WHEN height > 40 and height <=70 THEN '41-70'
+            ELSE '40 or under' END AS height_group,
+            count(1)
+  FROM benn.college_football_players
+GROUP by 1
+order by 1 desc
+
+
+You can also string together multiple conditional statements with AND and OR the same way you might in a WHERE clause:
+
+SELECT player_name,
+       CASE WHEN year = 'FR' AND position = 'WR' THEN 'frosh_wr'
+            ELSE NULL END AS sample_case_statement
+  FROM benn.college_football_players
+
+A quick review of CASE basics:
+
+    The CASE statement always goes in the SELECT clause
+    CASE must include the following components: WHEN, THEN, and END. ELSE is an optional component.
+    You can make any conditional statement using any conditional operator (like WHERE ) between WHEN and THEN. This includes stringing together multiple conditional statements using AND and OR.
+    You can include multiple WHEN statements, as well as an ELSE statement to deal with any unaddressed conditions.
+
+Practice Problem
+
+Write a query that selects all columns from benn.college_football_players and adds an additional column that displays the player's name if that player is a junior or senior.
+Try it out See the answer
+
+SELECT *,
+       CASE WHEN year IN ('JR', 'SR') THEN player_name ELSE NULL END AS upperclass_player_name
+  FROM benn.college_football_players
+
+
+
+
+
+-- Using CASE with aggregate functions
+
+CASE's slightly more complicated and substantially more useful functionality comes from pairing it with aggregate functions. For example, let's say you want to only count rows that fulfill a certain condition. Since COUNT ignores nulls, you could use a CASE statement to evaluate the condition and produce null or non-null values depending on the outcome:
+
+SELECT CASE WHEN year = 'FR' THEN 'FR'
+            ELSE 'Not FR' END AS year_group,
+            COUNT(1) AS count
+  FROM benn.college_football_players
+ GROUP BY CASE WHEN year = 'FR' THEN 'FR'
+               ELSE 'Not FR' END
+               
+-- above and below are the same.
+               
+SELECT CASE WHEN year = 'FR' THEN 'FR'
+            ELSE 'Not FR' END AS year_group,
+            COUNT(1) AS count
+  FROM benn.college_football_players
+ GROUP BY 1               
+
+Now, you might be thinking "why wouldn't I just use a WHERE clause to filter out the rows I don't want to count?" You could do that—it would look like this:
+
+SELECT COUNT(1) AS fr_count
+  FROM benn.college_football_players
+ WHERE year = 'FR'
+
+But what if you also wanted to count a couple other conditions? Using the WHERE clause only allows you to count one condition. Here's an example of counting multiple conditions in one query:
+
+SELECT CASE WHEN year = 'FR' THEN 'FR'
+            WHEN year = 'SO' THEN 'SO'
+            WHEN year = 'JR' THEN 'JR'
+            WHEN year = 'SR' THEN 'SR'
+            ELSE 'No Year Data' END AS year_group,
+            COUNT(1) AS count
+  FROM benn.college_football_players
+ GROUP BY 1
+
+The above query is an excellent place to use numbers instead of columns in the GROUP BY clause because repeating the CASE statement in the GROUP BY clause would make the query obnoxiously long. Alternatively, you can use the column's alias in the GROUP BY clause like this:
+
+SELECT CASE WHEN year = 'FR' THEN 'FR'
+            WHEN year = 'SO' THEN 'SO'
+            WHEN year = 'JR' THEN 'JR'
+            WHEN year = 'SR' THEN 'SR'
+            ELSE 'No Year Data' END AS year_group,
+            COUNT(1) AS count
+  FROM benn.college_football_players
+ GROUP BY year_group
+
+Note that if you do choose to repeat the entire CASE statement, you should remove the AS year_group column naming when you copy/paste into the GROUP BY clause:
+
+SELECT CASE WHEN year = 'FR' THEN 'FR'
+            WHEN year = 'SO' THEN 'SO'
+            WHEN year = 'JR' THEN 'JR'
+            WHEN year = 'SR' THEN 'SR'
+            ELSE 'No Year Data' END AS year_group,
+            COUNT(1) AS count
+  FROM benn.college_football_players
+ GROUP BY CASE WHEN year = 'FR' THEN 'FR'
+               WHEN year = 'SO' THEN 'SO'
+               WHEN year = 'JR' THEN 'JR'
+               WHEN year = 'SR' THEN 'SR'
+               ELSE 'No Year Data' END
+
+Combining CASE statements with aggregations can be tricky at first. It's often helpful to write a query containing the CASE statement first and run it on its own. Using the previous example, you might first write:
+
+SELECT CASE WHEN year = 'FR' THEN 'FR'
+            WHEN year = 'SO' THEN 'SO'
+            WHEN year = 'JR' THEN 'JR'
+            WHEN year = 'SR' THEN 'SR'
+            ELSE 'No Year Data' END AS year_group,
+            *
+  FROM benn.college_football_players
+
+The above query will show all columns in the benn.college_football_players table, as well as a column showing the results of the CASE statement. From there, you can replace the * with an aggregation and add a GROUP BY clause. Try this process if you struggle with either of the following practice problems.
+Practice Problem
+
+Write a query that counts the number of 300lb+ players for each of the following regions: West Coast (CA, OR, WA), Texas, and Other (everywhere else).
+
+-- Write a query that counts the number of 300lb+ players for each of the following regions: 
+  -- West Coast (CA, OR, WA), Texas, and Other (everywhere else).         
+  
+  select 
+  case when state in ('CA','OR','WA') then 'West Coast'
+       when state = 'TX' then 'Texas'
+       else 'Other' end as region_group,
+  count(region_group) -- it cannot find `region_group` error
+
+     FROM benn.college_football_players
+     group by 1
+     
+
+Try it out See the answer
+
+  select 
+  case when state in ('CA','OR','WA') then 'West Coast'
+       when state = 'TX' then 'Texas'
+       else 'Other' end as region_group,
+  
+  count(case when weight > 300 then 1
+  else NULL end) as weight_group
+     FROM benn.college_football_players
+     group by region_group
+     
+==========================================================================
+
+ SELECT CASE WHEN state IN ('CA', 'OR', 'WA') THEN 'West Coast'
+        WHEN state = 'TX' THEN 'Texas'
+        ELSE 'Other' END AS arbitrary_regional_designation,
+        COUNT(1) AS players
+ FROM benn.college_football_players
+ WHERE weight >= 300
+ GROUP BY 1
+
+Practice Problem
+
+-- Write a query that counts the number of 300lb+ players for each of the following regions: West Coast (CA, OR, WA), Texas, and Other (everywhere else).
+
+SELECT CASE WHEN state IN ('CA', 'OR', 'WA') THEN 'West Coast'
+            WHEN state = 'TX' THEN 'Texas'
+            ELSE 'Other' END AS arbitrary_regional_designation,
+            COUNT(1) AS players
+  FROM benn.college_football_players
+ WHERE weight >= 300
+ GROUP BY 1
+
+
+Practice Problem
+
+-- Write a query that calculates the combined weight of all underclass players (FR/SO) in California as well as the combined weight of all upperclass players (JR/SR) in California. 
+
+SELECT CASE WHEN year IN ('FR', 'SO') THEN 'underclass'
+            WHEN year IN ('JR', 'SR') THEN 'upperclass'
+            ELSE NULL END AS class_group,
+       SUM(weight) AS combined_player_weight
+  FROM benn.college_football_players
+ WHERE state = 'CA'
+ GROUP BY 1
+
+
+-- Using CASE inside of aggregate functions
+
+In the previous examples, data was displayed vertically, but in some instances, you might want to show data horizontally. This is known as "pivoting" (like a pivot table in Excel). Let's take the following query:
+
+SELECT CASE WHEN year = 'FR' THEN 'FR'
+            WHEN year = 'SO' THEN 'SO'
+            WHEN year = 'JR' THEN 'JR'
+            WHEN year = 'SR' THEN 'SR'
+            ELSE 'No Year Data' END AS year_group,
+            COUNT(1) AS count
+  FROM benn.college_football_players
+ GROUP BY 1
+
+And re-orient it horizontally:
+
+SELECT COUNT(CASE WHEN year = 'FR' THEN 1 ELSE NULL END) AS fr_count,
+       COUNT(CASE WHEN year = 'SO' THEN 1 ELSE NULL END) AS so_count,
+       COUNT(CASE WHEN year = 'JR' THEN 1 ELSE NULL END) AS jr_count,
+       COUNT(CASE WHEN year = 'SR' THEN 1 ELSE NULL END) AS sr_count
+  FROM benn.college_football_players
+
+It's worth noting that going from horizontal to vertical orientation can be a substantially more difficult problem depending on the circumstances, and is covered in greater depth in a later lesson.
+
+Sharpen your SQL skills
+-- Practice Problem
+
+Write a query that displays the number of players in each state, with FR, SO, JR, and SR players in separate columns and another column for the total number of players. Order results such that states with the most players come first.
+Try it out See the answer
+
+-- SELECT CASE WHEN year = 'FR' THEN 'FR'
+--             WHEN year = 'SO' THEN 'SO'
+--             WHEN year = 'JR' THEN 'JR'
+--             WHEN year = 'SR' THEN 'SR'
+--             ELSE 'No Year Data' END AS year_group,
+--             COUNT(1) AS count
+--   FROM benn.college_football_players
+-- GROUP BY 1
+ 
+ -- horizontal
+ 
+SELECT COUNT(CASE WHEN year = 'FR' THEN 1 ELSE NULL END) AS fr_count,
+       COUNT(CASE WHEN year = 'SO' THEN 1 ELSE NULL END) AS so_count,
+       COUNT(CASE WHEN year = 'JR' THEN 1 ELSE NULL END) AS jr_count,
+       COUNT(CASE WHEN year = 'SR' THEN 1 ELSE NULL END) AS sr_count,
+       count(1) as total
+  FROM benn.college_football_players
+
+-- Proper Answer
+
+SELECT state,
+       COUNT(CASE WHEN year = 'FR' THEN 1 ELSE NULL END) AS fr_count,
+       COUNT(CASE WHEN year = 'SO' THEN 1 ELSE NULL END) AS so_count,
+       COUNT(CASE WHEN year = 'JR' THEN 1 ELSE NULL END) AS jr_count,
+       COUNT(CASE WHEN year = 'SR' THEN 1 ELSE NULL END) AS sr_count,
+       COUNT(1) AS total_players
+  FROM benn.college_football_players
+ GROUP BY state
+ ORDER BY total_players DESC
+ 
+ 
+
+-- Practice Problem
+
+Write a query that shows the number of players at schools with names that start with A through M, and the number at schools with names starting with N - Z.
+Try it out See the answer
+
+SELECT COUNT(CASE WHEN name >= 'a' and name <n THEN 1 ELSE NULL END) AS AtoM,
+       COUNT(CASE WHEN name >= 'n' THEN 1 ELSE NULL END) AS NtoZ
+  FROM benn.college_football_players
+
+-- correct answer
+
+SELECT CASE WHEN school_name < 'n' THEN 'A-M'
+            WHEN school_name >= 'n' THEN 'N-Z'
+            ELSE NULL END AS school_name_group,
+       COUNT(1) AS players
+  FROM benn.college_football_players
+ GROUP BY 1
+
+Next Lesson
+
+-- SQL DISTINCT
+
+Starting here? This lesson is part of a full-length tutorial in using SQL for Data Analysis. Check out the beginning.
+
+In this lesson we'll cover:
+
+    Using SQL DISTINCT for viewing unique values
+    Using DISTINCT in aggregations
+    DISTINCT performance
+    Practice problems
+
+Using SQL DISTINCT for viewing unique values
+
+You'll occasionally want to look at only the unique values in a particular column. You can do this using SELECT DISTINCT syntax. To select unique values from the month column in the Apple stock prices dataset, you'd use the following query:
+
+SELECT DISTINCT month
+  FROM tutorial.aapl_historical_stock_price
+
+If you include two (or more) columns in a SELECT DISTINCT clause, your results will contain all of the unique pairs of those two columns:
+
+SELECT DISTINCT year, month
+  FROM tutorial.aapl_historical_stock_price
+
+Note: You only need to include DISTINCT once in your SELECT clause—you do not need to add it for each column name.
+Practice Problem
+
+-- Write a query that returns the unique values in the year column, in chronological order.
+Try it out See the answer
+
+SELECT DISTINCT year
+  FROM tutorial.aapl_historical_stock_price
+order by year
+
+DISTINCT can be particularly helpful when exploring a new data set. In many real-world scenarios, you will generally end up writing several preliminary queries in order to figure out the best approach to answering your initial question. Looking at the unique values on each column can help identify how you might want to group or filter the data.
+Using DISTINCT in aggregations
+
+You can use DISTINCT when performing an aggregation. You'll probably use it most commonly with the COUNT function.
+
+In this case, you should run the query below that counts the unique values in the month column.
+
+SELECT COUNT(DISTINCT month) AS unique_months
+  FROM tutorial.aapl_historical_stock_price
+
+The results show that there are 12 unique values (other examples may be less obvious). That's a small enough number that you might be able to aggregate by month and interpret the results fairly early. For example, you might follow this up by taking average trade volumes by month to get a sense of when Apple stock really moves:
+
+SELECT month,
+       AVG(volume) AS avg_trade_volume
+  FROM tutorial.aapl_historical_stock_price
+ GROUP BY month
+ ORDER BY 2 DESC
+
+Okay, back to DISTINCT. You'll notice that DISTINCT goes inside the aggregate function rather than at the beginning of the SELECT clause. Of course, you can SUM or AVG the distinct values in a column, but there are fewer practical applications for them. For MAX and MIN, you probably shouldn't ever use DISTINCT because the results will be the same as without DISTINCT, and the DISTINCT function will make your query substantially slower to return results.
+DISTINCT performance
+
+It's worth noting that using DISTINCT, particularly in aggregations, can slow your queries down quite a bit. We'll cover this in greater depth in a later lesson.
+Sharpen your SQL skills
+Practice Problem
+
+-- Write a query that counts the number of unique values in the month column for each year.
+
+SELECT year,
+       COUNT(DISTINCT month) AS months_count
+  FROM tutorial.aapl_historical_stock_price
+ GROUP BY year
+ ORDER BY year
+
+Try it out See the answer
+Practice Problem
+
+-- Write a query that separately counts the number of unique values in the month column and the number of unique values in the `year` column.
+Try it out See the answer
+
+
+
+
+Next Lesson
+
+SQL Joins
+ORDER BY average_weight DESC
+
+Starting here? This lesson is part of a full-length tutorial in using SQL for Data Analysis. Check out the beginning.
+
+In this lesson we'll cover:
+
+    Intro to SQL joins: relational concepts
+    The anatomy of a join
+    Aliases in SQL
+    JOIN and ON
+
+Intro to SQL joins: relational concepts
+
+Up to this point, we've only been working with one table at a time. The real power of SQL, however, comes from working with data from multiple tables at once. If you remember from a previous lesson, the tables you've been working with up to this point are all part of the same schema in a relational database. The term "relational database" refers to the fact that the tables within it "relate" to one another—they contain common identifiers that allow information from multiple tables to be combined easily.
+
+To understand what joins are and why they are helpful, let's think about Twitter.
+
+Twitter has to store a lot of data. Twitter could (hypothetically, of course) store its data in one big table in which each row represents one tweet. There could be one column for the content of each tweet, one for the time of the tweet, one for the person who tweeted it, and so on. It turns out, though, that identifying the person who tweeted is a little tricky. There's a lot to a person's Twitter identity—a username, a bio, followers, followees, and more. Twitter could store all of that data in a table like this:
+
+Let's say, for the sake of argument, that Twitter did structure their data this way. Every time you tweet, Twitter creates a new row in its database, with information about you and the tweet.
+
+But this creates a problem. When you update your bio, Twitter would have to change that information for every one of your tweets in this table. If you've tweeted 5,000 times, that means 5,000 changes. If many people on Twitter are making lots of changes at once, that's a lot of computation to support. Instead, it's much easier for Twitter to store everyone's profile information in a separate table. That way, whenever someone updates their bio, Twitter would only have to change one row of data instead of thousands.
+
+In an organization like this, Twitter now has two tables. The first table—the users table—contains profile information, and has one row per user. The second table—the tweets table—contains tweet information, including the username of the person who sent the tweet. By matching—or joining—that username in the tweets table to the username in the users table, Twitter can still connect profile information to every tweet.
+The anatomy of a join
+
+Unfortunately, we can't use Twitter's data in any working examples (for that, we'll have to wait for the NSA's SQL Tutorial), but we can look at a similar problem.
+
+In the previous lesson on conditional logic, we worked with a table of data on college football players—benn.college_football_players. This table included data on players, including each player's weight and the school that they played for. However, it didn't include much information on the school, such as the conference the school is in—that information is in a separate table, benn.college_football_teams.
+
+Let's say we want to figure out which conference has the highest average weight. Given that information is in two separate tables, how do you do that? A join!
+
+SELECT teams.conference AS conference,
+       AVG(players.weight) AS average_weight
+  FROM benn.college_football_players players
+  JOIN benn.college_football_teams teams
+    ON teams.school_name = players.school_name
+ GROUP BY teams.conference
+ ORDER BY AVG(players.weight) DESC
+ 
+ 
+ and also `order by average_weight desc`
+
+There's a lot of new stuff happening here, so we'll go step-by-step.
+Aliases in SQL
+
+When performing joins, it's easiest to give your table names aliases. benn.college_football_players is pretty long and annoying to type—players is much easier. You can give a table an alias by adding a space after the table name and typing the intended name of the alias. As with column names, best practice here is to use all lowercase letters and underscores instead of spaces.
+
+Once you've given a table an alias, you can refer to columns in that table in the SELECT clause using the alias name. For example, the first column selected in the above query is teams.conference. Because of the alias, this is equivalent to benn.college_football_teams.conference: we're selecting the conference column in the college_football_teams table in benn's schema.
+
+Practice Problem
+
+-- Write a query that selects the school name, player name, position, and weight for every player in Georgia, ordered by weight (heaviest to lightest). Be sure to make an alias for the table, and to reference all column names in relation to the alias.
+Try it out See the answer
+
+SELECT players.school_name,
+       players.player_name,
+       players.position,
+       players.weight
+  FROM benn.college_football_players players
+ WHERE players.state = 'GA'
+ ORDER BY players.weight DESC
+
+
+JOIN and ON
+
+After the FROM statement, we have two new statements: JOIN, which is followed by a table name, and ON, which is followed by a couple column names separated by an equals sign.
+
+Though the ON statement comes after JOIN, it's a bit easier to explain it first. ON indicates how the two tables (the one after the FROM and the one after the JOIN) relate to each other. You can see in the example above that both tables contain fields called school_name. Sometimes relational fields are slightly less obvious. For example, you might have a table called schools with a field called id, which could be joined against school_id in any other table. These relationships are sometimes called "mappings." teams.school_name and players.school_name, the two columns that map to one another, are referred to as "foreign keys" or "join keys." Their mapping is written as a conditional statement:
+
+ON teams.school_name = players.school_name
+
+In plain English, this means:
+
+    Join all rows from the players table on to rows in the teams table for which the school_name field in the players table is equal to the school_name field in the teams table.
+
+What does this actually do? Let's take a look at one row to see what happens. This is the row in the players table for Wake Forest wide receiver Michael Campanaro:
+
+During the join, SQL looks up the school_name—in this case, "Wake Forest"—in the school_name field of the teams table. If there's a match, SQL takes all five columns from the teams table and joins them to ten columns of the players table. The new result is a fifteen column table, and the row with Michael Campanaro looks like this:
+
+Two columns are cut off from the image, but you can see the full result here.
+
+When you run a query with a join, SQL performs the same operation as it did above to every row of the table after the FROM statement. To see the full table returned by the join, try running this query:
+
+SELECT *
+  FROM benn.college_football_players players
+  JOIN benn.college_football_teams teams
+    ON teams.school_name = players.school_name
+
+Note that SELECT * returns all of the columns from both tables, not just from the table after FROM. If you want to only return columns from one table, you can write SELECT players.* to return all the columns from the players table.
+
+Once you've generated this new table after the join, you can use the same aggregate functions from a previous lesson. By running an AVG function on player weights, and grouping by the conference field from the teams table, you can figure out each conference's average weight.
+ 
+ 
+ SQL INNER JOIN
+
+Starting here? This lesson is part of a full-length tutorial in using SQL for Data Analysis. Check out the beginning.
+
+In this lesson we'll cover:
+
+    INNER JOIN
+    Joining tables with identical column names
+    Practice problem
+
+INNER JOIN
+=================
+
+
+In the previous lesson, you learned the basics of SQL joins using a data about college football players. All of the players in the players table match to one school in the teams table. But what if the data isn't so clean? What if there are multiple schools in the teams table with the same name? Or if a player goes to a school that isn't in the teams table?
+
+If there are multiple schools in the teams table with the same name, each one of those rows will get joined to matching rows in the players table. Returning to the previous example with Michael Campanaro, if there were three rows in the teams table where school_name = 'Wake Forest', the join query above would return three rows with Michael Campanaro.
+
+It's often the case that one or both tables being joined contain rows that don't have matches in the other table. The way this is handled depends on whether you're making an inner join or an outer join.
+
+We'll start with inner joins, which can be written as either JOIN benn.college_football_teams teams or INNER JOIN benn.college_football_teams teams. Inner joins eliminate rows from both tables that do not satisfy the join condition set forth in the ON statement. In mathematical terms, an inner join is the intersection of the two tables.
+SQL Inner Join
+
+Therefore, if a player goes to a school that isn't in the teams table, that player won't be included in the result from an inner join. Similarly, if there are schools in the teams table that don't match to any schools in the players table, those rows won't be included in the results either.
+Joining tables with identical column names
+
+When you join two tables, it might be the case that both tables have columns with identical names. In the below example, both tables have columns called school_name:
+
+SELECT players.*,
+       teams.*
+  FROM benn.college_football_players players
+  JOIN benn.college_football_teams teams
+    ON teams.school_name = players.school_name
+
+The results can only support one column with a given name—when you include 2 columns of the same name, the results will simply show the exact same result set for both columns even if the two columns should contain different data. You can avoid this by naming the columns individually. It happens that these two columns will actually contain the same data because they are used for the join key, but the following query technically allows these columns to be independent:
+
+>> Give different col. names in JOINs to avoid problems.
+
+SELECT players.school_name AS players_school_name,
+       teams.school_name AS teams_school_name
+  FROM benn.college_football_players players
+  JOIN benn.college_football_teams teams
+    ON teams.school_name = players.school_name
+
+Sharpen your SQL skills
+Practice Problem
+
+-- Write a query that displays player names, school names and conferences for schools in the "FBS (Division I-A Teams)" division.
+Try it out See the answer
+
+SELECT players.player_name,
+       players.school_name,
+       teams.conference
+  FROM benn.college_football_players players
+  JOIN benn.college_football_teams teams
+    ON teams.school_name = players.school_name
+ WHERE teams.division = 'FBS (Division I-A Teams)'
+
+
+Next Lesson
+
+SQL Outer Joins
+------------------
+
+
+Starting here? This lesson is part of a full-length tutorial in using SQL for Data Analysis. Check out the beginning.
+
+In this lesson we'll cover:
+
+    Outer joins
+    The Crunchbase dataset
+
+Outer joins
+
+Outer joins are joins that return matched values and unmatched values from either or both tables. There are a few types of outer joins:
+
+    LEFT JOIN returns only unmatched rows from the left table, as well as matched rows in both tables.
+    RIGHT JOIN returns only unmatched rows from the right table , as well as matched rows in both tables.
+    FULL OUTER JOIN returns unmatched rows from both tables,as well as matched rows in both tables.
+
+Note: LEFT JOIN is also refered to as OUTER LEFT JOIN. RIGHT JOIN is also refered to as OUTER RIGHT JOIN. FULL OUTER JOIN is also refered to as OUTER JOIN.
+Outer joins vs. Inner join
+
+When performing an inner join, rows from either table that are unmatched in the other table are not returned. In an outer join, unmatched rows in one or both tables can be returned.
+
+As you work through the following lessons about outer joins, it might be helpful to refer to this JOIN visualization by Patrik Spathon.
+
+The Crunchbase dataset
+
+The data for the following lessons was pulled from Crunchbase, a crowdsourced index of startups, founders, investors, and the activities of all three. It was collected Feb. 5, 2014, and large portions of both tables were randomly dropped for the sake of this lesson. The first table lists a large portion of companies in the database; one row per company. The permalink field is a unique identifier for each row, and also shows the web address. For each company in the table, you can view its online Crunchbase profile by copying/pasting its permalink after Crunchbase’s web domain. For example, the third company in the table, “.Club Domains,” has the permalink “/company/club-domains,” so its profile address would be http://www.crunchbase.com/company/club-domains. The fields with "funding" in the name have to do with how much outside investment (in USD) each company has taken on. The rest of the fields are self-explanatory.
+
+SELECT *
+  FROM tutorial.crunchbase_companies
+
+The second table lists acquisitions—one row per acquisition. company_permalink in this table maps to the permalink field in tutorial.crunchbase_companies as described in the previous lesson. Joining these two fields will add information about the company being acquired.
+
+You'll notice that there is a separate field called acquirer_permalink as well. This can also be mapped to the permalink field tutorial.crunchbase_companies to add additional information about the acquiring company.
+
+SELECT *
+  FROM tutorial.crunchbase_acquisitions
+
+The foreign key you use to join these two tables will depend entirely on whether you're looking to add information about the acquiring company or the company that was acquired.
+
+It's worth noting that this sort of structure is common. For example, a table showing a list of emails sent might include a sender_email_address and a recipient_email_address, both of which map to a table listing email addresses and the names of their owners.
+
+SQL LEFT JOIN
+
+Starting here? This lesson is part of a full-length tutorial in using SQL for Data Analysis. Check out the beginning.
+
+In this lesson we'll cover:
+
+    The LEFT JOIN command
+    Practice problems
+
+The LEFT JOIN command
+{{ page.seo-title }}
+
+Let's start by running an INNER JOIN on the Crunchbase dataset and taking a look at the results. We'll just look at company-permalink in each table, as well as a couple other fields, to get a sense of what's actually being joined.
+
+SELECT companies.permalink AS companies_permalink,
+       companies.name AS companies_name,
+       acquisitions.company_permalink AS acquisitions_permalink,
+       acquisitions.acquired_at AS acquired_date
+  FROM tutorial.crunchbase_companies companies
+  JOIN tutorial.crunchbase_acquisitions acquisitions
+    ON companies.permalink = acquisitions.company_permalink
+
+You may notice that "280 North" appears twice in this list. That is because it has two entries in the tutorial.crunchbase_acquisitions table, both of which are being joined onto the tutorial.crunchbase_companies table.
+
+Now try running that query as a LEFT JOIN:
+
+SELECT companies.permalink AS companies_permalink,
+       companies.name AS companies_name,
+       acquisitions.company_permalink AS acquisitions_permalink,
+       acquisitions.acquired_at AS acquired_date
+  FROM tutorial.crunchbase_companies companies
+  LEFT JOIN tutorial.crunchbase_acquisitions acquisitions
+    ON companies.permalink = acquisitions.company_permalink
+
+You can see that the first two companies from the previous result set, #waywire and 1000memories, are pushed down the page by a number of results that contain null values in the acquisitions_permalink and acquired_date fields.
+
+This is because the LEFT JOIN command tells the database to return all rows in the table in the FROM clause, regardless of whether or not they have matches in the table in the LEFT JOIN clause.
+Sharpen your SQL skills
+
+You can explore the differences between a LEFT JOIN and a JOIN by solving these practice problems:
+
+Practice Problem
+
+-- Write a query that performs an inner join between the tutorial.crunchbase_acquisitions table and the tutorial.crunchbase_companies table, but instead of listing individual rows, count the number of non-null rows in each table.
+Try it out See the answer
+Practice Problem
+
+
+
+-- Modify the query above to be a LEFT JOIN. Note the difference in results.
+Try it out See the answer
+
+SELECT COUNT(companies.permalink) AS companies_rowcount,
+       COUNT(acquisitions.company_permalink) AS acquisitions_rowcount
+  FROM tutorial.crunchbase_companies companies
+  JOIN tutorial.crunchbase_acquisitions acquisitions
+    ON companies.permalink = acquisitions.company_permalink
+
+
+Now that you've got a sense of how left joins work, try this harder aggregation problem:
+
+
+Practice Problem
+
+-- Count the number of unique companies (don't double-count companies) and unique acquired companies by state. Do not include results for which there is no state data, and order by the number of acquired companies from highest to lowest.
+Try it out See the answer
+
+ SELECT COUNT(companies.permalink) AS companies_rowcount,
+       COUNT(acquisitions.company_permalink) AS acquisitions_rowcount
+  FROM tutorial.crunchbase_companies companies
+  LEFT JOIN tutorial.crunchbase_acquisitions acquisitions
+    ON companies.permalink = acquisitions.company_permalink
+ 
+ 
+ SQL RIGHT JOIN
+
+Starting here? This lesson is part of a full-length tutorial in using SQL for Data Analysis. Check out the beginning.
+
+In this lesson we'll cover:
+
+    The RIGHT JOIN command
+    Practice problem
+
+The RIGHT JOIN command
+
+Right joins are similar to left joins except they return all rows from the table in the RIGHT JOIN clause and only matching rows from the table in the FROM clause.
+SQL RIGHT JOIN Diagram
+
+RIGHT JOIN is rarely used because you can achieve the results of a RIGHT JOIN by simply switching the two joined table names in a LEFT JOIN. For example, in this query of the Crunchbase dataset, the LEFT JOIN section:
+
+SELECT companies.permalink AS companies_permalink,
+       companies.name AS companies_name,
+       acquisitions.company_permalink AS acquisitions_permalink,
+       acquisitions.acquired_at AS acquired_date
+  FROM tutorial.crunchbase_companies companies
+  LEFT JOIN tutorial.crunchbase_acquisitions acquisitions
+    ON companies.permalink = acquisitions.company_permalink
+
+produces the same results as this query:
+
+SELECT companies.permalink AS companies_permalink,
+       companies.name AS companies_name,
+       acquisitions.company_permalink AS acquisitions_permalink,
+       acquisitions.acquired_at AS acquired_date
+  FROM tutorial.crunchbase_acquisitions acquisitions
+ RIGHT JOIN tutorial.crunchbase_companies companies
+    ON companies.permalink = acquisitions.company_permalink
+
+The convention of always using LEFT JOIN probably exists to make queries easier to read and audit, but beyond that there isn't necessarily a strong reason to avoid using RIGHT JOIN.
+
+It's worth noting that LEFT JOIN and RIGHT JOIN can be written as LEFT OUTER JOIN and RIGHT OUTER JOIN, respectively.
+
+Sharpen your SQL skills
+
+Practice Problem
+
+-- Rewrite the previous practice query in which you counted total and acquired companies by state, but with a RIGHT JOIN instead of a LEFT JOIN. The goal is to produce the exact same results.
+
+ SELECT COUNT(companies.permalink) AS companies_rowcount,
+       COUNT(acquisitions.company_permalink) AS acquisitions_rowcount
+  FROM tutorial.crunchbase_companies companies
+  RIGHT JOIN tutorial.crunchbase_acquisitions acquisitions
+    ON companies.permalink = acquisitions.company_permalink
+
+Try it out See the answer
+
+Now that you've got a sense of how left joins work, try this harder aggregation problem:
+
+Practice Problem
+
+-- Count the number of unique companies (don't double-count companies) and unique acquired companies by state. Do not include results for which there is no state data, and order by the number of acquired companies from highest to lowest.
+Try it out See the answer
+ 
+SELECT companies.state_code,
+       COUNT(DISTINCT companies.permalink) AS unique_companies,
+       COUNT(DISTINCT acquisitions.company_permalink) AS unique_companies_acquired
+  FROM tutorial.crunchbase_companies companies
+  LEFT JOIN tutorial.crunchbase_acquisitions acquisitions
+    ON companies.permalink = acquisitions.company_permalink
+ WHERE companies.state_code IS NOT NULL
+ GROUP BY 1
+ ORDER BY 3 DESC
+ 
+ 
+SQL Joins Using WHERE or ON
+
+Starting here? This lesson is part of a full-length tutorial in using SQL for Data Analysis. Check out the beginning.
+
+In this lesson we'll cover:
+
+    Filtering in the ON clause
+    Filtering in the WHERE clause
+    Practice problems
+
+Filtering in the ON clause
+
+Normally, filtering is processed in the WHERE clause once the two tables have already been joined. It's possible, though that you might want to filter one or both of the tables before joining them. For example, you only want to create matches between the tables under certain circumstances.
+
+Using Crunchbase data, let's take another look at the LEFT JOIN example from an earlier lesson (this time we'll add an ORDER BY clause):
+
+SELECT companies.permalink AS companies_permalink,
+       companies.name AS companies_name,
+       acquisitions.company_permalink AS acquisitions_permalink,
+       acquisitions.acquired_at AS acquired_date
+  FROM tutorial.crunchbase_companies companies
+  LEFT JOIN tutorial.crunchbase_acquisitions acquisitions
+    ON companies.permalink = acquisitions.company_permalink
+ ORDER BY 1
+
+Compare the following query to the previous one and you will see that everything in the tutorial.crunchbase_acquisitions table was joined on except for the row for which company_permalink is '/company/1000memories':
+
+SELECT companies.permalink AS companies_permalink,
+       companies.name AS companies_name,
+       acquisitions.company_permalink AS acquisitions_permalink,
+       acquisitions.acquired_at AS acquired_date
+  FROM tutorial.crunchbase_companies companies
+  LEFT JOIN tutorial.crunchbase_acquisitions acquisitions
+    ON companies.permalink = acquisitions.company_permalink
+   AND acquisitions.company_permalink != '/company/1000memories'
+ ORDER BY 1
+
+What's happening above is that the conditional statement AND... is evaluated before the join occurs. You can think of it as a WHERE clause that only applies to one of the tables. You can tell that this is only happening in one of the tables because the 1000memories permalink is still displayed in the column that pulls from the other table:
+Filtering in the WHERE clause
+
+If you move the same filter to the WHERE clause, you will notice that the filter happens after the tables are joined. The result is that the 1000memories row is joined onto the original table, but then it is filtered out entirely (in both tables) in the WHERE clause before displaying results.
+
+SELECT companies.permalink AS companies_permalink,
+       companies.name AS companies_name,
+       acquisitions.company_permalink AS acquisitions_permalink,
+       acquisitions.acquired_at AS acquired_date
+  FROM tutorial.crunchbase_companies companies
+  LEFT JOIN tutorial.crunchbase_acquisitions acquisitions
+    ON companies.permalink = acquisitions.company_permalink
+ WHERE acquisitions.company_permalink != '/company/1000memories'
+    OR acquisitions.company_permalink IS NULL
+ ORDER BY 1
+
+You can see that the 1000memories line is not returned (it would have been between the two highlighted lines below). Also note that filtering in the WHERE clause can also filter null values, so we added an extra line to make sure to include the nulls.
+Sharpen your SQL skills
+
+For this set of practice problems, we're going to introduce a new dataset: tutorial.crunchbase_investments. This table is also sourced from Crunchbase and contains much of the same information as the tutorial.crunchbase_companies data. It it structured differently, though: it contains one row per investment. There can be multiple investments per company—it's even possible that one investor could invest in the same company multiple times. The column names are pretty self-explanatory. What's important is that company_permalink in the tutorial.crunchbase_investments table maps to permalink in the tutorial.crunchbase_companies table. Keep in mind that some random data has been removed from this table for the sake of this lesson.
+
+It is very likely that you will need to do some exploratory analysis on this table to understand how you might solve the following problems.
+
+
+Practice Problem
+
+-- Write a query that shows a company's name, "status" (found in the Companies table), and the number of unique investors in that company. Order by the number of investors from most to fewest. Limit to only companies in the state of New York.
+
+
+Try it out See the answer
+Practice Problem
+
+-- Write a query that lists investors based on the number of companies in which they are invested. Include a row for companies with no investor, and order from most companies to least.
+Try it out See the answer
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ ==================================
+ 
+ 
+ 
+
+-- Show all tables in a particular Schema
+`SELECT * FROM pg_catalog.pg_tables WHERE schemaname='tutorial'`
+
+schemaname	tablename	tableowner	tablespace	hasindexes	hasrules	hastriggers	rowsecurity
+tutorial	animial_crossing_accessories	mode_admin		false	false	false	false
+tutorial	animial_crossing_accessories_9067b7cc3b49da87072a3ca5	mode_admin		false	false	false	false
+tutorial	animal_crossing_achievements	mode_admin		false	false	false	false
+tutorial	animal_crossing_achievements_28e4e04e975e4f27cb9be9e1	mode_admin		false	false	false	false
+tutorial	animal_crossing_art	mode_admin		false	false	false	false
+tutorial	animal_crossing_art_3a053143a5a8c3ae9b75d0ed	mode_admin		false	false	false	false
+tutorial	animal_crossing_bags	mode_admin		false	false	false	false
+tutorial	animal_crossing_bags_9de2101d615e87fd86a3e478	mode_admin		false	false	false	false
+tutorial	animal_crossing_construction	mode_admin		false	false	false	false
+tutorial	animal_crossing_construction_8206ef829fca465fdd8701d5	mode_admin		false	false	false	false
+tutorial	animal_crossing_bottoms	mode_admin		false	false	false	false
+tutorial	animal_crossing_bottoms_7b62ddba747aef4ef8c8d8a2	mode_admin		false	false	false	false
+tutorial	animal_crossing_dress_up	mode_admin		false	false	false	false
+tutorial	animal_crossing_dress_up_ce7358a56aa5a9b8c2a306f2	mode_admin		false	false	false	false
+tutorial	animal_crossing_fencing	mode_admin		false	false	false	false
+tutorial	animal_crossing_fencing_b9fa7af2f25249c4711acb51	mode_admin		false	false	false	false
+tutorial	animal_crossing_floors	mode_admin		false	false	false	false
+tutorial	animal_crossing_floors_9a886f6549452cbf5efc25e7	mode_admin		false	false	false	false
+tutorial	animal_crossing_fish	mode_admin		false	false	false	false
+tutorial	animal_crossing_fish_f65f35f1632978a4c5f990ef	mode_admin		false	false	false	false
+tutorial	animal_crossing_fossils	mode_admin		false	false	false	false
+tutorial	animal_crossing_fossils_2c9272e9e0b33df09cdc65d3	mode_admin		false	false	false	false
+tutorial	animal_crossing_headwear	mode_admin		false	false	false	false
+tutorial	animal_crossing_headwear_ddba49991a05555e32792812	mode_admin		false	false	false	false
+tutorial	animal_crossing_housewares	mode_admin		false	false	false	false
+tutorial	animal_crossing_housewares_c8ed0d98ee526b2ba1359fd5	mode_admin		false	false	false	false
+tutorial	animal_crossing_insects	mode_admin		false	false	false	false
+tutorial	animal_crossing_insects_acc4b875f97d74102169d2ac	mode_admin		false	false	false	false
+tutorial	animal_crossing_miscellaneous	mode_admin		false	false	false	false
+tutorial	animal_crossing_miscellaneous_bdbfb596fce21c3f10335d1c	mode_admin		false	false	false	false
+tutorial	animal_crossing_music	mode_admin		false	false	false	false
+tutorial	animal_crossing_music_e7d082f93c66d3a22f746448	mode_admin		false	false	false	false
+tutorial	animal_crossing_other	mode_admin		false	false	false	false
+tutorial	animal_crossing_other_349705c2bea7ac80e9aa1f8a	mode_admin		false	false	false	false
+tutorial	animal_crossing_posters	mode_admin		false	false	false	false
+tutorial	animal_crossing_posters_bae92ee5c32fb77373406dab	mode_admin		false	false	false	false
+tutorial	animal_crossing_recipes	mode_admin		false	false	false	false
+tutorial	animal_crossing_recipes_9db63044c47e79231fc13265	mode_admin		false	false	false	false
+tutorial	animal_crossing_shoes	mode_admin		false	false	false	false
+tutorial	animal_crossing_shoes_3728971e61f59340c363023f	mode_admin		false	false	false	false
+tutorial	animal_crossing_rugs	mode_admin		false	false	false	false
+tutorial	animal_crossing_rugs_1c3f037f78650fd5246a6fdb	mode_admin		false	false	false	false
+tutorial	animal_crossing_tools	mode_admin		false	false	false	false
+tutorial	animal_crossing_tools_c5ae71342d66c5badbdfb82a	mode_admin		false	false	false	false
+tutorial	animal_crossing_tops	mode_admin		false	false	false	false
+tutorial	animal_crossing_tops_615ab87adf8163d8a3632515	mode_admin		false	false	false	false
+tutorial	animal_crossing_umbrellas	mode_admin		false	false	false	false
+tutorial	animal_crossing_umbrellas_6b7b894344d22db6ba932f4e	mode_admin		false	false	false	false
+tutorial	animal_crossing_wallpaper	mode_admin		false	false	false	false
+tutorial	animal_crossing_wallpaper_690812972f7225866204afbd	mode_admin		false	false	false	false
+tutorial	animal_crossing_wall_mounted	mode_admin		false	false	false	false
+tutorial	animal_crossing_wall_mounted_2ec1aae4ebae36d6b3015cea	mode_admin		false	false	false	false
+tutorial	animal_crossing_villagers	mode_admin		false	false	false	false
+tutorial	animal_crossing_villagers_3f286f728bf68dc64e41884c	mode_admin		false	false	false	false
+tutorial	animal_crossing_photos	mode_admin		false	false	false	false
+tutorial	animal_crossing_photos_ef96196614c1f8dc943eb969	mode_admin		false	false	false	false
+tutorial	reactions	mode_admin		false	false	false	false
+tutorial	reactions_5b88e629c63295f5037e5dd7	mode_admin		false	false	false	false
+tutorial	socks	mode_admin		false	false	false	false
+tutorial	socks_83b7a623aa1f412cf7c27191	mode_admin		false	false	false	false
+tutorial	periodic_table	mode_admin		false	false	false	false
+tutorial	periodic_table_3da367b4eaee33483bb07aa2	mode_admin		false	false	false	false
+tutorial	accounts	mode_admin		false	false	false	false
+tutorial	city_populations	mode_admin		true	false	false	false
+tutorial	aapl_historical_stock_price	mode_admin		true	false	false	false
+tutorial	aapl_historical_stock_price_729e68e4133568c5bd5b1fd6	mode_admin		true	false	false	false
+tutorial	accounts_df8aa6d9a2a88b831c67e50d	mode_admin		false	false	false	false
+tutorial	city_populations_e5890d99441ced7db0e917c8	mode_admin		true	false	false	false
+tutorial	crunchbase_acquisitions	mode_admin		true	false	false	false
+tutorial	crunchbase_acquisitions_clean_date	mode_admin		true	false	false	false
+tutorial	crunchbase_companies_23e8841677dd6b034ccf334a	mode_admin		true	false	false	false
+tutorial	crunchbase_acquisitions_clean_date_3de5ea9e69faa2d4c0daa50b	mode_admin		true	false	false	false
+tutorial	crunchbase_acquisitions_e6ea470d001f50dee95e911f	mode_admin		true	false	false	false
+tutorial	crunchbase_companies	mode_admin		true	false	false	false
+tutorial	crunchbase_companies_clean_date	mode_admin		true	false	false	false
+tutorial	crunchbase_companies_clean_date_bba7281543863b8c94439a02	mode_admin		true	false	false	false
+tutorial	crunchbase_investments	mode_admin		true	false	false	false
+tutorial	crunchbase_investments_59edee3d798d4e482b9f9c27	mode_admin		true	false	false	false
+tutorial	crunchbase_investments_part1	mode_admin		true	false	false	false
+tutorial	crunchbase_investments_part1_35c1eed808839504576cc2b4	mode_admin		true	false	false	false
+tutorial	crunchbase_investments_part2	mode_admin		true	false	false	false
+tutorial	crunchbase_investments_part2_fc6a02204dc27b40b2fa9240	mode_admin		true	false	false	false
+tutorial	excel_sql_inventory_data	mode_admin		false	false	false	false
+tutorial	dc_bikeshare_q1_2012	mode_admin		true	false	false	false
+tutorial	dunder_mifflin_paper_sales	mode_admin		false	false	false	false
+tutorial	dc_bikeshare_q1_2012_5b21eebb3d1f611898541dd8	mode_admin		true	false	false	false
+tutorial	dunder_mifflin_paper_sales_e84a724e74c938d968ab91fb	mode_admin		false	false	false	false
+tutorial	excel_sql_transaction_data_4cf18c59e5ecd52e57169740	mode_admin		false	false	false	false
+tutorial	excel_sql_inventory_data_1ee683fdce61d5baec32b00e	mode_admin		false	false	false	false
+tutorial	excel_sql_transaction_data	mode_admin		false	false	false	false
+tutorial	flight_revenue_d092d80fd70090b4731ec31d	mode_admin		true	false	false	false
+tutorial	flight_revenue	mode_admin		true	false	false	false
+tutorial	flights	mode_admin		false	false	false	false
+tutorial	kag_conversion_data	mode_admin		false	false	false	false
+tutorial	flights_5f419315c91e82d60e8e0875	mode_admin		false	false	false	false
+tutorial	global_weekly_charts_2013_2014	mode_admin		true	false	false	false
+tutorial	nominee_information	mode_admin		true	false	false	false
+tutorial	global_weekly_charts_2013_2014_eb98d24259d4a9241abc9e9a	mode_admin		true	false	false	false
+tutorial	housing_units_completed_us	mode_admin		false	false	false	false
+tutorial	housing_units_completed_us_6887847a8865b7e27ded2c5d	mode_admin		false	false	false	false
+tutorial	nominee_filmography_79d0230f7e75cc81d4cee943	mode_admin		true	false	false	false
+tutorial	kag_conversion_data_2c2f81a8d32497b0415e4a15	mode_admin		false	false	false	false
+tutorial	nominee_filmography	mode_admin		true	false	false	false
+tutorial	nominee_information_1aabb7c60ed4a218e99ef3ff	mode_admin		true	false	false	false
+tutorial	olist_closed_deals_dataset	mode_admin		false	false	false	false
+tutorial	olist_closed_deals_dataset_aa7c34b34738a8d544480807	mode_admin		false	false	false	false
+tutorial	olist_marketing_qualified_leads_dataset	mode_admin		false	false	false	false
+tutorial	olist_marketing_qualified_leads_dataset_9c092ba603934d607fbc10a	mode_admin		false	false	false	false
+tutorial	orders	mode_admin		false	false	false	false
+tutorial	orders_8bb73dd06ead6bc5f0e29032	mode_admin		false	false	false	false
+tutorial	oscar_nominees	mode_admin		true	false	false	false
+tutorial	patient_list	mode_admin		true	false	false	false
+tutorial	oscar_nominees_4d120ddc8a5d160d382080c4	mode_admin		true	false	false	false
+tutorial	playbook_emails_0e0407ff792c147582413c79	mode_admin		false	false	false	false
+tutorial	patient_list_0a64d48a4d61ee3157779028	mode_admin		true	false	false	false
+tutorial	playbook_emails	mode_admin		false	false	false	false
+tutorial	playbook_events_9b1b64883991067bd829c07e	mode_admin		false	false	false	false
+tutorial	playbook_events	mode_admin		false	false	false	false
+tutorial	playbook_experiments	mode_admin		false	false	false	false
+tutorial	playbook_experiments_308636a76661de422e58112a	mode_admin		false	false	false	false
+tutorial	sales_reps	mode_admin		false	false	false	false
+tutorial	playbook_users	mode_admin		false	false	false	false
+tutorial	sales_performance	mode_admin		true	false	false	false
+tutorial	playbook_users_b855ac7269b53346b63023a5	mode_admin		false	false	false	false
+tutorial	regions	mode_admin		false	false	false	false
+tutorial	regions_ac8db41348e3e07ea8ecfa3b	mode_admin		false	false	false	false
+tutorial	sales_performance_98a4f8fe80ec93fa51d3e6ac	mode_admin		true	false	false	false
+tutorial	sat_scores	mode_admin		true	false	false	false
+tutorial	sales_reps_955282f7425fd8aa35d63e2c	mode_admin		false	false	false	false
+tutorial	sat_scores_dee2756beb74f1d54f19ae0e	mode_admin		true	false	false	false
+tutorial	sf_crime_incidents_2014_01	mode_admin		true	false	false	false
+tutorial	sf_crime_incidents_2014_01_b4e0bc1587c3b5d55dfe4147	mode_admin		true	false	false	false
+tutorial	test_table_1245034f7b728e33b379cae5	mode_admin		true	false	false	false
+tutorial	sf_crime_incidents_cleandate	mode_admin		true	false	false	false
+tutorial	sf_crime_incidents_cleandate_63d6ccfbee85a9b2d199cc4e	mode_admin		true	false	false	false
+tutorial	test_table	mode_admin		true	false	false	false
+tutorial	us_housing_units_completed_9fd74772e020626793e02431	mode_admin		true	false	false	false
+tutorial	us_housing_units_1309f10be77d5233cc1faaf4	mode_admin		false	false	false	false
+tutorial	us_flights	mode_admin		false	false	false	false
+tutorial	us_flights_59b24e427c9c8acac6d3da53	mode_admin		false	false	false	false
+tutorial	us_housing_units	mode_admin		false	false	false	false
+tutorial	us_housing_units_completed	mode_admin		true	false	false	false
+tutorial	wa_fn_usec_telco_customer_churn_wa_fn_u_2adca2f6cfc10754235509d	mode_admin		false	false	false	false
+tutorial	wa_fn_usec_telco_customer_churn_wa_fn_usec_telco_customer_churn	mode_admin		false	false	false	false
+tutorial	watsi_events	mode_admin		false	false	false	false
+tutorial	watsi_events_677512b5b01f5e376e5a8526	mode_admin		false	false	false	false
+tutorial	yammer_emails	mode_admin		false	false	false	false
+tutorial	worldwide_earthquakes	mode_admin		true	false	false	false
+tutorial	worldwide_earthquakes_a0a12bad0edf50224fe97c5c	mode_admin		true	false	false	false
+tutorial	yammer_emails_d96cf1b9f9e98c8761af2e54	mode_admin		false	false	false	false
+tutorial	yammer_experiments	mode_admin		false	false	false	false
+tutorial	yammer_events	mode_admin		false	false	false	false
+tutorial	yammer_events_29ce87bdef256e1f540bfe90	mode_admin		false	false	false	false
+tutorial	yammer_experiments_326f368ea19b7bbc7c7ad6a2	mode_admin		false	false	false	false
+tutorial	yammer_users_ec7fb2789bca2e2ebf4d4e91	mode_admin		false	false	false	false
+tutorial	yammer_users	mode_admin		false	false	false	false
+tutorial	billboard_top_100_year_end	mode_admin		false	false	false	false
+tutorial	billboard_top_100_year_end_8d3506ab0b609d56b1bd3a54	mode_admin		false	false	false	false
+tutorial	animal_crossing_headwear	mode_admin		false	false	false	false
+tutorial	animal_crossing_headwear_ddba49991a05555e32792812	mode_admin		false	false	false	false
+tutorial	animal_crossing_housewares	mode_admin		false	false	false	false
+tutorial	animal_crossing_housewares_c8ed0d98ee526b2ba1359fd5	mode_admin		false	false	false	false
+tutorial	animal_crossing_insects	mode_admin		false	false	false	false
+tutorial	animal_crossing_insects_acc4b875f97d74102169d2ac	mode_admin		false	false	false	false
+tutorial	animal_crossing_miscellaneous	mode_admin		false	false	false	false
+tutorial	animal_crossing_miscellaneous_bdbfb596fce21c3f10335d1c	mode_admin		false	false	false	false
+tutorial	animal_crossing_music	mode_admin		false	false	false	false
+tutorial	animal_crossing_music_e7d082f93c66d3a22f746448	mode_admin		false	false	false	false
+tutorial	animal_crossing_other	mode_admin		false	false	false	false
+tutorial	animal_crossing_other_349705c2bea7ac80e9aa1f8a	mode_admin		false	false	false	false
+tutorial	animal_crossing_posters	mode_admin		false	false	false	false
+tutorial	animal_crossing_posters_bae92ee5c32fb77373406dab	mode_admin		false	false	false	false
+tutorial	animal_crossing_recipes	mode_admin		false	false	false	false
+tutorial	animal_crossing_recipes_9db63044c47e79231fc13265	mode_admin		false	false	false	false
+tutorial	animal_crossing_shoes	mode_admin		false	false	false	false
+tutorial	animal_crossing_shoes_3728971e61f59340c363023f	mode_admin		false	false	false	false
+tutorial	animal_crossing_rugs	mode_admin		false	false	false	false
+tutorial	animal_crossing_rugs_1c3f037f78650fd5246a6fdb	mode_admin		false	false	false	false
+tutorial	animal_crossing_tools	mode_admin		false	false	false	false
+tutorial	animal_crossing_tools_c5ae71342d66c5badbdfb82a	mode_admin		false	false	false	false
+tutorial	animal_crossing_tops	mode_admin		false	false	false	false
+tutorial	animal_crossing_tops_615ab87adf8163d8a3632515	mode_admin		false	false	false	false
+tutorial	animal_crossing_umbrellas	mode_admin		false	false	false	false
+tutorial	animal_crossing_umbrellas_6b7b894344d22db6ba932f4e	mode_admin		false	false	false	false
+tutorial	animal_crossing_wallpaper	mode_admin		false	false	false	false
+tutorial	animal_crossing_wallpaper_690812972f7225866204afbd	mode_admin		false	false	false	false
+tutorial	animal_crossing_wall_mounted	mode_admin		false	false	false	false
+tutorial	animal_crossing_wall_mounted_2ec1aae4ebae36d6b3015cea	mode_admin		false	false	false	false
+tutorial	animal_crossing_villagers	mode_admin		false	false	false	false
+tutorial	animal_crossing_villagers_3f286f728bf68dc64e41884c	mode_admin		false	false	false	false
+tutorial	animal_crossing_photos	mode_admin		false	false	false	false
+tutorial	animal_crossing_photos_ef96196614c1f8dc943eb969	mode_admin		false	false	false	false
+tutorial	reactions	mode_admin		false	false	false	false
+tutorial	reactions_5b88e629c63295f5037e5dd7	mode_admin		false	false	false	false
+tutorial	socks	mode_admin		false	false	false	false
+tutorial	socks_83b7a623aa1f412cf7c27191	mode_admin		false	false	false	false
+tutorial	periodic_table	mode_admin		false	false	false	false
+tutorial	periodic_table_3da367b4eaee33483bb07aa2	mode_admin		false	false	false	false
+tutorial	accounts	mode_admin		false	false	false	false
+tutorial	city_populations	mode_admin		true	false	false	false
+tutorial	aapl_historical_stock_price	mode_admin		true	false	false	false
+tutorial	aapl_historical_stock_price_729e68e4133568c5bd5b1fd6	mode_admin		true	false	false	false
+tutorial	accounts_df8aa6d9a2a88b831c67e50d	mode_admin		false	false	false	false
+tutorial	city_populations_e5890d99441ced7db0e917c8	mode_admin		true	false	false	false
+tutorial	crunchbase_acquisitions	mode_admin		true	false	false	false
+tutorial	crunchbase_acquisitions_clean_date	mode_admin		true	false	false	false
+tutorial	crunchbase_companies_23e8841677dd6b034ccf334a	mode_admin		true	false	false	false
+tutorial	crunchbase_acquisitions_clean_date_3de5ea9e69faa2d4c0daa50b	mode_admin		true	false	false	false
+tutorial	crunchbase_acquisitions_e6ea470d001f50dee95e911f	mode_admin		true	false	false	false
+tutorial	crunchbase_companies	mode_admin		true	false	false	false
+tutorial	crunchbase_companies_clean_date	mode_admin		true	false	false	false
+tutorial	crunchbase_companies_clean_date_bba7281543863b8c94439a02	mode_admin		true	false	false	false
+tutorial	crunchbase_investments	mode_admin		true	false	false	false
+tutorial	crunchbase_investments_59edee3d798d4e482b9f9c27	mode_admin		true	false	false	false
+tutorial	crunchbase_investments_part1	mode_admin		true	false	false	false
+tutorial	crunchbase_investments_part1_35c1eed808839504576cc2b4	mode_admin		true	false	false	false
+tutorial	crunchbase_investments_part2	mode_admin		true	false	false	false
+tutorial	crunchbase_investments_part2_fc6a02204dc27b40b2fa9240	mode_admin		true	false	false	false
+tutorial	excel_sql_inventory_data	mode_admin		false	false	false	false
+tutorial	dc_bikeshare_q1_2012	mode_admin		true	false	false	false
+tutorial	dunder_mifflin_paper_sales	mode_admin		false	false	false	false
+tutorial	dc_bikeshare_q1_2012_5b21eebb3d1f611898541dd8	mode_admin		true	false	false	false
+tutorial	dunder_mifflin_paper_sales_e84a724e74c938d968ab91fb	mode_admin		false	false	false	false
+tutorial	excel_sql_transaction_data_4cf18c59e5ecd52e57169740	mode_admin		false	false	false	false
+tutorial	excel_sql_inventory_data_1ee683fdce61d5baec32b00e	mode_admin		false	false	false	false
+tutorial	excel_sql_transaction_data	mode_admin		false	false	false	false
+tutorial	flight_revenue_d092d80fd70090b4731ec31d	mode_admin		true	false	false	false
+tutorial	flight_revenue	mode_admin		true	false	false	false
+tutorial	flights	mode_admin		false	false	false	false
+tutorial	kag_conversion_data	mode_admin		false	false	false	false
+tutorial	flights_5f419315c91e82d60e8e0875	mode_admin		false	false	false	false
+tutorial	global_weekly_charts_2013_2014	mode_admin		true	false	false	false
+tutorial	nominee_information	mode_admin		true	false	false	false
+tutorial	global_weekly_charts_2013_2014_eb98d24259d4a9241abc9e9a	mode_admin		true	false	false	false
+tutorial	housing_units_completed_us	mode_admin		false	false	false	false
+tutorial	housing_units_completed_us_6887847a8865b7e27ded2c5d	mode_admin		false	false	false	false
+tutorial	nominee_filmography_79d0230f7e75cc81d4cee943	mode_admin		true	false	false	false
+tutorial	kag_conversion_data_2c2f81a8d32497b0415e4a15	mode_admin		false	false	false	false
+tutorial	nominee_filmography	mode_admin		true	false	false	false
+tutorial	nominee_information_1aabb7c60ed4a218e99ef3ff	mode_admin		true	false	false	false
+tutorial	olist_closed_deals_dataset	mode_admin		false	false	false	false
+tutorial	olist_closed_deals_dataset_aa7c34b34738a8d544480807	mode_admin		false	false	false	false
+tutorial	olist_marketing_qualified_leads_dataset	mode_admin		false	false	false	false
+tutorial	olist_marketing_qualified_leads_dataset_9c092ba603934d607fbc10a	mode_admin		false	false	false	false
+tutorial	orders	mode_admin		false	false	false	false
+tutorial	orders_8bb73dd06ead6bc5f0e29032	mode_admin		false	false	false	false
+tutorial	oscar_nominees	mode_admin		true	false	false	false
+tutorial	patient_list	mode_admin		true	false	false	false
+tutorial	oscar_nominees_4d120ddc8a5d160d382080c4	mode_admin		true	false	false	false
+tutorial	playbook_emails_0e0407ff792c147582413c79	mode_admin		false	false	false	false
+tutorial	patient_list_0a64d48a4d61ee3157779028	mode_admin		true	false	false	false
+tutorial	playbook_emails	mode_admin		false	false	false	false
+tutorial	playbook_events_9b1b64883991067bd829c07e	mode_admin		false	false	false	false
+tutorial	playbook_events	mode_admin		false	false	false	false
+tutorial	playbook_experiments	mode_admin		false	false	false	false
+tutorial	playbook_experiments_308636a76661de422e58112a	mode_admin		false	false	false	false
+tutorial	sales_reps	mode_admin		false	false	false	false
+tutorial	playbook_users	mode_admin		false	false	false	false
+tutorial	sales_performance	mode_admin		true	false	false	false
+tutorial	playbook_users_b855ac7269b53346b63023a5	mode_admin		false	false	false	false
+tutorial	regions	mode_admin		false	false	false	false
+tutorial	regions_ac8db41348e3e07ea8ecfa3b	mode_admin		false	false	false	false
+tutorial	sales_performance_98a4f8fe80ec93fa51d3e6ac	mode_admin		true	false	false	false
+tutorial	sat_scores	mode_admin		true	false	false	false
+tutorial	sales_reps_955282f7425fd8aa35d63e2c	mode_admin		false	false	false	false
+tutorial	sat_scores_dee2756beb74f1d54f19ae0e	mode_admin		true	false	false	false
+tutorial	sf_crime_incidents_2014_01	mode_admin		true	false	false	false
+tutorial	sf_crime_incidents_2014_01_b4e0bc1587c3b5d55dfe4147	mode_admin		true	false	false	false
+tutorial	test_table_1245034f7b728e33b379cae5	mode_admin		true	false	false	false
+tutorial	sf_crime_incidents_cleandate	mode_admin		true	false	false	false
+tutorial	sf_crime_incidents_cleandate_63d6ccfbee85a9b2d199cc4e	mode_admin		true	false	false	false
+tutorial	test_table	mode_admin		true	false	false	false
+tutorial	us_housing_units_completed_9fd74772e020626793e02431	mode_admin		true	false	false	false
+tutorial	us_housing_units_1309f10be77d5233cc1faaf4	mode_admin		false	false	false	false
+tutorial	us_flights	mode_admin		false	false	false	false
+tutorial	us_flights_59b24e427c9c8acac6d3da53	mode_admin		false	false	false	false
+tutorial	us_housing_units	mode_admin		false	false	false	false
+tutorial	us_housing_units_completed	mode_admin		true	false	false	false
+tutorial	wa_fn_usec_telco_customer_churn_wa_fn_u_2adca2f6cfc10754235509d	mode_admin		false	false	false	false
+tutorial	wa_fn_usec_telco_customer_churn_wa_fn_usec_telco_customer_churn	mode_admin		false	false	false	false
+tutorial	watsi_events	mode_admin		false	false	false	false
+tutorial	watsi_events_677512b5b01f5e376e5a8526	mode_admin		false	false	false	false
+tutorial	yammer_emails	mode_admin		false	false	false	false
+tutorial	worldwide_earthquakes	mode_admin		true	false	false	false
+tutorial	worldwide_earthquakes_a0a12bad0edf50224fe97c5c	mode_admin		true	false	false	false
+tutorial	yammer_emails_d96cf1b9f9e98c8761af2e54	mode_admin		false	false	false	false
+tutorial	yammer_experiments	mode_admin		false	false	false	false
+tutorial	yammer_events	mode_admin		false	false	false	false
+tutorial	yammer_events_29ce87bdef256e1f540bfe90	mode_admin		false	false	false	false
+tutorial	yammer_experiments_326f368ea19b7bbc7c7ad6a2	mode_admin		false	false	false	false
+tutorial	yammer_users_ec7fb2789bca2e2ebf4d4e91	mode_admin		false	false	false	false
+tutorial	yammer_users	mode_admin		false	false	false	false
+tutorial	billboard_top_100_year_end	mode_admin		false	false	false	false
+tutorial	billboard_top_100_year_end_8d3506ab0b609d56b1bd3a54	mode_admin		false	false	false	false
+
+
+-- Describe all the tables in a particular schema
+
+
+
+```
+SELECT * FROM information_schema.columns
+WHERE table_schema = 'tutorial'
+   AND table_name   = 'us_housing_units'
+```   
+   
+table_catalog	table_schema	table_name	column_name	ordinal_position	column_default	is_nullable	data_type	character_maximum_length	character_octet_length	numeric_precision	numeric_precision_radix	numeric_scale	datetime_precision	interval_type	interval_precision	character_set_catalog	character_set_schema	character_set_name	collation_catalog	collation_schema	collation_name	domain_catalog	domain_schema	domain_name	udt_catalog	udt_schema	udt_name	scope_catalog	scope_schema	scope_name	maximum_cardinality	dtd_identifier	is_self_referencing	is_identity	identity_generation	identity_start	identity_increment	identity_maximum	identity_minimum	identity_cycle	is_generated	generation_expression	is_updatable
+d5b78k6rg4etlv	tutorial	us_housing_units	year	1		YES	double precision			53	2														d5b78k6rg4etlv	pg_catalog	float8					1	NO	NO						NO	NEVER		YES
+d5b78k6rg4etlv	tutorial	us_housing_units	month	2		YES	double precision			53	2														d5b78k6rg4etlv	pg_catalog	float8					2	NO	NO						NO	NEVER		YES
+d5b78k6rg4etlv	tutorial	us_housing_units	month_name	3		YES	text		1073741824																d5b78k6rg4etlv	pg_catalog	text					3	NO	NO						NO	NEVER		YES
+d5b78k6rg4etlv	tutorial	us_housing_units	south	4		YES	double precision			53	2														d5b78k6rg4etlv	pg_catalog	float8					4	NO	NO						NO	NEVER		YES
+d5b78k6rg4etlv	tutorial	us_housing_units	west	5		YES	double precision			53	2														d5b78k6rg4etlv	pg_catalog	float8					5	NO	NO						NO	NEVER		YES
+d5b78k6rg4etlv	tutorial	us_housing_units	midwest	6		YES	double precision			53	2														d5b78k6rg4etlv	pg_catalog	float8					6	NO	NO						NO	NEVER		YES
+d5b78k6rg4etlv	tutorial	us_housing_units	northeast	7		YES	double precision			53	2														d5b78k6rg4etlv	pg_catalog	float8					7	NO	NO						NO	NEVER		YES
+
+--

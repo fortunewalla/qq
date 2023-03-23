@@ -1,8 +1,8 @@
 ---
-title: "This is a long guide to mastering SQL in a long way."
+title: "SQL Guide."
 #author: "Harlow Malloc"
-date: "2023-02-18"
-date-modified: "2/18/2023"
+date: "2020-02-18"
+date-modified: "2/18/2020"
 categories: [guide, sql]
 image: "image.jpg"
 #draft: true
