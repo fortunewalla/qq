@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2014-03-07">
 
-<title>L'Œuvre – about</title>
+<title>L’Œuvre - Combinatorial analysis &amp; calculations using SAS functions – fact(), perm() and comb()</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +24,25 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./favicon.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -71,7 +73,7 @@ gtag('config', 'G-T2KJQMELJT', { 'anonymize_ip': true});
 </script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed fullcontent">
@@ -81,7 +83,7 @@ gtag('config', 'G-T2KJQMELJT', { 'anonymize_ip': true});
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">L’Œuvre</span>
     </a>
   </div>
@@ -92,12 +94,12 @@ gtag('config', 'G-T2KJQMELJT', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./about.html" rel="" target="" aria-current="page"><i class="bi bi-question-circle" role="img">
+    <a class="nav-link" href="../../about.html" rel="" target=""><i class="bi bi-question-circle" role="img">
 </i> 
  <span class="menu-text"> </span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="./index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+    <a class="nav-link" href="../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
@@ -117,55 +119,114 @@ gtag('config', 'G-T2KJQMELJT', { 'anonymize_ip': true});
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Combinatorial analysis &amp; calculations using SAS functions – <code>fact()</code>, <code>perm()</code> and <code>comb()</code></h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">article</div>
+    <div class="quarto-category">datascience</div>
+    <div class="quarto-category">sas</div>
+  </div>
+  </div>
 
 
-<p><em>Explore product management, data science, &amp; the metaverse.</em></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="intro.jpg" class="quarto-discovered-preview-image img-fluid figure-img" style="width:80.0%" alt="Portrait of a young Indian scholar, Mughal miniature by Mir Sayyid Ali, c. 1550."></p>
-</figure>
-</div>
-<p><em>“Turn yourself not away from three best things: Good Thought, Good Word, and Good Deed.” ~ <a href="https://www.britannica.com/biography/Zarathustra">Zarathushtra</a></em></p>
-<p>The website content is divided into four main types:</p>
-<ul>
-<li><a href="./#category=project">Projects</a>: Longer term and more complex work involving code, and other software websites.</li>
-<li><a href="./#category=article">Articles</a>: Shorter term work involving coding and analysis and opinion. Reviews would come under articles.</li>
-<li><a href="./#category=guide">Guides</a>: Longer term and frequently updated notes for learning topics.</li>
-<li><a href="./#category=misc">Misc</a>: Random stuff that does not fit anything formal.</li>
-</ul>
-<p>The content categories are further divided into four main areas:</p>
-<ul>
-<li><a href="./#category=product">Product Management</a>: Planning, creating, designing, managing, &amp; selling products. UI/UX design, technology, business &amp; startups.</li>
-<li><a href="./#category=datascience">Data Science</a>: Data science, analytics, visualization, machine learning &amp; artificial intelligence.</li>
-<li><a href="./#category=metaverse">Metaverse</a>: Includes Augmented, Virtual, Mixed, Extended Reality hardware, software, code &amp; business</li>
-<li><a href="./#category=software">Software</a>: Usage, coding, setup, scripts, algorithsm, &amp; recommendations.</li>
-</ul>
-<p>Click here to view <a href="./index.html">Portfolio of work</a></p>
-<div class="quarto-about-jolla">
- <div id="hero-heading">
-</div> 
-  <hr class="about-sep">
-   <div class="about-links">
-  <a href="https://twitter.com" class="about-link" rel="" target="">
-    <i class="bi bi-twitter"></i>
-     <span class="about-link-text"></span>
-  </a>
-  <a href="https://linkedin.com" class="about-link" rel="" target="">
-    <i class="bi bi-linkedin"></i>
-     <span class="about-link-text"></span>
-  </a>
-  <a href="https://github.com" class="about-link" rel="" target="">
-    <i class="bi bi-github"></i>
-     <span class="about-link-text"></span>
-  </a>
-  <a href="/index.xml" class="about-link" rel="" target="">
-    <i class="bi bi-rss"></i>
-     <span class="about-link-text"></span>
-  </a>
-</div>
-</div>
 
+<div class="quarto-title-meta">
 
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 7, 2014</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">August 16, 2015</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p><em>Created on Friday, March 7th, 2014 at 5:56 am</em></p>
+<p>SAS provides several kinds of functions for doing combinatorial analysis and calculations. Three basic ones will be demonstrated here. <code>fact()</code>,<code>perm()</code> and <code>comb()</code>. All three functions return a missing value for the arguments they cannot compute.</p>
+<p><code>fact(n)</code> is the function for calculating the factorial <code>n!</code> of any non-negative number <code>n</code>.</p>
+<pre><code>275  data _null_;
+276  a=fact(-3);
+277  b=fact(0);
+278  c=fact(9);
+279  d=fact(170);*170! is the max calculable by this particular computer.;
+280  e=fact(171);
+281  f=fact(1000);
+282  put _all_;
+283  run;</code></pre>
+<p>The output is given by:</p>
+<pre><code>NOTE: Invalid argument to function FACT at line 276 column 3.
+NOTE: Invalid argument to function FACT at line 280 column 3.
+NOTE: Invalid argument to function FACT at line 281 column 3.
+a=. b=1 c=362880 d=7.257416E306 e=. f=. _ERROR_=1 _N_=1
+a=. b=1 c=362880 d=7.257416E306 e=. f=. _ERROR_=1 _N_=1
+NOTE: Mathematical operations could not be performed at the following places. The results of the
+      operations have been set to missing values.
+      Each place is given by: (Number of times) at (Line):(Column).
+      1 at 276:3   1 at 280:3   1 at 281:3
+NOTE: DATA statement used (Total process time):</code></pre>
+<p>Similarly for permutation of <code>n</code> objects taken <code>r</code> at a time (where <code>n&gt;r</code>), we have the <code>perm(n,r)</code>. A single argument in the <code>perm()</code> function will calculate the factorial of the argument.</p>
+<pre><code>384  data _null_;
+385  a=perm(3,3);
+386  b=perm(2,5);
+387  c=perm(5,2);
+388  d=perm(5,4);
+389  e=perm(1660,170);
+390  f=perm(4);
+391  put _all_;
+392  run;</code></pre>
+<p>The output is given by</p>
+<pre><code>NOTE: Argument 2 to function PERM at line 386 column 3 is invalid.
+NOTE: Invalid argument to function PERM at line 389 column 3.
+a=6 b=. c=20 d=120 e=. f=24 _ERROR_=1 _N_=1
+a=6 b=. c=20 d=120 e=. f=24 _ERROR_=1 _N_=1
+NOTE: Mathematical operations could not be performed at the following places. The results of the
+      operations have been set to missing values.
+      Each place is given by: (Number of times) at (Line):(Column).
+      1 at 386:3   1 at 389:3
+NOTE: DATA statement used (Total process time):</code></pre>
+<p>Similarly for combination of <code>n</code> objects taken <code>r</code> at a time (where <code>n&gt;r</code>), we have the <code>comb(n,r)</code>. The <code>comb()</code> function requires two arguments.</p>
+<pre><code>433  data _null_;
+434  a=comb(3,3);
+435  b=comb(2,5);
+436  c=comb(5,2);
+437  d=comb(5,4);
+438  e=comb(9960,170);
+439  f=comb(1,0);
+440  put _all_;
+441  run;</code></pre>
+<p>The output is given by:</p>
+<pre><code>NOTE: Argument 2 to function COMB at line 435 column 3 is invalid.
+NOTE: Invalid argument to function COMB at line 438 column 3.
+a=1 b=. c=10 d=5 e=. f=1 _ERROR_=1 _N_=1
+a=1 b=. c=10 d=5 e=. f=1 _ERROR_=1 _N_=1
+NOTE: Mathematical operations could not be performed at the following places.
+      The results of the operations have been set to missing values.
+      Each place is given by: (Number of times) at (Line):(Column).
+      1 at 435:3   1 at 438:3</code></pre>
+<p>We have the logarithmic (natural) counterparts of the above three functions i.e.&nbsp;<code>lfact()</code>, <code>lperm()</code> and <code>lcomb()</code> The output is given below.</p>
+<pre><code>452  data _null_;
+453  a=lfact(10);
+454  b=lperm(10,5);
+455  c=lcomb(10,5);
+456  put _all_;
+457  run;
+
+a=15.104412573 b=10.31692083 c=5.5294290875 _ERROR_=0 _N_=1
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds</code></pre>
 
 
 
@@ -305,6 +366,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   } else {
     toggleColorMode(false);
   }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     

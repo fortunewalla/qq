@@ -15,9 +15,23 @@ items: 9999
 page-layout: full
 title-block-banner: false
 ---
+<!--
+ Gitanjali 35
+By Rabindranath Tagore / রবীন্দ্রনাথ ঠাকুর
+   Where the mind is without fear and the head is held high;
+   Where knowledge is free;
+   Where the world has not been broken up into fragments by narrow domestic walls;
+   Where words come out from the depth of truth;
+   Where tireless striving stretches its arms towards perfection;
+   Where the clear stream of reason has not lost its way into the dreary desert sand of dead habit;
+   Where the mind is led forward by thee into ever-widening thought and action
+   Into that heaven of freedom, my Father, let my country awake.
+
+-->
+
 
 *Explore product management, data analytics, & the metaverse.*
 
-![](index.jpg){fig-alt="'Laila and Majnun at School', Folio from a Khamsa (Quintet) of Nizami of Ganja. Calligrapher Ja'far Baisunghuri Iranian. Author Nizami A.H. 835/ 1431–32 CE " width="100%" fig-align="center" }
+![](index.jpg){fig-alt="'Laila and Majnun at School', Folio from a Khamsa (Quintet) of Nizami of Ganja. Calligrapher Ja'far Baisunghuri Iranian. Author Nizami A.H. 835/ 1431–32 CE " width="300" fig-align="center" }
 
 Below is a list of all work done and ongoing projects.

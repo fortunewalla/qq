@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>fortunewalla.net/about.html</loc>
-    <lastmod>2023-03-23T07:49:00.464Z</lastmod>
+    <lastmod>2023-03-24T08:40:31.067Z</lastmod>
   </url>
   <url>
     <loc>fortunewalla.net/index.html</loc>
-    <lastmod>2023-03-23T07:49:02.117Z</lastmod>
+    <lastmod>2023-03-24T10:38:37.536Z</lastmod>
   </url>
   <url>
     <loc>fortunewalla.net/p2p.html</loc>
@@ -31,5 +31,49 @@
   <url>
     <loc>fortunewalla.net/test.html</loc>
     <lastmod>2023-03-23T07:27:52.104Z</lastmod>
+  </url>
+  <url>
+    <loc>fortunewalla.net/posts/whatisds/index.html</loc>
+    <lastmod>2023-03-24T04:14:54.014Z</lastmod>
+  </url>
+  <url>
+    <loc>fortunewalla.net/posts/howtostartds/index.html</loc>
+    <lastmod>2023-03-24T04:55:49.445Z</lastmod>
+  </url>
+  <url>
+    <loc>fortunewalla.net/posts/bestwaytostudyforsas/index.html</loc>
+    <lastmod>2023-03-24T05:28:20.623Z</lastmod>
+  </url>
+  <url>
+    <loc>fortunewalla.net/posts/combsasfunctions/index.html</loc>
+    <lastmod>2023-03-24T07:24:50.939Z</lastmod>
+  </url>
+  <url>
+    <loc>fortunewalla.net/posts/connectquerymssqlsasodbc/index.html</loc>
+    <lastmod>2023-03-24T10:10:01.453Z</lastmod>
+  </url>
+  <url>
+    <loc>fortunewalla.net/posts/howtofindoutobssas/index.html</loc>
+    <lastmod>2023-03-24T07:20:52.394Z</lastmod>
+  </url>
+  <url>
+    <loc>fortunewalla.net/posts/projremotephpmysql/index.html</loc>
+    <lastmod>2023-03-24T07:20:53.449Z</lastmod>
+  </url>
+  <url>
+    <loc>fortunewalla.net/posts/refsasdsfullpath/index.html</loc>
+    <lastmod>2023-03-24T07:20:54.136Z</lastmod>
+  </url>
+  <url>
+    <loc>fortunewalla.net/posts/swchoicesremotedb/index.html</loc>
+    <lastmod>2023-03-24T07:20:56.307Z</lastmod>
+  </url>
+  <url>
+    <loc>fortunewalla.net/posts/qstoentreprenuers/index.html</loc>
+    <lastmod>2023-03-24T08:29:17.589Z</lastmod>
+  </url>
+  <url>
+    <loc>fortunewalla.net/posts/statdemmodforecasting/index.html</loc>
+    <lastmod>2023-03-24T08:38:46.132Z</lastmod>
   </url>
 </urlset>

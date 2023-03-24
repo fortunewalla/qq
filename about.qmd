@@ -20,23 +20,28 @@ about:
 
 ---
 
-*Explore product management, data analytics, & the metaverse.*
+*Explore product management, data science, & the metaverse.*
 
 ![](intro.jpg){fig-alt="Portrait of a young Indian scholar, Mughal miniature by Mir Sayyid Ali, c. 1550." width="80%" fig-align="center" }
 
 *“Turn yourself not away from three best things: Good Thought, Good Word, and Good Deed.” \~ [Zarathushtra](https://www.britannica.com/biography/Zarathustra)*
 
-[Home - List of Articles, Guides, & Programming Portfolio](index.qmd)
+The website content is divided into four main types:
 
-* Content is divided into four main types:
 * [Projects](/#category=project): Longer term and more complex work involving code, and other software websites.
 * [Articles](/#category=article): Shorter term work involving coding and analysis and opinion. Reviews would come under articles.
 * [Guides](/#category=guide): Longer term and frequently updated notes for learning topics.
 * [Misc](/#category=misc): Random stuff that does not fit anything formal.
 
-### This is how it happens.
+The content categories are further divided into four main areas:
+
+* [Product Management](/#category=product): Planning, creating, designing, managing, & selling products. UI/UX design, technology, business & startups.
+* [Data Science](/#category=datascience): Data science, analytics, visualization, machine learning & artificial intelligence.
+* [Metaverse](/#category=metaverse): Includes Augmented, Virtual, Mixed, Extended Reality hardware, software, code & business 
+* [Software](/#category=software): Usage, coding, setup, scripts, algorithsm, & recommendations.  
 
 
+Click here to view [Portfolio of work](index.qmd)
 
 
 :::{#hero-heading}

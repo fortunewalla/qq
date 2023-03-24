@@ -4,7 +4,18 @@
     "items": [
       "/posts/post-with-code/index.html",
       "/posts/welcome/index.html",
-      "/posts/sql/index.html"
+      "/posts/sql/index.html",
+      "/posts/qstoentreprenuers/index.html",
+      "/posts/statdemmodforecasting/index.html",
+      "/posts/bestwaytostudyforsas/index.html",
+      "/posts/combsasfunctions/index.html",
+      "/posts/connectquerymssqlsasodbc/index.html",
+      "/posts/howtofindoutobssas/index.html",
+      "/posts/howtostartds/index.html",
+      "/posts/projremotephpmysql/index.html",
+      "/posts/refsasdsfullpath/index.html",
+      "/posts/swchoicesremotedb/index.html",
+      "/posts/whatisds/index.html"
     ]
   }
 ]

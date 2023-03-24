@@ -7,6 +7,7 @@ website:
   #site-url: "http://localhost:3221/"
   site-url: "fortunewalla.net"
   favicon: favicon.png
+  google-analytics: "G-T2KJQMELJT"
   
   navbar:
     right:
