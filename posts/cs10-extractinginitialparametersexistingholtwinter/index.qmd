@@ -1,0 +1,114 @@
+---
+title: "Extracting initial parameters from an existing Holt‐Winter forecasting model"
+#author: "Fortune Walla"
+date: "2015-11-29"
+date-modified: "2015-11-29"
+categories: [article,product,excel,forecasting]
+#image: "image.jpg"
+#draft: true
+---
+
+**Objective**
+
+The model is known but the initial parameters need to be found.
+
+# Introduction 
+
+You are hired by a local company to help them improve their forecasting
+capabilities. You are tasked with coming up with quarterly forecasts for an item
+that appears to have level, seasonality, and trend. The good news is that the
+company has an existing Holt‐Winter forecasting model. The bad news is that no
+one knows what the parameters (Alpha, Beta, or Gamma) are.
+
+You do have some information. For example, you know that historically, the
+demand in each quarter follows this distribution:
+
+-   Q1 (January through March) = 50% of average quarterly demand
+
+-   Q2 (April through June) = 75% of average quarterly demand  Q3 (July through
+    September) = 150% of average quarterly demand
+
+-   Q4 (October through December) = 125% of average quarterly demand.
+
+You just ran the forecast at the end of September (end of 2014Q3) and you have
+the following estimates:
+
+For level: a\^2014Q3 = 1052 units
+
+For trend: b\^2014Q3 = 46.2 units per quarter
+
+**Q1. What is the forecast for demand for 2014Q4?**
+
+We know that
+
+>   ,
+
+>   1
+
+1
+
+1
+
+|        | x | a\^  | b\^  | F\^ | x\^     | F\^t‐P        |
+|--------|---|------|------|-----|---------|---------------|
+| 2014Q3 |   | 1052 | 46.2 |     | 1372.75 | 1.25 (2013Q4) |
+| 2014Q4 |   |      |      |     |         |               |
+
+**Q2. Suppose the actual demand in 2014Q4 is 1100 units. What is the smallest &
+largest possible value for your estimate for level, a\^2014Q4?**
+
+The fourth quarter level estimate = a\^2014Q4 = x2014Q4 / F2013Q4
+
+Without seasonality, level estimate = a\^2014Q4 = (a\^2014Q3 + b\^2014Q3 )
+
+|          | Alpha |        | x |      | a\^    | b\^  | F\^ | x\^     | F\^t‐P        |
+|----------|-------|--------|---|------|--------|------|-----|---------|---------------|
+|          |       | 2014Q3 |   |      | 1052   | 46.2 |     | 1372.75 | 1.25 (2013Q4) |
+| Smallest | 1     | 2014Q4 |   | 1100 | 880    |      |     |         |               |
+| Largest  | 0     | 2014Q4 |   | 1100 | 1098.2 |      |     |         |               |
+
+**Q3. The model was run at the end of 2014Q4. It provided you with the most
+recent estimates of each pattern. A) The estimate for level, a\^2014Q4 was
+1065.5. What is value of alpha? B) Estimate of trend, b\^2014Q4 = 42.9, what is
+value of beta? C) Estimate of seasonality is F\^2014Q4 = 1.239**
+
+| **Estimate**  | **Given**  | **Equation**  |             |           | **Parameter**  | **Solved**  |
+|---------------|------------|---------------|-------------|-----------|----------------|-------------|
+| a\^2014Q4     | 1065.5     | 1065.5        | 1100        | 1052 46.2 | Alpha          | 0.15        |
+| b\^2014Q4     | 42.9       | 42.9          | 1065.5 1052 | 1 46.2    | Beta           | 0.1         |
+| F\^2014Q4     | 1.239      | 1.239         | 1100        | 1 1.25    | Gamma          | 0.05        |
+
+![](media/1dd2047fca0296e1ba89ab06abbf8836.png)
+
+1
+
+![](media/b6cddab510efc0454f4ee4e458f6e88e.png)
+
+**Q4. What is your forecast for demand for the 1st quarter of 2015? That is
+a\^2014Q4,2015Q1?**
+
+x\^2014Q4,2015Q1 =(a\^2014Q1 + b\^2014Q1 ) F\^2014Q4
+
+We have the unnormalized seasonality factor, F\^2014Q4 = 1.239
+
+Since the sum of the most recent season estimates (0.500, 0.750, 1.500, and
+1.239 for Q1, Q2, Q3, and
+
+Q4) adds up to 3.98912, , we need to normalize F\^2014Q4 before we use it in our
+calculations. We use the formula
+
+\^ \^
+
+>   \^
+
+>   ∑
+
+So we have F\^2014Q1 = 0.500\*(4.000/3.989) = 0.50136
+
+x\^2014Q4,2015Q1 =(a\^2014Q1 + b\^2014Q1 ) F\^2014Q1 x\^2014Q4,2015Q1 = (1065.5
++ 42.9)(0.501) = 555.3084 = 555.31
+
+. If you did not normalize the seasonality factor you would have gotten =
+(1065.5 + 42.9)(0.500) = 554.20. Normalizing the seasonality factors prevents
+the estimates from drifting. In this case, it is a small drift ‐ but over time
+it would grow.

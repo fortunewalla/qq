@@ -6,7 +6,7 @@ listing:
   categories: true
   sort-ui: true
   filter-ui: true
-  fields: [title,date-modified,date]
+  fields: [title,date]
   page-size: 9999
   feed:
     title: "L'Œuvre"

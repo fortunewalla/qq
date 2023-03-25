@@ -69,7 +69,7 @@
 </item>
 <item>
   <title>Some questions to ask entrepreneurs</title>
-  <link>fortunewalla.net/posts/qstoentreprenuers/index.html</link>
+  <link>fortunewalla.net/posts/13-questionstoaskentrepreneurs/index.html</link>
   <description><![CDATA[ 
 
 
@@ -150,12 +150,1382 @@ Q30. Anything you wish to share about your experiences that most people don’t 
   <category>article</category>
   <category>product</category>
   <category>mitx</category>
-  <guid>fortunewalla.net/posts/qstoentreprenuers/index.html</guid>
+  <guid>fortunewalla.net/posts/13-questionstoaskentrepreneurs/index.html</guid>
   <pubDate>Wed, 10 Feb 2016 18:30:00 GMT</pubDate>
 </item>
 <item>
+  <title>Extracting initial parameters from an existing Holt‐Winter forecasting model</title>
+  <link>fortunewalla.net/posts/cs10-extractinginitialparametersexistingholtwinter/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<p><strong>Objective</strong></p>
+<p>The model is known but the initial parameters need to be found.</p>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>You are hired by a local company to help them improve their forecasting capabilities. You are tasked with coming up with quarterly forecasts for an item that appears to have level, seasonality, and trend. The good news is that the company has an existing Holt‐Winter forecasting model. The bad news is that no one knows what the parameters (Alpha, Beta, or Gamma) are.</p>
+<p>You do have some information. For example, you know that historically, the demand in each quarter follows this distribution:</p>
+<ul>
+<li><p>Q1 (January through March) = 50% of average quarterly demand</p></li>
+<li><p>Q2 (April through June) = 75% of average quarterly demand  Q3 (July through September) = 150% of average quarterly demand</p></li>
+<li><p>Q4 (October through December) = 125% of average quarterly demand.</p></li>
+</ul>
+<p>You just ran the forecast at the end of September (end of 2014Q3) and you have the following estimates:</p>
+<p>For level: a^2014Q3 = 1052 units</p>
+<p>For trend: b^2014Q3 = 46.2 units per quarter</p>
+<p><strong>Q1. What is the forecast for demand for 2014Q4?</strong></p>
+<p>We know that</p>
+<blockquote class="blockquote">
+<p>,</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>1</p>
+</blockquote>
+<p>1</p>
+<p>1</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th></th>
+<th>x</th>
+<th>a^</th>
+<th>b^</th>
+<th>F^</th>
+<th>x^</th>
+<th>F^t‐P</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2014Q3</td>
+<td></td>
+<td>1052</td>
+<td>46.2</td>
+<td></td>
+<td>1372.75</td>
+<td>1.25 (2013Q4)</td>
+</tr>
+<tr class="even">
+<td>2014Q4</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Q2. Suppose the actual demand in 2014Q4 is 1100 units. What is the smallest &amp; largest possible value for your estimate for level, a^2014Q4?</strong></p>
+<p>The fourth quarter level estimate = a^2014Q4 = x2014Q4 / F2013Q4</p>
+<p>Without seasonality, level estimate = a^2014Q4 = (a^2014Q3 + b^2014Q3 )</p>
+<table class="table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 10%">
+<col style="width: 3%">
+<col style="width: 7%">
+<col style="width: 10%">
+<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 11%">
+<col style="width: 19%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Alpha</th>
+<th></th>
+<th>x</th>
+<th></th>
+<th>a^</th>
+<th>b^</th>
+<th>F^</th>
+<th>x^</th>
+<th>F^t‐P</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>2014Q3</td>
+<td></td>
+<td></td>
+<td>1052</td>
+<td>46.2</td>
+<td></td>
+<td>1372.75</td>
+<td>1.25 (2013Q4)</td>
+</tr>
+<tr class="even">
+<td>Smallest</td>
+<td>1</td>
+<td>2014Q4</td>
+<td></td>
+<td>1100</td>
+<td>880</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Largest</td>
+<td>0</td>
+<td>2014Q4</td>
+<td></td>
+<td>1100</td>
+<td>1098.2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Q3. The model was run at the end of 2014Q4. It provided you with the most recent estimates of each pattern. A) The estimate for level, a^2014Q4 was 1065.5. What is value of alpha? B) Estimate of trend, b^2014Q4 = 42.9, what is value of beta? C) Estimate of seasonality is F^2014Q4 = 1.239</strong></p>
+<table class="table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 12%">
+<col style="width: 15%">
+<col style="width: 13%">
+<col style="width: 11%">
+<col style="width: 16%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Estimate</strong></th>
+<th><strong>Given</strong></th>
+<th><strong>Equation</strong></th>
+<th></th>
+<th></th>
+<th><strong>Parameter</strong></th>
+<th><strong>Solved</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>a^2014Q4</td>
+<td>1065.5</td>
+<td>1065.5</td>
+<td>1100</td>
+<td>1052 46.2</td>
+<td>Alpha</td>
+<td>0.15</td>
+</tr>
+<tr class="even">
+<td>b^2014Q4</td>
+<td>42.9</td>
+<td>42.9</td>
+<td>1065.5 1052</td>
+<td>1 46.2</td>
+<td>Beta</td>
+<td>0.1</td>
+</tr>
+<tr class="odd">
+<td>F^2014Q4</td>
+<td>1.239</td>
+<td>1.239</td>
+<td>1100</td>
+<td>1 1.25</td>
+<td>Gamma</td>
+<td>0.05</td>
+</tr>
+</tbody>
+</table>
+<p><img src="fortunewalla.net/posts/cs10-extractinginitialparametersexistingholtwinter/media/1dd2047fca0296e1ba89ab06abbf8836.png" class="quarto-discovered-preview-image img-fluid"></p>
+<p>1</p>
+<p><img src="fortunewalla.net/posts/cs10-extractinginitialparametersexistingholtwinter/media/b6cddab510efc0454f4ee4e458f6e88e.png" class="img-fluid"></p>
+<p><strong>Q4. What is your forecast for demand for the 1st quarter of 2015? That is a^2014Q4,2015Q1?</strong></p>
+<p>x^2014Q4,2015Q1 =(a^2014Q1 + b^2014Q1 ) F^2014Q4</p>
+<p>We have the unnormalized seasonality factor, F^2014Q4 = 1.239</p>
+<p>Since the sum of the most recent season estimates (0.500, 0.750, 1.500, and 1.239 for Q1, Q2, Q3, and</p>
+<p>Q4) adds up to 3.98912, , we need to normalize F^2014Q4 before we use it in our calculations. We use the formula</p>
+<p>^ ^</p>
+<blockquote class="blockquote">
+<p>^</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>∑</p>
+</blockquote>
+<p>So we have F^2014Q1 = 0.500*(4.000/3.989) = 0.50136</p>
+<p>x^2014Q4,2015Q1 =(a^2014Q1 + b^2014Q1 ) F^2014Q1 x^2014Q4,2015Q1 = (1065.5 + 42.9)(0.501) = 555.3084 = 555.31</p>
+<p>. If you did not normalize the seasonality factor you would have gotten = (1065.5 + 42.9)(0.500) = 554.20. Normalizing the seasonality factors prevents the estimates from drifting. In this case, it is a small drift ‐ but over time it would grow.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>article</category>
+  <category>product</category>
+  <category>excel</category>
+  <category>forecasting</category>
+  <guid>fortunewalla.net/posts/cs10-extractinginitialparametersexistingholtwinter/index.html</guid>
+  <pubDate>Sat, 28 Nov 2015 18:30:00 GMT</pubDate>
+</item>
+<item>
+  <title>Forecasting with seasonal trends at BLAYK restaurant</title>
+  <link>fortunewalla.net/posts/cs09-forecastingseasonaltrendsblayk/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<p><strong>Objective</strong></p>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>You are the lead demand planner for Beers Looking At You, Kid (or BLAYK) a restaurant that features sandwiches, appetizers, and, of course, beer. The restaurant is known for its very fresh beer so the management tries to monitor beer consumption by each shift. You have been tasked to look at how the beer consumption is being forecasted in order to improve the quality and lower the costs of having fresh beer.</p>
+<p>There are four shifts in each day the restaurant is open:</p>
+<p>Shift 1from 11 AM to 2 PM</p>
+<p>Shift 2from 2 PM to 5 PM</p>
+<p>Shift 3from 5 PM to 8 PM</p>
+<p>Shift 4from 8 PM to 11 PM</p>
+<p>The fields in the spreadsheet are:</p>
+<p>Time Period (t) – a sequential numbering of each shift in your data from 1 to 120</p>
+<p>Date – the date of the record</p>
+<p>Shift Number – the shift number for that record (1, 2, 3, or 4), and</p>
+<p>Pints Sold – the number of pints of beer sold on that day during that shift.</p>
+</section>
+<section id="visualization-of-the-raw-data" class="level1">
+<h1>Visualization of the raw data</h1>
+<p><img src="fortunewalla.net/posts/cs09-forecastingseasonaltrendsblayk/9f7c787bf68f68e97ee79c9eb6bc6ad1.png" class="quarto-discovered-preview-image img-fluid"></p>
+<section id="initial-seasonality-factors" class="level2">
+<h2 class="anchored" data-anchor-id="initial-seasonality-factors">Initial Seasonality Factors</h2>
+<p>The above diagram clearly points to a seasonality of the sales.</p>
+<p>Since at this point it is not very clear as to whether there is a trend in the data or not, we find use two methods to find the seasonality factors.</p>
+<section id="assuming-no-trend" class="level3">
+<h3 class="anchored" data-anchor-id="assuming-no-trend">Assuming no trend</h3>
+<p>With no trend the seasonality factors (SF) need not be normalized each season.</p>
+<blockquote class="blockquote">
+<p>SF per period = total sales per shift / (total sales per month/no. of periods)</p>
+</blockquote>
+<p>Also</p>
+<blockquote class="blockquote">
+<p>SF per period = total sales per shift / average no. of sales per period</p>
+</blockquote>
+<p>Mathematically we can express it as</p>
+<p>∑ D t i</p>
+<p>∑ D /P</p>
+</section>
+<section id="centered-moving-average-method-cma" class="level3">
+<h3 class="anchored" data-anchor-id="centered-moving-average-method-cma">Centered Moving Average Method (CMA)</h3>
+<p>Since each season has 4 periods, we use 4‐point Centered Moving Average. Here since the season has an even number of points. We need to take the moving average of the season from both sides &amp; then take the final average.</p>
+<p>Below is a sample of the data used to calculate part of the Fi’s</p>
+<p>MATop is the average of Shift 1,2,3 &amp; 4</p>
+<p>MABottom is the average of Shift 2,3,4 &amp; 5</p>
+<p>MA_Avgi is the average of MATop &amp; MABottom.</p>
+<p>Each Fi is the xi/MA_Avgi except the first two &amp; last two of the time series. The first two &amp; last two Fi are calculated by first &amp; the last MA_Avg values respectively.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Time</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<blockquote class="blockquote">
+<p>Perio d (t)</p>
+</blockquote>
+<p>Date</p>
+<p>Shift</p>
+<blockquote class="blockquote">
+<p>Number</p>
+</blockquote>
+<p>Pints Sold, xi</p>
+<p>MATop</p>
+<p>MABottom</p>
+<p>MA_Avg</p>
+<blockquote class="blockquote">
+<p>i</p>
+</blockquote>
+<p>Fi</p>
+<p>&nbsp;</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>1</th>
+<th>1‐Jun</th>
+<th>1</th>
+<th>357</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th>1.363897</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2</td>
+<td>1‐Jun</td>
+<td>2</td>
+<td>49</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>0.187202</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>1‐Jun</td>
+<td>3</td>
+<td>242</td>
+<td>260</td>
+<td>264</td>
+<td>262</td>
+<td></td>
+<td>0.924546</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>1‐Jun</td>
+<td>4</td>
+<td>391</td>
+<td>264</td>
+<td>264</td>
+<td>264</td>
+<td></td>
+<td>1.481762</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>2‐Jun</td>
+<td>1</td>
+<td>373</td>
+<td>264</td>
+<td>264</td>
+<td>264</td>
+<td></td>
+<td>1.41221</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>2‐Jun</td>
+<td>2</td>
+<td>50</td>
+<td>264</td>
+<td>269</td>
+<td>266</td>
+<td></td>
+<td>0.187705</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>2‐Jun</td>
+<td>3</td>
+<td>243</td>
+<td>269</td>
+<td>269</td>
+<td>269</td>
+<td></td>
+<td>0.904607</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>2‐Jun</td>
+<td>4</td>
+<td>408</td>
+<td>269</td>
+<td>269</td>
+<td>269</td>
+<td></td>
+<td>1.518846</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Now if the assumption is incorrect &amp; then is a small trend, then the sum of the factors will not add up to number of periods in a season. i.e P = 4 Hence a correction is required in the form and we simply multiply each of your Seasonality Factors by</p>
+<blockquote class="blockquote">
+<p>P</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>∑</p>
+</blockquote>
+<p>Once all the Fi are calculated, we average them according to Shift Number. The summary is in the table.</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 10%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Total Pints Sold</strong></th>
+<th><strong>If equal sales per shift, pints per shift sold</strong></th>
+<th><strong>Ratio of Sales per shift compared with average</strong></th>
+<th><strong>4‐point Moving</strong> <strong>Centered Averaged</strong> <strong>Seasonality Factors</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Entire Month</td>
+<td>37423</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Shift 1</td>
+<td>13045</td>
+<td>9356</td>
+<td>1.39432969</td>
+<td>1.402007</td>
+</tr>
+<tr class="odd">
+<td>Shift 2</td>
+<td>1737</td>
+<td>9356</td>
+<td>0.185661224</td>
+<td>0.185922</td>
+</tr>
+<tr class="even">
+<td>Shift 3</td>
+<td>8700</td>
+<td>9356</td>
+<td>0.929909414</td>
+<td>0.928191</td>
+</tr>
+<tr class="odd">
+<td>Shift 4</td>
+<td>13941</td>
+<td>9356</td>
+<td>1.490099671</td>
+<td>1.483154</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td>4</td>
+<td>3.999273</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="holtwinter-model-levelseasonalitytrend" class="level2">
+<h2 class="anchored" data-anchor-id="holtwinter-model-levelseasonalitytrend">Holt­Winter Model (level+seasonality+trend)</h2>
+<p><strong>Level &amp; Trend:</strong></p>
+<p>Running a linear regression we get the equation. y = 0.812x + 262.6</p>
+<p>From the regression equation we get a level of about 263 pints of beer per shift with an trend of 0.8 additional pints per time period. i.e.</p>
+<p>The regression gives you an estimated level of 265 pints per each shift with a trend of 0.80 additional pints per time period. This means that the sales of beer is increasing about 3.2 pints per day. Hence there is a positive trend trend.</p>
+<p><img src="fortunewalla.net/posts/cs09-forecastingseasonaltrendsblayk/a23739094719aa4968faaf829fddb96c.png" class="img-fluid"></p>
+<section id="seasonality" class="level3">
+<h3 class="anchored" data-anchor-id="seasonality">Seasonality</h3>
+<p>This involves estimating the initial values of the level and trend “de‐seasoning” the actual demand by the Seasonality Factors we just found. Part of the data used to calculate the normalized seasonality factors.</p>
+<table>
+<thead>
+<tr class="header">
+<th><strong>Time Period</strong> <strong>(t)</strong></th>
+<th><strong>Date</strong></th>
+<th><strong>Shift</strong></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<blockquote class="blockquote">
+<p><strong>Number</strong></p>
+</blockquote>
+<p><strong>Pints Sold</strong></p>
+<p><strong>MATop</strong></p>
+<p><strong>MABotto m</strong></p>
+<p><strong>MA_Avg</strong></p>
+<p><strong>Fi</strong></p>
+<p><strong>SUM of each season</strong></p>
+<p><strong>Fi Normalized</strong></p>
+<p><strong>Normali zed Sum</strong></p>
+<table class="table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 9%">
+<col style="width: 4%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 13%">
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 4%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>1</th>
+<th>1‐Jun</th>
+<th>1</th>
+<th>357</th>
+<th></th>
+<th></th>
+<th></th>
+<th>1.363897</th>
+<th>3.957406897</th>
+<th>1.378576309</th>
+<th>4</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2</td>
+<td>1‐Jun</td>
+<td>2</td>
+<td>49</td>
+<td></td>
+<td></td>
+<td></td>
+<td>0.187202</td>
+<td>3.957406897</td>
+<td>0.189216356</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>1‐Jun</td>
+<td>3</td>
+<td>242</td>
+<td>260</td>
+<td>264</td>
+<td>262</td>
+<td>0.924546</td>
+<td>3.957406897</td>
+<td>0.934497106</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>1‐Jun</td>
+<td>4</td>
+<td>391</td>
+<td>264</td>
+<td>264</td>
+<td>264</td>
+<td>1.481762</td>
+<td>3.957406897</td>
+<td>1.497710229</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>2‐Jun</td>
+<td>1</td>
+<td>373</td>
+<td>264</td>
+<td>264</td>
+<td>264</td>
+<td>1.41221</td>
+<td>4.023368199</td>
+<td>1.404007844</td>
+<td>4</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>2‐Jun</td>
+<td>2</td>
+<td>50</td>
+<td>264</td>
+<td>269</td>
+<td>266</td>
+<td>0.187705</td>
+<td>4.023368199</td>
+<td>0.186615088</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>2‐Jun</td>
+<td>3</td>
+<td>243</td>
+<td>269</td>
+<td>269</td>
+<td>269</td>
+<td>0.904607</td>
+<td>4.023368199</td>
+<td>0.89935273</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>2‐Jun</td>
+<td>4</td>
+<td>408</td>
+<td>269</td>
+<td>269</td>
+<td>269</td>
+<td>1.518846</td>
+<td>4.023368199</td>
+<td>1.510024337</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>So taking the average of the all the normalized factors we get,</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Before Normalized</th>
+<th>After Normalized</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fs1</td>
+<td>1.402007</td>
+<td>1.402205906</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Fs2</td>
+<td>0.185922</td>
+<td>0.185977102</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Fs3</td>
+<td>0.928191</td>
+<td>0.928395676</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Fs4</td>
+<td>1.483154</td>
+<td>1.483421316</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>SUM</td>
+<td>3.999273</td>
+<td>4</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="initial-parameters" class="level3">
+<h3 class="anchored" data-anchor-id="initial-parameters">Initial Parameters</h3>
+<p>Assume that Alpha=0.15, Beta=0.06 &amp; gamma = 0.05</p>
+<p>,</p>
+<p>1</p>
+<p>1</p>
+<p>1</p>
+<p>We have for the period 120, the following initial parameters,</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Fs1</th>
+<th>1.402205906</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fs2</td>
+<td>0.185977102</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Fs3</td>
+<td>0.928395676</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Fs4</td>
+<td>1.483421316</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>a^120</td>
+<td>360.04</td>
+<td>0.812*(120) + 262.6</td>
+</tr>
+<tr class="odd">
+<td>b^120</td>
+<td>0.812</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Alpha</td>
+<td>0.15</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Beta</td>
+<td>0.06</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Gamma</td>
+<td>0.05</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Using above data we can start forecasting for the coming periods 122 i.e.&nbsp;July 2 Shift 2</p>
+<table class="table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 21%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Actual x(t)</strong></th>
+<th><strong>a^i</strong></th>
+<th><strong>b^ i</strong></th>
+<th><strong>F^i</strong></th>
+<th><strong>x^(t+4)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>120</td>
+<td>557</td>
+<td>360</td>
+<td>0.81</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>121</td>
+<td>520</td>
+<td>362.3151378</td>
+<td>0.900308265</td>
+<td>1.403856344</td>
+<td>513.694 (for t=125)</td>
+</tr>
+</tbody>
+</table>
+<p>Using just the 122 forecast, the rest of the periods i.e.&nbsp;123, 124 &amp; 125 can be calculated using</p>
+<p>,</p>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>As observed above, the data about beer consumption follows seasonality &amp; has a positive trend. This can be modeled using the Holt‐Winter Model. Of course, error analysis must be done to tweak the model especially the seasonality factors.</p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>article</category>
+  <category>product</category>
+  <category>excel</category>
+  <category>forecasting</category>
+  <guid>fortunewalla.net/posts/cs09-forecastingseasonaltrendsblayk/index.html</guid>
+  <pubDate>Mon, 23 Nov 2015 18:30:00 GMT</pubDate>
+</item>
+<item>
+  <title>Choice of moving average or exponential smoothing for a particular product profile</title>
+  <link>fortunewalla.net/posts/cs06-choiceofmovingaverageorexponential/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>The demand data for a product has been shown in the table below. Compare the forecasts using a</p>
+<p>Moving Average with a period of 5 months, MA(5), and an Exponential smoothing Method with an α of</p>
+<p>0.33. For Exponential Smoothing use the midpoint of first 5 month range of the average as the initial Forecast. (Hint: the Exponential Smoothing Forecast will be initialized with a forecast of 4951 for April made in March.)</p>
+</section>
+<section id="visualization-of-raw-data" class="level2">
+<h2 class="anchored" data-anchor-id="visualization-of-raw-data">Visualization of raw data</h2>
+<p><img src="fortunewalla.net/posts/cs06-choiceofmovingaverageorexponential/fig1.jpg" class="quarto-discovered-preview-image img-fluid"></p>
+<section id="forecasting-with-5point-moving-average-simple-exponential-smoothing" class="level3">
+<h3 class="anchored" data-anchor-id="forecasting-with-5point-moving-average-simple-exponential-smoothing">Forecasting with 5­point moving average &amp; simple exponential smoothing</h3>
+<p>Here we use α=1/3 for our exponential smoothing model</p>
+<p><img src="fortunewalla.net/posts/cs06-choiceofmovingaverageorexponential/fig2.jpg" class="img-fluid"></p>
+</section>
+<section id="accuracy-of-the-models" class="level3">
+<h3 class="anchored" data-anchor-id="accuracy-of-the-models">Accuracy of the models</h3>
+<p>To estimate the accuracy of the models, we first compare the Mean Absolute Deviation (MAD) for each of the models.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>5MA</strong></th>
+<th><strong>SES</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>MAD</td>
+<td>453.7429</td>
+<td>432.0553</td>
+</tr>
+</tbody>
+</table>
+<p>Also comparing the error cumulatively gives a better picture of the accuracy of each of the models.</p>
+<p><img src="fortunewalla.net/posts/cs06-choiceofmovingaverageorexponential/fig3.jpg" class="img-fluid"></p>
+</section>
+<section id="conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
+<p>For this particular product, the forecasts from June to December show that SES is performing better than 5MA. SES outperforms 5MA for 5 months while 5MA outperforms SES for only 2 months.</p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>article</category>
+  <category>product</category>
+  <category>excel</category>
+  <category>forecasting</category>
+  <guid>fortunewalla.net/posts/cs06-choiceofmovingaverageorexponential/index.html</guid>
+  <pubDate>Sun, 22 Nov 2015 18:30:00 GMT</pubDate>
+</item>
+<item>
+  <title>Forecasting for Sugar Bon‐Bon Cereals</title>
+  <link>fortunewalla.net/posts/cs07-forecastingforsugarbonbon/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<p><strong>Objective</strong></p>
+<p>Formulation &amp; testing of different exponential models on the product data.</p>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>You are working for a retailer that sells a lot of breakfast cereals. One of the cereals that you sell is the popular Sugar Bon‐Bon brand that features twice the sugar and even more caffeine.</p>
+</section>
+<section id="visualization-of-raw-data" class="level1">
+<h1>Visualization of raw data</h1>
+<p><img src="fortunewalla.net/posts/cs07-forecastingforsugarbonbon/fig1.jpg" class="quarto-discovered-preview-image img-fluid"></p>
+<section id="simple-exponential-smoothing-ses" class="level2">
+<h2 class="anchored" data-anchor-id="simple-exponential-smoothing-ses">Simple Exponential Smoothing (SES)</h2>
+<p>We know that SES assumes stationary demand. i.e.&nbsp;it forecasts does not take into account trends or seasonalities. Even so, we would still like to know the effect of using SES on the forecasts.</p>
+<p>Underlying model: xt = a + et</p>
+<p>Forecasting model: x^t,t+1 = α xt + (1 – α) x^t‐1,t</p>
+<p>Where x^t,t+1 is forecast for the next period, xt is the present actual demand and x^t,t‐1 is forecast for the previous period.</p>
+<p>Initialization of the parameters</p>
+<p>There are many ways of doing this. We can take the centered average for the first 4 or 5 periods. We can also take the average of the first 3, 4 or 5 periods depending on the data.</p>
+<p>We take a^4,5=205.25</p>
+<p>We take α=0.15</p>
+<p>Using the above model, the forecast for period 25 is around 654 bars. Also the forecast for period</p>
+<p>30 will also be the same i.e.&nbsp;654 since the model assumes stationary demand.</p>
+<p>MAPE for SES is 0.279329</p>
+</section>
+<section id="holts-model-hm" class="level2">
+<h2 class="anchored" data-anchor-id="holts-model-hm">Holt’s Model (HM)</h2>
+<p><img src="fortunewalla.net/posts/cs07-forecastingforsugarbonbon/fig2.jpg" class="img-fluid"></p>
+<p>Since the data shows a positive trend, we use HM which assumes level &amp; trend.</p>
+<p>Underlying model: xt = a + bt + et</p>
+<p>Forecasting model: x^t,t+τ = a^t + τ*b^t Updating Component:</p>
+<p>a^t = α xt + (1 – α) x^t‐1,t b^t = β (a^t ‐ a^t‐1) + (1 – β) b^t‐1</p>
+<p>Initialization of parameters</p>
+<p>We take α = 0.2 and β = 0.05</p>
+<p>We take a^t = 157.5 &amp; b^t = 19.1</p>
+</section>
+<section id="comparison-of-models" class="level2">
+<h2 class="anchored" data-anchor-id="comparison-of-models">Comparison of models</h2>
+<p><img src="fortunewalla.net/posts/cs07-forecastingforsugarbonbon/fig3.jpg" class="img-fluid"></p>
+<p><img src="fortunewalla.net/posts/cs07-forecastingforsugarbonbon/fig4.jpg" class="img-fluid"></p>
+</section>
+<section id="mape-of-the-various-models" class="level2">
+<h2 class="anchored" data-anchor-id="mape-of-the-various-models">MAPE of the various models</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th></th>
+<th>MAPE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>SES</td>
+<td>0.279329</td>
+</tr>
+<tr class="even">
+<td>HM (alp=0.2bet=0.05)</td>
+<td>0.128729</td>
+</tr>
+<tr class="odd">
+<td>HM (alp=0.5bet=0.05)</td>
+<td>0.120443</td>
+</tr>
+<tr class="even">
+<td>HM (alp=0.99bet=0.05)</td>
+<td>0.112559</td>
+</tr>
+</tbody>
+</table>
+<p>The MAPE and various other measures such as RMSE or MAD or most any other metric will improve as we increase the value of Alpha. This does not mean we are getting a better model. This means is that we are only fitting the model better to the historical data that we have. We are simple placing more weight to the most recent observations. Therefore, we should monitor effect of alpha &amp; change as and when required.</p>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>Holt’s model with alpha=0.2 seems to be best way to forecast the demand of sugar cereals.</p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>article</category>
+  <category>product</category>
+  <category>excel</category>
+  <category>forecasting</category>
+  <guid>fortunewalla.net/posts/cs07-forecastingforsugarbonbon/index.html</guid>
+  <pubDate>Sun, 22 Nov 2015 18:30:00 GMT</pubDate>
+</item>
+<item>
+  <title>Exponential smoothing models at TrainMax Systems</title>
+  <link>fortunewalla.net/posts/cs08-exponentialsmoothingmodelstrainmax/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>Objective:</p>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>You have been called in to take another look at TrainMax’s forecasting problems. Recall from the earlier problem that TrainMax is a manufacturer of high‐end specialty engine equipment for high speed trains. They produce parts that are sent to the original equipment manufacturers (OEMs) for manufacturing new engines. They face a continuing challenge of trying to forecast demand for their products. The demand for one part in particular, XC‐288, was highlighted as needing to be examined.</p>
+</section>
+<section id="visualization-of-the-raw-data" class="level1">
+<h1>Visualization of the raw data</h1>
+<p><img src="fortunewalla.net/posts/cs08-exponentialsmoothingmodelstrainmax/fig1.jpg" class="quarto-discovered-preview-image img-fluid"></p>
+<section id="simple-exponential-smoothing-ses-model" class="level2">
+<h2 class="anchored" data-anchor-id="simple-exponential-smoothing-ses-model">Simple Exponential Smoothing (SES) model</h2>
+<p>We try this model as it looks like there is stationary demand &amp; no trend. We need to assign the initial parameters first. We start with period 0 where we assume the forecast for the period 1 is the same as the demand for period 1. Also assume initial α=0.12</p>
+<p>Using this we have</p>
+<p><img src="fortunewalla.net/posts/cs08-exponentialsmoothingmodelstrainmax/fig2.jpg" class="img-fluid"></p>
+</section>
+<section id="varying-alpha-to-get-the-most-accurate-model" class="level2">
+<h2 class="anchored" data-anchor-id="varying-alpha-to-get-the-most-accurate-model">Varying alpha to get the most accurate model</h2>
+<table class="table">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 18%">
+<col style="width: 16%">
+<col style="width: 18%">
+<col style="width: 16%">
+<col style="width: 4%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>SES alpha</strong></th>
+<th><strong>MAPE</strong></th>
+<th></th>
+<th><strong>RMSE</strong></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.12</td>
+<td>0.052619</td>
+<td></td>
+<td>74.00847195</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>0.20925</td>
+<td>0.04772</td>
+<td>LEAST MAPE</td>
+<td>69.79034</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>0.29816</td>
+<td>0.048748836</td>
+<td></td>
+<td>68.96512784</td>
+<td>LEAST RMSE</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>0.4</td>
+<td>0.05095862</td>
+<td></td>
+<td>69.57546188</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>0.9</td>
+<td>0.062207335</td>
+<td></td>
+<td>81.68324857</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><img src="fortunewalla.net/posts/cs08-exponentialsmoothingmodelstrainmax/fig3.jpg" class="img-fluid"></p>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>By varying Alpha we are merely trying to fit the model &amp; minimize the error to historical data. Such tweaking will not necessarily produce a forecast. Also the coefficient of variation needs to be looked at. Higher CV means that data is more volatile &amp; thus Alpha needs to be high to follow these fast changes.</p>
+<p>Also increasing Alpha does not change the forecast much. This shows the robustness of the SES model.</p>
+<p>From the above data, an increase between 0.15 and 0.20 would give a good forecasting model. But whatever the value of Alpha to be used in the model, it needs to be tested on new data to see how it performs.</p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>article</category>
+  <category>product</category>
+  <category>excel</category>
+  <category>forecasting</category>
+  <guid>fortunewalla.net/posts/cs08-exponentialsmoothingmodelstrainmax/index.html</guid>
+  <pubDate>Sun, 22 Nov 2015 18:30:00 GMT</pubDate>
+</item>
+<item>
+  <title>Evaluation of stationary demand models</title>
+  <link>fortunewalla.net/posts/cs05-evaluationofstationarydemand/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<p><strong>Objective</strong></p>
+<p>Select a suitable model among the given choices.</p>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>TrainMax is a manufacturer of high‐end specialty engine equipment for high speed trains. They produce parts that are sent to the original equipment manufacturers (OEMs) for manufacturing new engines. They face a continuing challenge of trying to forecast demand for their products. The demand for one part in particular, XC‐288, was highlighted as needing to be examined.</p>
+</section>
+<section id="visualization-of-all-the-models" class="level1">
+<h1>Visualization of all the models</h1>
+<p><img src="fortunewalla.net/posts/cs05-evaluationofstationarydemand/9240726888c2daf802a451c0bdf69dfa.png" class="quarto-discovered-preview-image img-fluid"></p>
+<section id="check-for-stationary-demand" class="level2">
+<h2 class="anchored" data-anchor-id="check-for-stationary-demand">Check for stationary demand</h2>
+<p>One way of doing is to determine the coefficient of variation (CV)</p>
+<p>We get</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>STDEV</th>
+<th>62.6899312</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>AVERAGE</td>
+<td>1103.78571</td>
+</tr>
+<tr class="even">
+<td>CV</td>
+<td>0.05679538</td>
+</tr>
+</tbody>
+</table>
+<p>CV is very low &amp; hence the demand is quite stationary &amp; stable in nature.</p>
+</section>
+<section id="calculations-among-the-models" class="level2">
+<h2 class="anchored" data-anchor-id="calculations-among-the-models">Calculations among the models</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Prediction for period 15</strong></th>
+<th><strong>MAPE(%)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Period 14 value</td>
+<td>1169</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Naïve</td>
+<td>1169</td>
+<td>7.08446274</td>
+</tr>
+<tr class="odd">
+<td>Cumulative</td>
+<td>1103.78571</td>
+<td>5.13422811</td>
+</tr>
+<tr class="even">
+<td>2MA</td>
+<td>1145</td>
+<td>6.46420824</td>
+</tr>
+<tr class="odd">
+<td>4MA</td>
+<td>1113.25</td>
+<td>4.79251584</td>
+</tr>
+</tbody>
+</table>
+<p>Here we see that the moving average forecasts need not always be between the naïve &amp; cumulative forecasts.</p>
+</section>
+<section id="selection-of-the-model-in-the-presence-of-a-trend" class="level2">
+<h2 class="anchored" data-anchor-id="selection-of-the-model-in-the-presence-of-a-trend">Selection of the model in the presence of a trend</h2>
+<p><img src="fortunewalla.net/posts/cs05-evaluationofstationarydemand/fig2.jpg" class="img-fluid"></p>
+<p>If we assume there is a positive trend in the data then none of these models are appropriate for demand with a trend pattern. The Cumulative, Naive, and Moving Average forecasts all assume stationary demand. That means that you only assume a Level pattern to the demand with some random noise.</p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>article</category>
+  <category>product</category>
+  <category>excel</category>
+  <category>forecasting</category>
+  <guid>fortunewalla.net/posts/cs05-evaluationofstationarydemand/index.html</guid>
+  <pubDate>Thu, 19 Nov 2015 18:30:00 GMT</pubDate>
+</item>
+<item>
+  <title>Analysis of three black‐box type demand forecasting models</title>
+  <link>fortunewalla.net/posts/cs04-analysisofblackboxtypedemand/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="objective" class="level1">
+<h1>Objective</h1>
+<p>To help the Fenway Park concessions evaluate and compare the quality of these three competing forecasting approaches.</p>
+</section>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>Hot dogs are an integral part of the experience of a Red Sox baseball game in Boston. The hot dogs, or frankfurters, that are sold at the ball park are called Fenway Franks. During the regular season, a total of 81 games are played at Fenway Park, each one bringing around 37 thousand fans. Some games bring more fans than others: attendance depends on many factors, from the weather to the reputation of the opposing team. Demand for hot dogs depends not only on attendance, but also on many other factors, such as temperature or the time of the day when the game takes place.</p>
+<p>Although it is not a simple task, estimating the demand for hot dogs during each one of the 81 games of a season is very important for concessions at Fenway. On the one hand, underestimating the demand would mean – besides unsatisfied and hungry fans – lost profit: the cost of a lost sale is estimated at $3. On the other hand, overestimating the demand would mean an excess of unsold hot dogs at the end of the game: the cost of an unsold hot dog, including ingredients, energy and labor, is estimated at $2.</p>
+<p>A year ago, a group of concessions at Fenway hired three consulting firms for preparing as many mathematical models, one by each firm, to predict the demand for hot dogs during each game of the season based on multiple factors that are known as late as just two days before the game: air temperature, rain, the opposing team, time of day for the game, injured players who would be absent, and dozens of other factors.</p>
+<p>After a year of frantic data crunching, the consultants have presented their final models to the Fenway concessions. You have been hired as an independent expert to evaluate the quality of the forecasts produced by their proposed models. Due to intellectual property issues, you are not allowed to see the actual models, only the forecasts they produced. They are, for your purposes, to be treated as black boxes.</p>
+<p>As input data, you have been given the forecast that each model yielded for hot dogs demand in each game in the two most recent seasons. You have also been given by the concessions a detailed record of the actual demand for hot dogs in each of the 81 games of these two seasons.</p>
+<section id="visualization-of-raw-data" class="level2">
+<h2 class="anchored" data-anchor-id="visualization-of-raw-data">Visualization of raw data</h2>
+<p><img src="fortunewalla.net/posts/cs04-analysisofblackboxtypedemand/9a2a88bdd81c37122889f948d1c6c8d8.png" class="quarto-discovered-preview-image img-fluid"></p>
+</section>
+<section id="comparison-of-the-mean-deviation-md-among-the-three-models" class="level2">
+<h2 class="anchored" data-anchor-id="comparison-of-the-mean-deviation-md-among-the-three-models">Comparison of the mean deviation (MD) among the three models</h2>
+<table class="table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 12%">
+<col style="width: 73%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Model</strong></th>
+<th><strong>MD</strong></th>
+<th><strong>% deviation from mean of actual sales</strong> <strong>(3750.056)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>M1</td>
+<td>‐526.988</td>
+<td>‐14.0528</td>
+</tr>
+<tr class="even">
+<td>M2</td>
+<td>24.45679</td>
+<td>0.652171</td>
+</tr>
+<tr class="odd">
+<td>M3</td>
+<td>‐11.6852</td>
+<td>‐0.3116</td>
+</tr>
+</tbody>
+</table>
+<p>As seen above M1 exhibits the most bias. M3 has the least bias. This is done to</p>
+<p>Models 2 and 3 have an average error in the vicinity of only a few dozen hotdogs from the actual. In fact,</p>
+<p>M2 &amp; M3 have a MD equivalent to less than 1% of the average hot dog sales per game.</p>
+<p>However, Model 1 seems to consistently over‐estimate the demand for hotdogs by an average of 500 units per game ‐ or about 14% of the average hot dog sales per game). Therefore, we can say that – based on the historical data we have – Models 2 and 3 are less biased than Model 1. Model 1 is the most biased of the pack and it is OVER forecasting.</p>
+</section>
+<section id="calculation-of-rmse-of-each-of-the-models" class="level2">
+<h2 class="anchored" data-anchor-id="calculation-of-rmse-of-each-of-the-models">Calculation of RMSE of each of the models</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th><strong>Model</strong></th>
+<th><strong>RMSE</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>M1</td>
+<td>597.6846</td>
+</tr>
+<tr class="even">
+<td>M2</td>
+<td>286.457</td>
+</tr>
+<tr class="odd">
+<td>M3</td>
+<td>500.2935</td>
+</tr>
+</tbody>
+</table>
+<p>As seen above, M2 has an error that is half of the other models &amp; hence is the most suitable forecasting model besides also have a small deviation in forecasted sales from the actual demand.</p>
+</section>
+<section id="effect-of-underestimating-overestimating-by-the-models" class="level2">
+<h2 class="anchored" data-anchor-id="effect-of-underestimating-overestimating-by-the-models">Effect of underestimating &amp; overestimating by the models</h2>
+<p>As mentioned in the introduction,</p>
+<table class="table">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 43%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Forecasting Issues</strong></th>
+<th><strong>Effect</strong></th>
+<th><strong>Cost</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Underestimating</td>
+<td>Unsatisfied &amp; hungry fans</td>
+<td>$3 per lost sale</td>
+</tr>
+<tr class="even">
+<td>Overestimating</td>
+<td>Waste of ingredients, energy &amp; labor</td>
+<td>$2 per unsold hot dog</td>
+</tr>
+</tbody>
+</table>
+<p>Calculations of the lost‐sale or unsold inventory by the three models.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th><strong>Metric</strong></th>
+<th><strong>M1</strong></th>
+<th><strong>M2</strong></th>
+<th><strong>M3</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Shortage of hotdogs</td>
+<td>0</td>
+<td>21765</td>
+<td>32883</td>
+</tr>
+<tr class="even">
+<td>Cost of Lost Sales $</td>
+<td>0</td>
+<td>65295</td>
+<td>98649</td>
+</tr>
+<tr class="odd">
+<td>Unsold Hotdogs</td>
+<td>85372</td>
+<td>17803</td>
+<td>34776</td>
+</tr>
+<tr class="even">
+<td>Cost of Unsold hotdogs $</td>
+<td>170744</td>
+<td>35606</td>
+<td>69552</td>
+</tr>
+<tr class="odd">
+<td>Total Loss $</td>
+<td>170744</td>
+<td>100901</td>
+<td>168201</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>Least Total loss</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>When comparing the MD, RMSE among the three models, M2 seems to be the most accurate in its predictions and it also manages to provide the least total loss &amp; a balance between the cost of lost sales and unsold hot dogs better than the other two models.</p>
+<p>Therefore, from among the three available options, M2 seems to make the predictions that make most economic sense.</p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>article</category>
+  <category>product</category>
+  <category>excel</category>
+  <category>forecasting</category>
+  <guid>fortunewalla.net/posts/cs04-analysisofblackboxtypedemand/index.html</guid>
+  <pubDate>Wed, 18 Nov 2015 18:30:00 GMT</pubDate>
+</item>
+<item>
   <title>Suitability of stationary demand models for forecasting</title>
-  <link>fortunewalla.net/posts/statdemmodforecasting/index.html</link>
+  <link>fortunewalla.net/posts/cs01-suitabilityofstationarydemandmodels/index.html</link>
   <description><![CDATA[ 
 
 
@@ -171,13 +1541,13 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 </section>
 <section id="visualization-of-the-raw-data" class="level1">
 <h1>Visualization of the raw data</h1>
-<p><img src="fortunewalla.net/posts/statdemmodforecasting/a0b469b9abf2c42032068c851e70aa81.png" class="quarto-discovered-preview-image img-fluid"></p>
+<p><img src="fortunewalla.net/posts/cs01-suitabilityofstationarydemandmodels/a0b469b9abf2c42032068c851e70aa81.png" class="quarto-discovered-preview-image img-fluid"></p>
 <p><strong>Q1. What is the trend over the last three years?</strong></p>
 <p>There appears to be a positive trend. From the graph there is an increase in the demand of palm oil by about 24 lbs per month for the last three years.</p>
-<p><img src="fortunewalla.net/posts/statdemmodforecasting/d6300b600473130800c577e600fe9a41.png" class="img-fluid"></p>
+<p><img src="fortunewalla.net/posts/cs01-suitabilityofstationarydemandmodels/d6300b600473130800c577e600fe9a41.png" class="img-fluid"></p>
 <p><strong>Q2. Does there appear to be any seasonality in the demand pattern?</strong></p>
 <p>Yes. If we plot the data by the months for each of the years, there seems to be seasonality to the demand. Demand is low from January to May. It picks up from June to August and then again from October to December.</p>
-<p><img src="fortunewalla.net/posts/statdemmodforecasting/7e8963b5923d1e0b71940da630ea2e9b.png" class="img-fluid"></p>
+<p><img src="fortunewalla.net/posts/cs01-suitabilityofstationarydemandmodels/7e8963b5923d1e0b71940da630ea2e9b.png" class="img-fluid"></p>
 <p><strong>Q3. What is the forecast for demand in January 2015?</strong></p>
 <table class="table">
 <colgroup>
@@ -249,12 +1619,141 @@ Q30. Anything you wish to share about your experiences that most people don’t 
   <category>product</category>
   <category>excel</category>
   <category>forecasting</category>
-  <guid>fortunewalla.net/posts/statdemmodforecasting/index.html</guid>
+  <guid>fortunewalla.net/posts/cs01-suitabilityofstationarydemandmodels/index.html</guid>
+  <pubDate>Tue, 17 Nov 2015 18:30:00 GMT</pubDate>
+</item>
+<item>
+  <title>Performance characteristics of forecasting models</title>
+  <link>fortunewalla.net/posts/cs02-performancecharacteristics/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<p><strong>Objective</strong></p>
+<p>Investigate existing forecasting capabilities of Ordroid devices &amp; provide suggestions.</p>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>You have just been hired by a company that manufactures mid‐range communication devices that use the Ordroid open source operating system. The company is focused on innovating its products and has not put much thought on its inventory or forecasting capabilities. Your boss thinks there might be a problem in the forecasting of the Ordroid Devices and wants you to figure it out. The Ordroid, far from being new to the market, has been out for two years.</p>
+<p>Knowing this, you have asked for data on both years of historical sales as well as any forecasts, promotions, pricing changes, or competitive analyses made during this time. Your boss laughs and provides you with all the data they have: the last six months of sales. You ask to meet with the current demand planner for the Ordroid Devices and she tells you that they use a forecasting algorithm of her own design and there is no documentation.</p>
+</section>
+<section id="visualization-of-the-raw-data" class="level1">
+<h1>Visualization of the raw data</h1>
+<p>Raw data &amp; forecasts supplied by the demand planner at Ordroid Devices</p>
+<p><strong>Calculate some different performance characteristics for the data sample given.</strong></p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AMD=%5Cfrac%7B%5Csum_%7Bi=1%7D%5E%7Bn%7D%20(Actual_%7Bi%7D-Forecast_%7Bi%7D)%7D%7Bn%7D%0A"> <img src="https://latex.codecogs.com/png.latex?%0AMAD=%5Cfrac%7B%5Csum_%7Bi=1%7D%5E%7Bn%7D%20%5Clvert%20Actual_%7Bi%7D-Forecast_%7Bi%7D%5Crvert%7D%7Bn%7D%0A"> <img src="https://latex.codecogs.com/png.latex?%0ARMSE=%5Csqrt%7B%5Cfrac%7B%5Csum_%7Bi=1%7D%5E%7Bn%7D%20(Actual_%7Bi%7D-Forecast_%7Bi%7D)%5E2%7D%7Bn%7D%7D%0A"> <img src="https://latex.codecogs.com/png.latex?%0AMPE=%5Cfrac%7B%5Csum_%7Bi=1%7D%5E%7Bn%7D%20%5Cfrac%7B%20(Actual_%7Bi%7D-Forecast_%7Bi%7D)%7D%7BActual_%7Bi%7D%7D%7D%7Bn%7D%0A"> <img src="https://latex.codecogs.com/png.latex?%0AMAPE=%5Cfrac%7B%5Csum_%7Bi=1%7D%5E%7Bn%7D%20%5Clvert%20%5Cfrac%7BActual_%7Bi%7D-Forecast_%7Bi%7D%7D%7BActual_%7Bi%7D%7D%5Crvert%7D%7Bn%7D%0A"></p>
+<div class="table-responsive">
+<table class="table">
+<caption></caption>
+<thead>
+<tr class="header">
+<th></th>
+<th></th>
+<th>Number of devices</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mean Deviation</td>
+<td>MD</td>
+<td>112.5</td>
+</tr>
+<tr class="even">
+<td>Mean Absolute Deviation</td>
+<td>MAD</td>
+<td>509.5</td>
+</tr>
+<tr class="odd">
+<td>Root Mean Square Error</td>
+<td>RMSE</td>
+<td>540.6115</td>
+</tr>
+<tr class="even">
+<td>Mean Percent Error</td>
+<td>MPE</td>
+<td>0.04112</td>
+</tr>
+<tr class="odd">
+<td>Mean Absolute Percent Error</td>
+<td>MAPE</td>
+<td>0.269002</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Q1. What can you say about the presence seasonality of demand?</strong></p>
+<p>Seasonality requires a whole cycle. There is not even one full year of data. So as of now, it is too early to fully evaluate seasonality. You need at least two full cycles to determine seasonality.</p>
+<p><strong>Q2. What can you say about the presence of a trend in the demand?</strong></p>
+<p>Although we don’t have a year’s worth of data, there seems to be a positive trend of about 10% increase in demand in the data or about 171 devices per month.</p>
+<p><strong>Q3. What can you say about the bias of the forecast?</strong></p>
+<p>A bias is a persistent tendency to over or under predict. These forecasts are not persistent in either. In fact, of the six periods, half are over forecast and half are under forecast. So, there does not appear to be any bias in the forecast.</p>
+<p><strong>Q4. What can you say about the accuracy of the forecast?</strong></p>
+<p>This is not a very good forecast because even though there is a strong positive trend, the forecasts ignores the trend &amp; also the MAPE is almost 27% ‐ quite high.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>article</category>
+  <category>product</category>
+  <category>excel</category>
+  <category>forecasting</category>
+  <guid>fortunewalla.net/posts/cs02-performancecharacteristics/index.html</guid>
+  <pubDate>Tue, 17 Nov 2015 18:30:00 GMT</pubDate>
+</item>
+<item>
+  <title>Improving the naïve model forecast using cumulative period model</title>
+  <link>fortunewalla.net/posts/cs03-comparisonnaivecumulative/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<p><strong>Objective:</strong></p>
+<p>Comparing error metrics by switching naïve model to cumulative model.</p>
+<p><strong>Introduction:</strong></p>
+<p>You have been hired by General Miles, a company that produces healthy gluten‐free breakfast cereal bars. The last market introduction happened a year ago and your manager thinks there might be an issue in the forecasting methodology. They are currently using a simple Naive forecasting model and you think there might be some room for improvement.</p>
+<p>Your boss provides you with the sales for the last 12 months and the forecasts for the last 11 months. No data is available to forecast the first month as the product was totally new to the market at the time.</p>
+<p><strong>Visualization of the raw data</strong></p>
+<p><img src="fortunewalla.net/posts/cs03-comparisonnaivecumulative/fig1.jpg" class="quarto-discovered-preview-image img-fluid"></p>
+<p><strong>Comparison of the forecasting models</strong></p>
+<p><img src="fortunewalla.net/posts/cs03-comparisonnaivecumulative/fig2.jpg" class="img-fluid"></p>
+<p><strong>Comparison of Model Error Metrics</strong></p>
+<table class="table">
+<thead>
+<tr class="header">
+<th><strong>Error Metric</strong></th>
+<th><strong>RMSE</strong></th>
+<th><strong>MAPE</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Naïve Model</td>
+<td>80.45665</td>
+<td>0.155729</td>
+</tr>
+<tr class="even">
+<td>Cumulative Model</td>
+<td>131.226</td>
+<td>0.269029</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Conclusion:</strong></p>
+<p>The cumulative model in this case is worse than the Naïve model since the RMSE and the MAPE values are greater. It does not react quickly enough to adapt to the high variability in sales for this new gluten free cereal bar.</p>
+
+
+
+ ]]></description>
+  <category>article</category>
+  <category>product</category>
+  <category>excel</category>
+  <category>forecasting</category>
+  <guid>fortunewalla.net/posts/cs03-comparisonnaivecumulative/index.html</guid>
   <pubDate>Tue, 17 Nov 2015 18:30:00 GMT</pubDate>
 </item>
 <item>
   <title>Connect to and query Microsoft SQL Server using SAS/ACCESS Interface to ODBC</title>
-  <link>fortunewalla.net/posts/connectquerymssqlsasodbc/index.html</link>
+  <link>fortunewalla.net/posts/09-connectquerymssqlsasinterfaceodbc/index.html</link>
   <description><![CDATA[ 
 
 
@@ -431,6 +1930,7 @@ real time 0.37 seconds
 cpu time 0.06 seconds
 **Results Viewer:sashtml**</code></pre>
 <p>The SAS System</p>
+<div class="table-responsive">
 <table class="table">
 <colgroup>
 <col style="width: 2%">
@@ -981,6 +2481,7 @@ cpu time 0.06 seconds
 </tr>
 </tbody>
 </table>
+</div>
 <pre><code>  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   **Obs**   **CustomerKey**   **GeographyKey**   **CustomerAlternateKey**   **Title**   **FirstName**   **MiddleName**   **LastName**   **NameStyle**   **BirthDate**   **MaritalStatus**   **Suffix**   **Gender**   **EmailAddress**                  **YearlyIncome**   **TotalChildren**   **NumberChildrenAtHome**   **EnglishEducation**   **SpanishEducation**   **FrenchEducation**   **EnglishOccupation**   **SpanishOccupation**   **FrenchOccupation**   **HouseOwnerFlag**   **NumberCarsOwned**   **AddressLine1**   **AddressLine2**   **Phone**      **DateFirstPurchase**   **CommuteDistance**
   --------- ----------------- ------------------ -------------------------- ----------- --------------- ---------------- -------------- --------------- --------------- ------------------- ------------ ------------ --------------------------------- ------------------ ------------------- -------------------------- ---------------------- ---------------------- --------------------- ----------------------- ----------------------- ---------------------- -------------------- --------------------- ------------------ ------------------ -------------- ----------------------- ---------------------
@@ -1116,6 +2617,7 @@ real time 0.35 seconds
 cpu time 0.03 seconds
 **Results Viewer:sashtml**</code></pre>
 <p>The SAS System</p>
+<div class="table-responsive">
 <table class="table">
 <caption></caption>
 <colgroup>
@@ -1650,6 +3152,7 @@ cpu time 0.03 seconds
 </tr>
 </tbody>
 </table>
+</div>
 <pre><code>  ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   **CustomerKey**   **GeographyKey**   **CustomerAlternateKey**   **Title**   **FirstName**   **MiddleName**   **LastName**   **NameStyle**   **BirthDate**   **MaritalStatus**   **Suffix**   **Gender**   **EmailAddress**                  **YearlyIncome**   **TotalChildren**   **NumberChildrenAtHome**   **EnglishEducation**   **SpanishEducation**   **FrenchEducation**   **EnglishOccupation**   **SpanishOccupation**   **FrenchOccupation**   **HouseOwnerFlag**   **NumberCarsOwned**   **AddressLine1**   **AddressLine2**   **Phone**      **DateFirstPurchase**   **CommuteDistance**
   ----------------- ------------------ -------------------------- ----------- --------------- ---------------- -------------- --------------- --------------- ------------------- ------------ ------------ --------------------------------- ------------------ ------------------- -------------------------- ---------------------- ---------------------- --------------------- ----------------------- ----------------------- ---------------------- -------------------- --------------------- ------------------ ------------------ -------------- ----------------------- ---------------------
@@ -1695,12 +3198,12 @@ cpu time 0.03 seconds
   <category>datascience</category>
   <category>sas</category>
   <category>odbc</category>
-  <guid>fortunewalla.net/posts/connectquerymssqlsasodbc/index.html</guid>
+  <guid>fortunewalla.net/posts/09-connectquerymssqlsasinterfaceodbc/index.html</guid>
   <pubDate>Sat, 17 May 2014 18:30:00 GMT</pubDate>
 </item>
 <item>
   <title>Project to implement remote PHP web client/ MSSQL database server network setup</title>
-  <link>fortunewalla.net/posts/projremotephpmysql/index.html</link>
+  <link>fortunewalla.net/posts/08-projecttoimplementremotedb/index.html</link>
   <description><![CDATA[ 
 
 
@@ -2246,13 +3749,13 @@ MSSQL master.dbo.spt_monitor TABLE
   <category>datascience</category>
   <category>php</category>
   <category>mysql</category>
-  <guid>fortunewalla.net/posts/projremotephpmysql/index.html</guid>
+  <guid>fortunewalla.net/posts/08-projecttoimplementremotedb/index.html</guid>
   <pubDate>Thu, 15 May 2014 18:30:00 GMT</pubDate>
 </item>
 <item>
   <title>Software choices to implement a remote database client/server network setup</title>
   <dc:creator>Fortune Walla</dc:creator>
-  <link>fortunewalla.net/posts/swchoicesremotedb/index.html</link>
+  <link>fortunewalla.net/posts/07-softwarechoicesremotedb/index.html</link>
   <description><![CDATA[ 
 
 
@@ -2309,12 +3812,12 @@ Misc. client software: MS Excel, MS Access, R, Python. It is advisable to try th
   <category>article</category>
   <category>datascience</category>
   <category>sas</category>
-  <guid>fortunewalla.net/posts/swchoicesremotedb/index.html</guid>
+  <guid>fortunewalla.net/posts/07-softwarechoicesremotedb/index.html</guid>
   <pubDate>Wed, 07 May 2014 18:30:00 GMT</pubDate>
 </item>
 <item>
   <title>Referring to a SAS data set with its full filesystem path</title>
-  <link>fortunewalla.net/posts/refsasdsfullpath/index.html</link>
+  <link>fortunewalla.net/posts/06-referringsasdatasetfullpath/index.html</link>
   <description><![CDATA[ 
 
 
@@ -2333,12 +3836,12 @@ run;</code></pre>
   <category>article</category>
   <category>datascience</category>
   <category>sas</category>
-  <guid>fortunewalla.net/posts/refsasdsfullpath/index.html</guid>
+  <guid>fortunewalla.net/posts/06-referringsasdatasetfullpath/index.html</guid>
   <pubDate>Thu, 03 Apr 2014 18:30:00 GMT</pubDate>
 </item>
 <item>
   <title>How to find out and use the number of observations in a given SAS data set</title>
-  <link>fortunewalla.net/posts/howtofindoutobssas/index.html</link>
+  <link>fortunewalla.net/posts/05-howtofindnoofobssas/index.html</link>
   <description><![CDATA[ 
 
 
@@ -2408,12 +3911,12 @@ run;</code></pre>
   <category>article</category>
   <category>datascience</category>
   <category>sas</category>
-  <guid>fortunewalla.net/posts/howtofindoutobssas/index.html</guid>
+  <guid>fortunewalla.net/posts/05-howtofindnoofobssas/index.html</guid>
   <pubDate>Sat, 15 Mar 2014 18:30:00 GMT</pubDate>
 </item>
 <item>
   <title>Combinatorial analysis &amp; calculations using SAS functions – fact(), perm() and comb()</title>
-  <link>fortunewalla.net/posts/combsasfunctions/index.html</link>
+  <link>fortunewalla.net/posts/04-combinatorialfunctionsas/index.html</link>
   <description><![CDATA[ 
 
 
@@ -2499,142 +4002,8 @@ NOTE: DATA statement used (Total process time):
   <category>article</category>
   <category>datascience</category>
   <category>sas</category>
-  <guid>fortunewalla.net/posts/combsasfunctions/index.html</guid>
+  <guid>fortunewalla.net/posts/04-combinatorialfunctionsas/index.html</guid>
   <pubDate>Thu, 06 Mar 2014 18:30:00 GMT</pubDate>
-</item>
-<item>
-  <title>The best options to study for SAS Certified Base Programmer for SAS 9 Credential</title>
-  <link>fortunewalla.net/posts/bestwaytostudyforsas/index.html</link>
-  <description><![CDATA[ 
-
-
-
-<p><em>Created on Friday, February 21st, 2014 at 6:59 am</em></p>
-<p>If SAS software will be a part of your career then get certified by passing the SAS Base Programming Exam from SAS Institute. It is designed to test your knowledge in writing SAS programs to access &amp; manage data to perform queries and analyses. It also creates a good impression to your client / company.</p>
-<p><a href="http://support.sas.com/certify/creds/bp.html" class="uri">http://support.sas.com/certify/creds/bp.html</a></p>
-<p><strong>Option 1:</strong> If you can afford it or have your company/institution sponsor/subsidize you, then the two courses offered by the SAS Institute is the best way to learn the Base SAS system &amp; programming.</p>
-<p>SAS Programming 1: Essentials <a href="http://support.sas.com/edu/schedules.html?id=277&amp;ctry=US" class="uri">http://support.sas.com/edu/schedules.html?id=277&amp;ctry=US</a></p>
-<p>SAS Programming 2: Data Manipulation Techniques <a href="http://support.sas.com/edu/schedules.html?id=278&amp;ctry=US" class="uri">http://support.sas.com/edu/schedules.html?id=278&amp;ctry=US</a></p>
-<p>It is a highly structured course with code examples, exercises &amp; practice questions that will thoroughly teach you the basic concepts of SAS software &amp; Base SAS programming.</p>
-<p><strong>Option 2:</strong> The next best option is to purchase the following book</p>
-<p>Base SAS Programmer Certification 3rd edition</p>
-<p><a href="http://www.amazon.com/SAS-Certification-Prep-Guide-Programming/dp/1607649241/ref=sr_1_1?ie=UTF8" class="uri">http://www.amazon.com/SAS-Certification-Prep-Guide-Programming/dp/1607649241/ref=sr_1_1?ie=UTF8</a></p>
-<p>It is a condensed version of the full course &amp; hence is the best option for those that cannot afford the full course. Use it with the Base SAS software available at your academic institution or company &amp; practice all the example code. You can also buy access to SAS OnDemand to use SAS software through the Internet to practice for the exam.</p>
-<p><strong>Option 3:</strong> Join an institute that offer training in SAS &amp; statistical analysis. They usually frame their SAS course syllabus &amp; material from the official courses &amp; have computer labs with access to Base SAS software. The advantage here is having an instructor who can give you feedback on your progress &amp; clear your doubts &amp; queries regarding the exam.</p>
-<p><em>Preparation:</em> You can be ready with 4-5 months of preparation if you follow any of the above options. Modifying existing code &amp; using different procedures / keywords to achieve the same result is best way to understand how SAS works. It requires time &amp; practice as SAS software is vast &amp; comprehensive.</p>
-<p>SAS Institute also offers a practice exam that you can purchase to test yourself before attempting the actual exam.</p>
-<p>It should be understood that in addition to all this, there is an abundant amount of material on the Web to help you learn Base SAS programming &amp; prepare for the certification credential exam. All the best!</p>
-
-
-
- ]]></description>
-  <category>article</category>
-  <category>datascience</category>
-  <category>sas</category>
-  <guid>fortunewalla.net/posts/bestwaytostudyforsas/index.html</guid>
-  <pubDate>Thu, 20 Feb 2014 18:30:00 GMT</pubDate>
-</item>
-<item>
-  <title>How do I to get started in &amp; learn ‘data science’, ‘data analytics’?</title>
-  <link>fortunewalla.net/posts/howtostartds/index.html</link>
-  <description><![CDATA[ 
-
-
-
-<p><em>Created on Friday, February 21st, 2014 at 6:57 am</em></p>
-<p>This is an open ended question that has created a lot of discussion on the Web. There are no right answers or approaches. It all depends on what you are interested in &amp; want to achieve. If you choose the self study route, this would be my personal approach.</p>
-<p><strong>1) Decide your domain of interest:</strong> The fields of “data analytics”, “data science” are very vast in their scope to learn everything. So although the general statistical &amp; analytic principles are the same for all fields, it is best to find your industry of interest (say pharmaceutical, econometrics, finance, social &amp; bio sciences, human resources, actuarial sciences, marketing, energy forecasting, predictive modeling, business statistical analysis, medical sciences, etc..) &amp; develop domain specific knowledge for your interests. This will allow you to focus your learning &amp; effort. Trying to master too many domains might get you confused &amp; mentally drained in the long run.</p>
-<p><strong>2) Application or technical side:</strong> This is a broad generalization. Application side is where the understanding &amp; application is more important than the implementation of the code or the software system. Typically for students of business, social sciences, pharmaceutical, etc…</p>
-<p>Usually understanding &amp; framing the research/business problem required to be solved precedes analysis. The important thing is to know the business impact of your analysis. For example, by changing the values of the variables or doing a “WHAT…IF” analysis, one should be able to interpret the change in output in terms of how it addresses the research/business problem that is required to be solved. This type of skill comes only with having the right domain knowledge.</p>
-<p>Technical side usually interests students of mathematics, computer science, engineering &amp; fields where focus is on developing new techniques, software &amp; improving existing ones. The fields of data mining &amp; “Big Data” are pretty technical in terms of the mathematical &amp; programming knowledge required. This includes algorithms &amp; equations for data mining, machine learning, pattern recognition, text processing. Database design using “Big Data” technologies like Hadoop, NOSQL, Hive, MongoDb, PIG, MapReduce etc… Also most existing databases like MS SQL Server &amp; Oracle have data mining features.</p>
-<p>As technical conferences &amp; statistical journals discuss the latest techniques &amp; methods in terms of mathematics, it would be best to get the mathematical background (usually calculus 1 &amp; 2, linear algebra &amp; probability at undergraduate level) as quickly as you can. This will not only enable you to understand but also express yourself in terms of mathematics.</p>
-<p>The ability to understand the research/business problem &amp; convert it into mathematical form &amp; then choose or create an appropriate algorithmic method, that is relatively fast &amp; with minimum error, for the specific software system are skills you should aim to acquire.</p>
-<p><strong>3) Books &amp; reading material:</strong> The books &amp; material you read from should match your level of expertise &amp; also must be based on the software you plan to use. Your best option is to use academic websites, publisher websites &amp; book review websites like Amazon.com to know the contents &amp; the subject matter of the books. There are specialized statistical books for students of social sciences, marketing, computer science, pharmaceutical etc… Also books that teach data analytics/data science/statistics using particular software (such as R, SAS, SPSS, STATA, MS Excel, Python &amp; many more).</p>
-<p>Buy textbooks on the following criteria:</p>
-<ul>
-<li>Based on your mathematical level i.e.&nbsp;based on advanced math like calculus or simple math like algebra.</li>
-<li>That teaches &amp; uses the software you plan to learn with. Using R, SAS, SPSS, STATA, MS Excel, etc….</li>
-<li>That deal with the techniques &amp; methods for your domain of interest i.e.&nbsp;finance, marketing, pharmaceutical, biostatistics etc…</li>
-</ul>
-<p><strong>4) Get the software running:</strong> Being familiar with the various functions &amp; features of the software is almost as important as learning statistical theory. You want to be productive &amp; not waste time looking up help/documentation all the time.</p>
-<p>There are software specifically for statistical analysis. Some are suited for certain domains &amp; industries. The hyperlink below shows a list of them.</p>
-<p><a href="http://www.amstat.org/careers/statisticalsoftware.cfm" class="uri">http://www.amstat.org/careers/statisticalsoftware.cfm</a></p>
-<p>The R project software is the ideal to begin learning with. It is extensive &amp; has many user submitted packages for almost every kind of statistical analysis. It is available for free (as in gratis).</p>
-<p>Since R is distributed under the GPL software license you might need to be familiar with the licensing issues of the various R packages especially if you plan to use R commercially &amp; your code also contains other proprietary code using restrictive licenses.</p>
-<p>Microsoft Excel is a good option as most office/college computers have machines running MS Windows &amp; MS Office. It has many add-ins (e.g.&nbsp;XLMiner, neuroXL, Oracle Spreadsheet Add-In, Perfringens Predictor Excel Add-in, ADAPA Add-in for Microsoft® Office Excel®, RExcel, DataMinerXL, SAS Add-in for Rapid Predictive Modeler, Palisade Neuraltools Add-in, 11Ants Model Builder Microsoft Excel Add-in, etc.. ) available for analytics &amp; data mining. It can also be used to interact with the data mining features of MS SQL Server.</p>
-<p>Commercial statistical software like SAS, IBM SPSS &amp; STATA are used widely in industry &amp; academia. Those in academia should be able to get an academic license to access &amp; use SAS/SPSS/STATA on their personal computers. SAS also offers an SAS OnDemand service to access SAS through the Internet for a fee.</p>
-<p><strong>5) Programming:</strong> Since each software package has its own programming environment. Learning a general programming course at undergraduate level will help you understand programming principles that each software uses. Those technically inclined would do well to do a course in computer algorithms &amp; database design.</p>
-<p>Knowing SQL is important since most of the data you will analyze or process will reside in a database system like MySQL, MS SQL Server, Oracle etc…</p>
-<p>A major part of analytics &amp; data science is modifying existing data into a particular format (especially dates, currency, telephone, number formats) for processing. Every software has built-in features for checking errors &amp; missing values, replacing, searching, sorting, filtering &amp; extracting text from a larger dataset. Text processing tools like grep, perl, and python are also used.</p>
-<p>It is good idea, although not necessary, to get the basic certifications for commercial software like SAS, SPSS. The exams allow you to brush up your skills &amp; your clients or the company would be somewhat assured of your competency.</p>
-<p>Last but not least, it is best to explore websites &amp; join academic/industry communities specific to your area of research or choice.</p>
-<p><strong>Summary:</strong></p>
-<ul>
-<li>Decide on your area of interest &amp; domain.</li>
-<li>Do you prefer to be on the technical/programming side or be application/business oriented?</li>
-<li>Get the right books &amp; study material for your academic level &amp; area of interest.</li>
-<li>Decide on the appropriate software used by your industry.</li>
-<li>Learn programming &amp; algorithms.</li>
-<li>Explore the Internet for websites &amp; join communities specific to your needs.</li>
-</ul>
-
-
-
- ]]></description>
-  <category>article</category>
-  <category>datascience</category>
-  <guid>fortunewalla.net/posts/howtostartds/index.html</guid>
-  <pubDate>Thu, 20 Feb 2014 18:30:00 GMT</pubDate>
-</item>
-<item>
-  <title>What is ‘data science’ / data analytics? - Yet another opinion</title>
-  <link>fortunewalla.net/posts/whatisds/index.html</link>
-  <description><![CDATA[ 
-
-
-
-<p><em>Created on Friday, February 21st, 2014 at 6:52 am</em></p>
-<p>In the last twenty years of the Information Age, computer networks &amp; the Internet have allowed us to gather &amp; store information from a wide variety of devices (industrial/medical equipment, photos/audio/video sensors, ATMs, credit/debit cards, mobiles &amp; computers, etc..) &amp; platforms (retailing, telecom, banking &amp; insurance , pharmaceutical, security, social media, etc..).</p>
-<p>The information being collected is increasing as more people &amp; businesses use computers &amp; the Internet as a primary means for conducting business, social &amp; monetary transactions. Technologies such as 3G/4G data networks, mobile computing devices &amp; cloud based computing systems have accelerated this trend.</p>
-<blockquote class="blockquote">
-<p><em>“The value of data is no longer in how much of it you have. In the new regime, the value is in how quickly and how effectively can the data be reduced, explored, manipulated and managed.”</em></p>
-<p><em>Usama Fayyad – President &amp; CEO of digiMine, Inc.&nbsp;[1]</em></p>
-</blockquote>
-<p>Questions to think about:</p>
-<ul>
-<li>Can the increasing amount of information be collected, stored &amp; managed in a consistent manner for easy access to others?</li>
-<li>Can information from different sources be integrated &amp; linked to create meaningful relationships between them?</li>
-<li>Can information systems be built to easily get answers to characteristics of stored data?</li>
-<li>Can we detect underlying patterns in the data &amp; “mine” the data to reveal patterns of behavior that will be insightful &amp; profitable in terms of business/research before it loses its value?</li>
-<li>Can analytic processes/models be built to allow prediction of future outcomes/behavior from existing data more quickly than the competition?</li>
-<li>Can it be ensured that business/research returns will be greater than the investment cost of the data collection &amp; analytics system?</li>
-</ul>
-<blockquote class="blockquote">
-<p><em>It takes brilliance to ask the right questions, at the right time in history. The value of a Big Data resource is that a good analyst can start to see connections between different types of data, and this may prompt the analyst to determine whether there is a way to describe these connections in terms of general relationships among the data objects [2]</em></p>
-</blockquote>
-<p>It is important to realize that most of these problems have been discussed [1] &amp; studied in research journals &amp; other industry publications for the last 30-40 years under various labels such as “Business Intelligence”, “Knowledge Discovery”, “Data Mining”, “Decision Science”, “Statistical Learning”, “Predictive Modeling” “Machine Learning”, “Business Forecasting”, etc… Essentially, it is the coming together of data analysis techniques, large scale computing &amp; domain knowledge.</p>
-<p>Now in the present time, all these are under the labels of “Big Data” [2] “Data Science” &amp; “Data Analytics”. The big change now is in the commoditization of technologies where all these techniques can be applied in a cost effective manner &amp; almost in real-time.</p>
-<p>While it is not realistically possible for a single person to perform all the above tasks, a new practitioner has emerged who has the relevant knowledge in statistical &amp; data mining techniques, computing &amp; programming techniques as well as domain knowledge of the business/research problem.</p>
-<p>The main skill required (besides the usual technical knowledge) is curiosity about what patterns exist or can be “mined” from stored data sources as well what can be predicted from it, the ability to experiment with new methods to get new insights &amp; explanations just like a scientist would. Perhaps that is why they call people in this field “data scientists”!</p>
-<p>My own equation for this “emerging” field would be:</p>
-<blockquote class="blockquote">
-<p><em>Data Science/Data Analytics =</em><br>
-<em><strong>Domain knowledge</strong> of the business/research problem +</em><br>
-<em><strong>Mathematical</strong> formulation of business/research problem into a statistical model +</em><br>
-<em><strong>Programming</strong> the statistical model into software code +</em><br>
-<em><strong>Business/Research</strong> analysis of the statistical output</em></p>
-</blockquote>
-<p><strong>References</strong></p>
-<p>[1] HAMPARSUM BOZDOGAN (ed.) <em>Statistical data mining and knowledge discovery</em> (2003) Chapman &amp; Hall/CRC</p>
-<p>[2] JULES J BERMAN <em>Principles of big data: preparing, sharing, and analyzing complex information</em> (2013) Morgan Kaufmann</p>
-
-
-
- ]]></description>
-  <category>article</category>
-  <category>datascience</category>
-  <guid>fortunewalla.net/posts/whatisds/index.html</guid>
-  <pubDate>Thu, 20 Feb 2014 18:30:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
