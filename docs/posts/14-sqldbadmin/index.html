@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2014-02-21">
+<meta name="dcterms.date" content="2023-03-26">
 
-<title>L’Œuvre - What is ‘data science’ / data analytics? - Yet another opinion</title>
+<title>L’Œuvre - SQL &amp; Database Administration Setup &amp; Tips</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -121,10 +121,14 @@ gtag('config', 'G-T2KJQMELJT', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">What is ‘data science’ / data analytics? - Yet another opinion</h1>
+<h1 class="title">SQL &amp; Database Administration Setup &amp; Tips</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">article</div>
-    <div class="quarto-category">datascience</div>
+    <div class="quarto-category">guide</div>
+    <div class="quarto-category">sql</div>
+    <div class="quarto-category">mysql</div>
+    <div class="quarto-category">database</div>
+    <div class="quarto-category">dba</div>
+    <div class="quarto-category">tips</div>
   </div>
   </div>
 
@@ -136,14 +140,14 @@ gtag('config', 'G-T2KJQMELJT', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 21, 2014</p>
+      <p class="date">March 26, 2023</p>
     </div>
   </div>
   
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">June 20, 2015</p>
+      <p class="date-modified">March 26, 2023</p>
     </div>
   </div>
     
@@ -152,42 +156,45 @@ gtag('config', 'G-T2KJQMELJT', { 'anonymize_ip': true});
 
 </header>
 
-<p><em>Created on Friday, February 21st, 2014 at 6:52 am</em></p>
-<p>In the last twenty years of the Information Age, computer networks &amp; the Internet have allowed us to gather &amp; store information from a wide variety of devices (industrial/medical equipment, photos/audio/video sensors, ATMs, credit/debit cards, mobiles &amp; computers, etc..) &amp; platforms (retailing, telecom, banking &amp; insurance , pharmaceutical, security, social media, etc..).</p>
-<p>The information being collected is increasing as more people &amp; businesses use computers &amp; the Internet as a primary means for conducting business, social &amp; monetary transactions. Technologies such as 3G/4G data networks, mobile computing devices &amp; cloud based computing systems have accelerated this trend.</p>
-<blockquote class="blockquote">
-<p><em>“The value of data is no longer in how much of it you have. In the new regime, the value is in how quickly and how effectively can the data be reduced, explored, manipulated and managed.”</em></p>
-<p><em>Usama Fayyad – President &amp; CEO of digiMine, Inc.&nbsp;[1]</em></p>
-</blockquote>
-<p>Questions to think about:</p>
-<ul>
-<li>Can the increasing amount of information be collected, stored &amp; managed in a consistent manner for easy access to others?</li>
-<li>Can information from different sources be integrated &amp; linked to create meaningful relationships between them?</li>
-<li>Can information systems be built to easily get answers to characteristics of stored data?</li>
-<li>Can we detect underlying patterns in the data &amp; “mine” the data to reveal patterns of behavior that will be insightful &amp; profitable in terms of business/research before it loses its value?</li>
-<li>Can analytic processes/models be built to allow prediction of future outcomes/behavior from existing data more quickly than the competition?</li>
-<li>Can it be ensured that business/research returns will be greater than the investment cost of the data collection &amp; analytics system?</li>
-</ul>
-<blockquote class="blockquote">
-<p><em>It takes brilliance to ask the right questions, at the right time in history. The value of a Big Data resource is that a good analyst can start to see connections between different types of data, and this may prompt the analyst to determine whether there is a way to describe these connections in terms of general relationships among the data objects [2]</em></p>
-</blockquote>
-<p>It is important to realize that most of these problems have been discussed [1] &amp; studied in research journals &amp; other industry publications for the last 30-40 years under various labels such as “Business Intelligence”, “Knowledge Discovery”, “Data Mining”, “Decision Science”, “Statistical Learning”, “Predictive Modeling” “Machine Learning”, “Business Forecasting”, etc… Essentially, it is the coming together of data analysis techniques, large scale computing &amp; domain knowledge.</p>
-<p>Now in the present time, all these are under the labels of “Big Data” [2] “Data Science” &amp; “Data Analytics”. The big change now is in the commoditization of technologies where all these techniques can be applied in a cost effective manner &amp; almost in real-time.</p>
-<p>While it is not realistically possible for a single person to perform all the above tasks, a new practitioner has emerged who has the relevant knowledge in statistical &amp; data mining techniques, computing &amp; programming techniques as well as domain knowledge of the business/research problem.</p>
-<p>The main skill required (besides the usual technical knowledge) is curiosity about what patterns exist or can be “mined” from stored data sources as well what can be predicted from it, the ability to experiment with new methods to get new insights &amp; explanations just like a scientist would. Perhaps that is why they call people in this field “data scientists”!</p>
-<p>My own equation for this “emerging” field would be:</p>
-<blockquote class="blockquote">
-<p><em>Data Science/Data Analytics =</em><br>
-<em><strong>Domain knowledge</strong> of the business/research problem +</em><br>
-<em><strong>Mathematical</strong> formulation of business/research problem into a statistical model +</em><br>
-<em><strong>Programming</strong> the statistical model into software code +</em><br>
-<em><strong>Business/Research</strong> analysis of the statistical output</em></p>
-</blockquote>
-<p><strong>References</strong></p>
-<p>[1] HAMPARSUM BOZDOGAN (ed.) <em>Statistical data mining and knowledge discovery</em> (2003) Chapman &amp; Hall/CRC</p>
-<p>[2] JULES J BERMAN <em>Principles of big data: preparing, sharing, and analyzing complex information</em> (2013) Morgan Kaufmann</p>
+<section id="r.bat-file-to-read-an-sql-script-from-the-command-line-display-the-content-back-to-the-cli." class="level3">
+<h3 class="anchored" data-anchor-id="r.bat-file-to-read-an-sql-script-from-the-command-line-display-the-content-back-to-the-cli.">r.bat File to read an sql script from the command line &amp; display the content back to the CLI.</h3>
+<p>usage: r.bat script_name.sql</p>
+<pre class="dos"><code>echo off
+set arg1=%1
+set arg2=%~n1
+shift
+shift
+
+rem mysql -h &lt;hostname&gt; -u &lt;username&gt; -p&lt;pass&gt; &lt;dbname&gt; &lt; %arg1%
+mysql -h &lt;hostname&gt; -u &lt;username&gt; -p&lt;pass&gt; &lt;dbname&gt; &lt; %arg1%</code></pre>
+</section>
+<section id="a.bat-file-to-read-an-sql-script-from-the-command-line-display-the-content-back-to-a-text-file." class="level3">
+<h3 class="anchored" data-anchor-id="a.bat-file-to-read-an-sql-script-from-the-command-line-display-the-content-back-to-a-text-file.">a.bat File to read an sql script from the command line &amp; display the content back to a text file.</h3>
+<p>usage: a.bat script_name.sql</p>
+<pre class="dos"><code>echo off
+set arg1=%1
+set arg2=%~n1
+shift
+shift
+
+mysql -h &lt;hostname&gt; -u &lt;username&gt; -p&lt;pass&gt; &lt;dbname&gt; &lt; %arg1% &gt; %arg2%.txt
+more %arg2%.txt</code></pre>
+</section>
+<section id="runserver.bat-add-path-and-start-mysql-client." class="level3">
+<h3 class="anchored" data-anchor-id="runserver.bat-add-path-and-start-mysql-client.">runserver.bat add path and start mysql client.</h3>
+<p>usage: runserver.bat</p>
+<pre class="dos"><code></code></pre>
+</section>
+<section id="runserver.bat-add-path-and-start-mysql-client.-1" class="level3">
+<h3 class="anchored" data-anchor-id="runserver.bat-add-path-and-start-mysql-client.-1">runserver.bat add path and start mysql client.</h3>
+<p>usage: runserver.bat</p>
+<pre class="dos"><code>echo off
+set path=C:\mysql-5.1-winx64\bin;%path%
+rem sudo ifup enp0s8
+mysql -h &lt;hostname&gt; -u &lt;username&gt; -p&lt;pass&gt; &lt;dbname&gt;</code></pre>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

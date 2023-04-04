@@ -21,6 +21,8 @@ Knowing this, you have asked for data on both years of historical sales as well 
 
 Raw data & forecasts supplied by the demand planner at Ordroid Devices
 
+![](fig1.jpg)
+
 **Calculate some different performance characteristics for the data sample given.**
 
 $$
@@ -57,6 +59,8 @@ Seasonality requires a whole cycle. There is not even one full year of data. So 
 **Q2. What can you say about the presence of a trend in the demand?**
 
 Although we don’t have a year’s worth of data, there seems to be a positive trend of about 10% increase in demand in the data or about 171 devices per month.
+
+![](fig2.jpg)
 
 **Q3. What can you say about the bias of the forecast?**
 

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.283">
+<meta name="generator" content="quarto-1.3.290">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -166,6 +166,7 @@ gtag('config', 'G-T2KJQMELJT', { 'anonymize_ip': true});
 <section id="visualization-of-the-raw-data" class="level1">
 <h1>Visualization of the raw data</h1>
 <p>Raw data &amp; forecasts supplied by the demand planner at Ordroid Devices</p>
+<p><img src="fig1.jpg" class="quarto-discovered-preview-image img-fluid"></p>
 <p><strong>Calculate some different performance characteristics for the data sample given.</strong></p>
 <p><span class="math display">\[
 MD=\frac{\sum_{i=1}^{n} (Actual_{i}-Forecast_{i})}{n}
@@ -221,6 +222,7 @@ MAPE=\frac{\sum_{i=1}^{n} \lvert \frac{Actual_{i}-Forecast_{i}}{Actual_{i}}\rver
 <p>Seasonality requires a whole cycle. There is not even one full year of data. So as of now, it is too early to fully evaluate seasonality. You need at least two full cycles to determine seasonality.</p>
 <p><strong>Q2. What can you say about the presence of a trend in the demand?</strong></p>
 <p>Although we don’t have a year’s worth of data, there seems to be a positive trend of about 10% increase in demand in the data or about 171 devices per month.</p>
+<p><img src="fig2.jpg" class="img-fluid"></p>
 <p><strong>Q3. What can you say about the bias of the forecast?</strong></p>
 <p>A bias is a persistent tendency to over or under predict. These forecasts are not persistent in either. In fact, of the six periods, half are over forecast and half are under forecast. So, there does not appear to be any bias in the forecast.</p>
 <p><strong>Q4. What can you say about the accuracy of the forecast?</strong></p>

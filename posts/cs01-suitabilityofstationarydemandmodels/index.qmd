@@ -64,10 +64,10 @@ these three years of demand?**
 January 2015 demand?**
 
 None. As shown above, the palm oil data shows a positive trend & seasonality
-during the years. The
-
-Naïve model forecast for Jan 2015 is clearly different from the previous trends.
+during the years. The Naïve model forecast for Jan 2015 is clearly different from the previous trends.
 While the cumulative & naïve models are quite calm indicating they are
 forecasting demand closer to the average of the data. The main reason for this
 discrepancies is that the above three models assume a stationary demand that is
 very close to the level of the mean.
+
+![](fig4.png)

@@ -1,0 +1,59 @@
+---
+title: "Figma notes"
+#author: "Fortune Walla"
+date: "2023-03-25"
+date-modified: "2023-03-25"
+categories: [article,product,]
+#image: "image.jpg"
+draft: true
+---
+
+*App Version: Figma Beta 116.8.3 (updated 1 Apr 2023)*
+
+1apr23
+
+Pen Tool: Create Esc Create Move etc...
+
+Rounding.
+
+Inner Shadow vs. Drop Shadow
+
+Group Selection Ctrl G
+
+
+Tidy Up Ctrl Alt Shift T
+Distribute Vertical Spacing Alt Shift V
+Distribute Horizontal Spacing Alt Shift H
+
+Align Left
+Align Horizontal Centers
+
+Ctrl Alt C Copy Properties
+Ctrl Alt V Paste Properties
+
+For Icons, Group Selection and then export. Then for editing, we can ungroup.
+
+
+BB Jira & Figma Integration.
+
+https://www.youtube.com/watch?v=rD7QJ3TO3HM&list=PLmsVJzfxqMF-XayPj5tC9lt6wjPwoDt2J&index=2
+
+
+Import an image and use Pen tool to trace over it and then use gradient to fill in the colour of the trace.
+
+Hide Frame Background to export to transparent PNG.
+
+
+Designership:
+
+
+Q. How to import files all at once?
+A. Create project, select all local files and drag and drop into the project. Not inside the team but within the project.
+
+It will pop up the modal with a list of file. After upload it will be green.
+
+To set the thumbnails of the files,  Go to Overview page, set as thumbnail. Set each page to the thumbnail.
+
+
+
+

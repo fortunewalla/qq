@@ -1,0 +1,59 @@
+---
+title: "SQL & Database Administration Setup & Tips"
+#author: "Fortune Walla"
+date: "2023-03-26"
+date-modified: "2023-03-26"
+categories: [guide,sql,mysql,database,dba,tips]
+#image: "image.jpg"
+#draft: true
+---
+
+### r.bat File to read an sql script from the command line & display the content back to the CLI.
+
+usage: r.bat script_name.sql
+
+```dos
+echo off
+set arg1=%1
+set arg2=%~n1
+shift
+shift
+
+rem mysql -h <hostname> -u <username> -p<pass> <dbname> < %arg1%
+mysql -h <hostname> -u <username> -p<pass> <dbname> < %arg1%
+```
+
+### a.bat File to read an sql script from the command line & display the content back to a text file.
+
+usage: a.bat script_name.sql
+
+```dos
+echo off
+set arg1=%1
+set arg2=%~n1
+shift
+shift
+
+mysql -h <hostname> -u <username> -p<pass> <dbname> < %arg1% > %arg2%.txt
+more %arg2%.txt
+```
+
+
+### runserver.bat add path and start mysql client.
+
+usage: runserver.bat
+
+```dos
+
+```
+
+### runserver.bat add path and start mysql client.
+
+usage: runserver.bat
+
+```dos
+echo off
+set path=C:\mysql-5.1-winx64\bin;%path%
+rem sudo ifup enp0s8
+mysql -h <hostname> -u <username> -p<pass> <dbname>
+```

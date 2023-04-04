@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.283">
+<meta name="generator" content="quarto-1.3.290">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -72,6 +72,8 @@ gtag('js', new Date());
 gtag('config', 'G-T2KJQMELJT', { 'anonymize_ip': true});
 </script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -161,33 +163,39 @@ gtag('config', 'G-T2KJQMELJT', { 'anonymize_ip': true});
 <p>You are hired by a local company to help them improve their forecasting capabilities. You are tasked with coming up with quarterly forecasts for an item that appears to have level, seasonality, and trend. The good news is that the company has an existing Holt‐Winter forecasting model. The bad news is that no one knows what the parameters (Alpha, Beta, or Gamma) are.</p>
 <p>You do have some information. For example, you know that historically, the demand in each quarter follows this distribution:</p>
 <ul>
-<li><p>Q1 (January through March) = 50% of average quarterly demand</p></li>
-<li><p>Q2 (April through June) = 75% of average quarterly demand  Q3 (July through September) = 150% of average quarterly demand</p></li>
-<li><p>Q4 (October through December) = 125% of average quarterly demand.</p></li>
+<li>Q1 (January through March) = 50% of average quarterly demand</li>
+<li>Q2 (April through June) = 75% of average quarterly demand</li>
+<li>Q3 (July through September) = 150% of average quarterly demand</li>
+<li>Q4 (October through December) = 125% of average quarterly demand.</li>
 </ul>
 <p>You just ran the forecast at the end of September (end of 2014Q3) and you have the following estimates:</p>
-<p>For level: a^2014Q3 = 1052 units</p>
-<p>For trend: b^2014Q3 = 46.2 units per quarter</p>
+<p>For level: <span class="math inline">\(\hat{a}_{2014Q3}\)</span> = 1052 units</p>
+<p>For trend: <span class="math inline">\(\hat{b}_{2014Q3}\)</span> = 46.2 units per quarter</p>
 <p><strong>Q1. What is the forecast for demand for 2014Q4?</strong></p>
 <p>We know that</p>
-<blockquote class="blockquote">
-<p>,</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>1</p>
-</blockquote>
-<p>1</p>
-<p>1</p>
+<p><span class="math inline">\(\hat{x}_{t,t+\tau}=(\hat{a_{t}}+\tau\hat{b_{t}})\hat{F}_{t+\tau-P}\)</span></p>
+<p><span class="math inline">\(\hat{a}_{t}=\alpha \left(\frac{x_{t}}{\hat{F}_{t-P}}\right) +(1-\alpha)(\hat{a}_{t-1}+\hat{b}_{t-1})\)</span></p>
+<p><span class="math inline">\(\hat{b}_{t}=\beta(\hat{a}_{t}-\hat{a}_{t-1})+(1-\beta)\hat{b}_{t-1}\)</span></p>
+<p><span class="math inline">\(\hat{F}_{t}=\gamma \left(\frac{x_{t}}{\hat{a}_{t}}\right) +(1-\gamma)\hat{F}_{t-P}\)</span></p>
 <table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 3%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 14%">
+<col style="width: 19%">
+<col style="width: 21%">
+</colgroup>
 <thead>
 <tr class="header">
 <th></th>
 <th>x</th>
-<th>a^</th>
-<th>b^</th>
-<th>F^</th>
-<th>x^</th>
-<th>F^t‐P</th>
+<th><span class="math inline">\(\hat{a}\)</span></th>
+<th><span class="math inline">\(\hat{b}\)</span></th>
+<th><span class="math inline">\(\hat{F}\)</span></th>
+<th><span class="math inline">\(\hat{x}\)</span></th>
+<th><span class="math inline">\(\hat{F}_{t-P}\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -211,21 +219,21 @@ gtag('config', 'G-T2KJQMELJT', { 'anonymize_ip': true});
 </tr>
 </tbody>
 </table>
-<p><strong>Q2. Suppose the actual demand in 2014Q4 is 1100 units. What is the smallest &amp; largest possible value for your estimate for level, a^2014Q4?</strong></p>
-<p>The fourth quarter level estimate = a^2014Q4 = x2014Q4 / F2013Q4</p>
-<p>Without seasonality, level estimate = a^2014Q4 = (a^2014Q3 + b^2014Q3 )</p>
+<p><strong>Q2. Suppose the actual demand in 2014Q4 is 1100 units. What is the smallest &amp; largest possible value for your estimate for level, <span class="math inline">\(\hat{a}_{2014Q4}\)</span>?</strong></p>
+<p>The fourth quarter level estimate = <span class="math inline">\(\hat{a}_{2014Q4} = \hat{x}_{2014Q4} / \hat{F}_{2013Q4}\)</span></p>
+<p>Without seasonality, level estimate = <span class="math inline">\(\hat{a}_{2014Q4} = (\hat{a}_{2014Q3}+\hat{b}_{2014Q34})\)</span></p>
 <table class="table">
 <colgroup>
-<col style="width: 12%">
 <col style="width: 9%">
-<col style="width: 10%">
-<col style="width: 3%">
-<col style="width: 7%">
-<col style="width: 10%">
-<col style="width: 7%">
 <col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 2%">
+<col style="width: 5%">
+<col style="width: 13%">
 <col style="width: 11%">
-<col style="width: 19%">
+<col style="width: 10%">
+<col style="width: 14%">
+<col style="width: 16%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -234,11 +242,11 @@ gtag('config', 'G-T2KJQMELJT', { 'anonymize_ip': true});
 <th></th>
 <th>x</th>
 <th></th>
-<th>a^</th>
-<th>b^</th>
-<th>F^</th>
-<th>x^</th>
-<th>F^t‐P</th>
+<th><span class="math inline">\(\hat{a}\)</span></th>
+<th><span class="math inline">\(\hat{b}\)</span></th>
+<th><span class="math inline">\(\hat{F}\)</span></th>
+<th><span class="math inline">\(\hat{x}\)</span></th>
+<th><span class="math inline">\(\hat{a}_{t-P}\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -280,7 +288,7 @@ gtag('config', 'G-T2KJQMELJT', { 'anonymize_ip': true});
 </tr>
 </tbody>
 </table>
-<p><strong>Q3. The model was run at the end of 2014Q4. It provided you with the most recent estimates of each pattern. A) The estimate for level, a^2014Q4 was 1065.5. What is value of alpha? B) Estimate of trend, b^2014Q4 = 42.9, what is value of beta? C) Estimate of seasonality is F^2014Q4 = 1.239</strong></p>
+<p><strong>Q3. The model was run at the end of 2014Q4. It provided you with the most recent estimates of each pattern. A) The estimate for level, <span class="math inline">\(\hat{a}_{2014Q4}\)</span> was 1065.5. What is value of alpha? B) Estimate of trend, <span class="math inline">\(\hat{b}_{2014Q4}\)</span> = 42.9, what is value of beta? C) Estimate of seasonality is <span class="math inline">\(\hat{F}_{2014Q4}\)</span> = 1.239</strong></p>
 <table class="table">
 <colgroup>
 <col style="width: 15%">
@@ -304,27 +312,27 @@ gtag('config', 'G-T2KJQMELJT', { 'anonymize_ip': true});
 </thead>
 <tbody>
 <tr class="odd">
-<td>a^2014Q4</td>
+<td><span class="math inline">\(\hat{a}_{2014Q4}\)</span></td>
 <td>1065.5</td>
-<td>1065.5</td>
+<td>1065.5<span class="math inline">\(=\alpha \left(\frac{1100}{1.25}\right) +(1-\alpha)(1052+46.2)\)</span></td>
 <td>1100</td>
 <td>1052 46.2</td>
 <td>Alpha</td>
 <td>0.15</td>
 </tr>
 <tr class="even">
-<td>b^2014Q4</td>
+<td><span class="math inline">\(\hat{b}_{2014Q4}\)</span></td>
 <td>42.9</td>
-<td>42.9</td>
+<td>42.9<span class="math inline">\(=\beta(1.065.5-1052)+(1-\beta)46.2\)</span></td>
 <td>1065.5 1052</td>
 <td>1 46.2</td>
 <td>Beta</td>
 <td>0.1</td>
 </tr>
 <tr class="odd">
-<td>F^2014Q4</td>
+<td><span class="math inline">\(\hat{F}_{2014Q4}\)</span></td>
 <td>1.239</td>
-<td>1.239</td>
+<td>1.239<span class="math inline">\(=\gamma \left(\frac{1100}{1065.5}\right) +(1-\gamma)1.25\)</span></td>
 <td>1100</td>
 <td>1 1.25</td>
 <td>Gamma</td>
@@ -332,24 +340,18 @@ gtag('config', 'G-T2KJQMELJT', { 'anonymize_ip': true});
 </tr>
 </tbody>
 </table>
-<p><img src="media/1dd2047fca0296e1ba89ab06abbf8836.png" class="quarto-discovered-preview-image img-fluid"></p>
-<p>1</p>
-<p><img src="media/b6cddab510efc0454f4ee4e458f6e88e.png" class="img-fluid"></p>
-<p><strong>Q4. What is your forecast for demand for the 1st quarter of 2015? That is a^2014Q4,2015Q1?</strong></p>
-<p>x^2014Q4,2015Q1 =(a^2014Q1 + b^2014Q1 ) F^2014Q4</p>
-<p>We have the unnormalized seasonality factor, F^2014Q4 = 1.239</p>
+<p><strong>Q4. What is your forecast for demand for the 1st quarter of 2015? That is <span class="math inline">\(\hat{a}_{2014Q4,2015Q1}\)</span>?</strong></p>
+<p><span class="math inline">\(\hat{x}_{2014Q4,2015Q1} =(\hat{a}_{2014Q1} + \hat{b}_{2014Q1}) \hat{F}_{2014Q4}\)</span></p>
+<p>We have the unnormalized seasonality factor, <span class="math inline">\(\hat{F}_{2014Q4} = 1.239\)</span></p>
 <p>Since the sum of the most recent season estimates (0.500, 0.750, 1.500, and 1.239 for Q1, Q2, Q3, and</p>
-<p>Q4) adds up to 3.98912, , we need to normalize F^2014Q4 before we use it in our calculations. We use the formula</p>
-<p>^ ^</p>
-<blockquote class="blockquote">
-<p>^</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>∑</p>
-</blockquote>
-<p>So we have F^2014Q1 = 0.500*(4.000/3.989) = 0.50136</p>
-<p>x^2014Q4,2015Q1 =(a^2014Q1 + b^2014Q1 ) F^2014Q1 x^2014Q4,2015Q1 = (1065.5 + 42.9)(0.501) = 555.3084 = 555.31</p>
-<p>. If you did not normalize the seasonality factor you would have gotten = (1065.5 + 42.9)(0.500) = 554.20. Normalizing the seasonality factors prevents the estimates from drifting. In this case, it is a small drift ‐ but over time it would grow.</p>
+<p>Q4) adds up to 3.98912, , we need to normalize <span class="math inline">\(\hat{F}_{2014Q4}\)</span> before we use it in our calculations. We use the formula</p>
+<p><span class="math display">\[
+\hat{F}_{iadj}=\hat{F}_{iold}\frac{P}{\sum{\hat{F}_{i}}}
+\]</span></p>
+<p>So we have <span class="math inline">\(\hat{F}_{2014Q1} = 0.500*(4.000/3.989) = 0.50136\)</span></p>
+<p><span class="math inline">\(\hat{x}_{2014Q4,2015Q1} =(\hat{a}_{2014Q1} + \hat{b}_{2014Q1}) \hat{F}_{2014Q1}\)</span></p>
+<p><span class="math inline">\(\hat{x}_{2014Q4,2015Q1} = (1065.5 + 42.9)(0.501) = 555.3084 = 555.31\)</span></p>
+<p>If you did not normalize the seasonality factor you would have gotten = (1065.5 + 42.9)(0.500) = 554.20. Normalizing the seasonality factors prevents the estimates from drifting. In this case, it is a small drift ‐ but over time it would grow.</p>
 
 
 </section>

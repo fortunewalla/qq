@@ -30,8 +30,20 @@ By Rabindranath Tagore / রবীন্দ্রনাথ ঠাকুর
 -->
 
 
-*Explore product management, data analytics, & the metaverse.*
+*Explore product management, data science, & the metaverse.*
 
 ![](index.jpg){fig-alt="'Laila and Majnun at School', Folio from a Khamsa (Quintet) of Nizami of Ganja. Calligrapher Ja'far Baisunghuri Iranian. Author Nizami A.H. 835/ 1431–32 CE " width="300" fig-align="center" }
+
+::: {.text-center}
+:::
+
+[About](/about.qmd) this website. 
+
+Current Work & Projects: 
+
+* Review of paper "A comprehensive overview of software product management challenges"
+
+* df
+
 
 Below is a list of all work done and ongoing projects.

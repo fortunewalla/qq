@@ -1,0 +1,67 @@
+---
+title: "Remote Portfolio"
+#author: "Fortune Walla"
+date: "2015-11-18"
+date-modified: "2023-03-26"
+categories: [misc,remote,portfolio,career]
+#image: "image.jpg"
+draft: true
+---
+
+https://sites.google.com/view/remoteportfolio
+
+About me: I've an engineering background and also in digital product management. My role includes understanding complex technical and business scenarios and writing down documents for teams and executives to take things forward.
+
+I've published very little of what I've written but have been wanting to blog and publish for a long time.
+
+The following samples should show that I can write a variety of coding & IT topics, as well as topics relating to management and other areas.
+
+Technical Writings:
+
+[report] Business opportunities from the analysis of customer data - Created an overview for implementing data science in an enterprise environment.  Google Docs
+
+[summary] Suitability of stationary demand models for forecasting - Summarized the forecasting process  to determine sales for a company. Google Docs
+
+[summary] Performance characteristics of forecasting models - Summarized the accuracy of the forecasting process for a company. Google Docs
+
+[report] GEOINT Capstone & final assignment project report: Created a report showing the analysis results of route map layers and geospatial calculations using ArcGIS . Google Docs
+
+[posts] OTTVOD - Created an initiative during lockdown to publish daily all the important news from the OTT & VOD industry.
+
+https://twitter.com/ottvod
+
+https://www.instagram.com/ottvod/
+
+[posts] MetaversePM - Current initiative  relating to regular development from the AR/VR & Metaverse industries.
+
+https://www.linkedin.com/company/metaversepm
+
+https://www.instagram.com/metaversepm
+
+ Corporate Writings:
+
+[byline] The missing pieces in India’s healthcare jigsaw and how policymakers can put them back together:  A health care opinion piece published in The Economic Times (2 Dec 2021). I contributed towards the business and  technology aspects. Direct Website Link
+
+[proposal] Astro Project Report -  A proposal for a startup involving the online astrology industry. Google Docs
+
+[report] Project Process Plan - Initial report for starting operations at the beginning stage of a startup. Google Docs
+
+[research] A brief overview of the principles of geospatial intelligence for a commercial setting - Research report done as a consultant for implementing geospatial data collection for a GIS project. Google Docs
+
+Entertainment Writings: Some writings and other copy work for posters done for a film club. 
+
+[social media] Copy written & posters created on Instagram, Twitter for all the Béla Tarr Retrospective posts. These received appreciation and highest views so far for the film club.
+
+https://www.instagram.com/theparallelcinemaclub/
+
+[post] Urbanism as a phenomenon unfolding in humanity: An opinion on the 2018 Gary Hustwit film, 'Urbanized' Google Docs 
+
+[post] New York, New Age...: An opinion on the 2011 Andrew Rossi documentary,  'Page One: Inside the New York Times' Google Docs
+
+[post] We are all in chains: An opinion on the 2004 film by Jem Cohen, 'Chain'  Google Docs
+
+[post] The city of 'joy': An opinion on the 1982 film by Mrinal Sen, 'Calcutta '71' Google Docs
+
+[post] John Doe & Jane Doe go to America...: An opinion on the 2005 film by Ashim Ahluwalia, 'John & Jane' Google Docs
+
+[post] Thirst... for self-fulfillment: An opinion on the  1957 film by Guru Dutt, 'Pyaasa' Google Docs

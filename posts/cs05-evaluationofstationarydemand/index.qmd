@@ -22,11 +22,15 @@ XC‐288, was highlighted as needing to be examined.
 
 # Visualization of all the models 
 
-![](9240726888c2daf802a451c0bdf69dfa.png)
+![](9240726888c2daf802a451c0bdf69dfa.jpg)
 
 ## Check for stationary demand 
 
 One way of doing is to determine the coefficient of variation (CV)
+
+$$
+CV=\frac{STDEV(data)}{AVERAGE(data)}
+$$
 
 We get
 

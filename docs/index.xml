@@ -9,8 +9,65 @@
 <link>fortunewalla.net/index.html</link>
 <atom:link href="fortunewalla.net/index.xml" rel="self" type="application/rss+xml"/>
 <description>Explore product management, data analytics, &amp; the metaverse.</description>
-<generator>quarto-1.3.283</generator>
-<lastBuildDate>Thu, 16 Feb 2023 18:30:00 GMT</lastBuildDate>
+<generator>quarto-1.3.290</generator>
+<lastBuildDate>Sat, 25 Mar 2023 18:30:00 GMT</lastBuildDate>
+<item>
+  <title>SQL &amp; Database Administration Setup &amp; Tips</title>
+  <link>fortunewalla.net/posts/14-sqldbadmin/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="r.bat-file-to-read-an-sql-script-from-the-command-line-display-the-content-back-to-the-cli." class="level3">
+<h3 class="anchored" data-anchor-id="r.bat-file-to-read-an-sql-script-from-the-command-line-display-the-content-back-to-the-cli.">r.bat File to read an sql script from the command line &amp; display the content back to the CLI.</h3>
+<p>usage: r.bat script_name.sql</p>
+<pre class="dos"><code>echo off
+set arg1=%1
+set arg2=%~n1
+shift
+shift
+
+rem mysql -h &lt;hostname&gt; -u &lt;username&gt; -p&lt;pass&gt; &lt;dbname&gt; &lt; %arg1%
+mysql -h &lt;hostname&gt; -u &lt;username&gt; -p&lt;pass&gt; &lt;dbname&gt; &lt; %arg1%</code></pre>
+</section>
+<section id="a.bat-file-to-read-an-sql-script-from-the-command-line-display-the-content-back-to-a-text-file." class="level3">
+<h3 class="anchored" data-anchor-id="a.bat-file-to-read-an-sql-script-from-the-command-line-display-the-content-back-to-a-text-file.">a.bat File to read an sql script from the command line &amp; display the content back to a text file.</h3>
+<p>usage: a.bat script_name.sql</p>
+<pre class="dos"><code>echo off
+set arg1=%1
+set arg2=%~n1
+shift
+shift
+
+mysql -h &lt;hostname&gt; -u &lt;username&gt; -p&lt;pass&gt; &lt;dbname&gt; &lt; %arg1% &gt; %arg2%.txt
+more %arg2%.txt</code></pre>
+</section>
+<section id="runserver.bat-add-path-and-start-mysql-client." class="level3">
+<h3 class="anchored" data-anchor-id="runserver.bat-add-path-and-start-mysql-client.">runserver.bat add path and start mysql client.</h3>
+<p>usage: runserver.bat</p>
+<pre class="dos"><code></code></pre>
+</section>
+<section id="runserver.bat-add-path-and-start-mysql-client.-1" class="level3">
+<h3 class="anchored" data-anchor-id="runserver.bat-add-path-and-start-mysql-client.-1">runserver.bat add path and start mysql client.</h3>
+<p>usage: runserver.bat</p>
+<pre class="dos"><code>echo off
+set path=C:\mysql-5.1-winx64\bin;%path%
+rem sudo ifup enp0s8
+mysql -h &lt;hostname&gt; -u &lt;username&gt; -p&lt;pass&gt; &lt;dbname&gt;</code></pre>
+
+
+</section>
+
+ ]]></description>
+  <category>guide</category>
+  <category>sql</category>
+  <category>mysql</category>
+  <category>database</category>
+  <category>dba</category>
+  <category>tips</category>
+  <guid>fortunewalla.net/posts/14-sqldbadmin/index.html</guid>
+  <pubDate>Sat, 25 Mar 2023 18:30:00 GMT</pubDate>
+</item>
 <item>
   <title>Post With Code</title>
   <dc:creator>Harlow Malloc</dc:creator>
@@ -167,33 +224,39 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 <p>You are hired by a local company to help them improve their forecasting capabilities. You are tasked with coming up with quarterly forecasts for an item that appears to have level, seasonality, and trend. The good news is that the company has an existing Holt‐Winter forecasting model. The bad news is that no one knows what the parameters (Alpha, Beta, or Gamma) are.</p>
 <p>You do have some information. For example, you know that historically, the demand in each quarter follows this distribution:</p>
 <ul>
-<li><p>Q1 (January through March) = 50% of average quarterly demand</p></li>
-<li><p>Q2 (April through June) = 75% of average quarterly demand  Q3 (July through September) = 150% of average quarterly demand</p></li>
-<li><p>Q4 (October through December) = 125% of average quarterly demand.</p></li>
+<li>Q1 (January through March) = 50% of average quarterly demand</li>
+<li>Q2 (April through June) = 75% of average quarterly demand</li>
+<li>Q3 (July through September) = 150% of average quarterly demand</li>
+<li>Q4 (October through December) = 125% of average quarterly demand.</li>
 </ul>
 <p>You just ran the forecast at the end of September (end of 2014Q3) and you have the following estimates:</p>
-<p>For level: a^2014Q3 = 1052 units</p>
-<p>For trend: b^2014Q3 = 46.2 units per quarter</p>
+<p>For level: <img src="https://latex.codecogs.com/png.latex?%5Chat%7Ba%7D_%7B2014Q3%7D"> = 1052 units</p>
+<p>For trend: <img src="https://latex.codecogs.com/png.latex?%5Chat%7Bb%7D_%7B2014Q3%7D"> = 46.2 units per quarter</p>
 <p><strong>Q1. What is the forecast for demand for 2014Q4?</strong></p>
 <p>We know that</p>
-<blockquote class="blockquote">
-<p>,</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>1</p>
-</blockquote>
-<p>1</p>
-<p>1</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Chat%7Bx%7D_%7Bt,t+%5Ctau%7D=(%5Chat%7Ba_%7Bt%7D%7D+%5Ctau%5Chat%7Bb_%7Bt%7D%7D)%5Chat%7BF%7D_%7Bt+%5Ctau-P%7D"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Chat%7Ba%7D_%7Bt%7D=%5Calpha%20%5Cleft(%5Cfrac%7Bx_%7Bt%7D%7D%7B%5Chat%7BF%7D_%7Bt-P%7D%7D%5Cright)%20+(1-%5Calpha)(%5Chat%7Ba%7D_%7Bt-1%7D+%5Chat%7Bb%7D_%7Bt-1%7D)"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Chat%7Bb%7D_%7Bt%7D=%5Cbeta(%5Chat%7Ba%7D_%7Bt%7D-%5Chat%7Ba%7D_%7Bt-1%7D)+(1-%5Cbeta)%5Chat%7Bb%7D_%7Bt-1%7D"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Chat%7BF%7D_%7Bt%7D=%5Cgamma%20%5Cleft(%5Cfrac%7Bx_%7Bt%7D%7D%7B%5Chat%7Ba%7D_%7Bt%7D%7D%5Cright)%20+(1-%5Cgamma)%5Chat%7BF%7D_%7Bt-P%7D"></p>
 <table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 3%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 14%">
+<col style="width: 19%">
+<col style="width: 21%">
+</colgroup>
 <thead>
 <tr class="header">
 <th></th>
 <th>x</th>
-<th>a^</th>
-<th>b^</th>
-<th>F^</th>
-<th>x^</th>
-<th>F^t‐P</th>
+<th><img src="https://latex.codecogs.com/png.latex?%5Chat%7Ba%7D"></th>
+<th><img src="https://latex.codecogs.com/png.latex?%5Chat%7Bb%7D"></th>
+<th><img src="https://latex.codecogs.com/png.latex?%5Chat%7BF%7D"></th>
+<th><img src="https://latex.codecogs.com/png.latex?%5Chat%7Bx%7D"></th>
+<th><img src="https://latex.codecogs.com/png.latex?%5Chat%7BF%7D_%7Bt-P%7D"></th>
 </tr>
 </thead>
 <tbody>
@@ -217,21 +280,21 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 </tr>
 </tbody>
 </table>
-<p><strong>Q2. Suppose the actual demand in 2014Q4 is 1100 units. What is the smallest &amp; largest possible value for your estimate for level, a^2014Q4?</strong></p>
-<p>The fourth quarter level estimate = a^2014Q4 = x2014Q4 / F2013Q4</p>
-<p>Without seasonality, level estimate = a^2014Q4 = (a^2014Q3 + b^2014Q3 )</p>
+<p><strong>Q2. Suppose the actual demand in 2014Q4 is 1100 units. What is the smallest &amp; largest possible value for your estimate for level, <img src="https://latex.codecogs.com/png.latex?%5Chat%7Ba%7D_%7B2014Q4%7D">?</strong></p>
+<p>The fourth quarter level estimate = <img src="https://latex.codecogs.com/png.latex?%5Chat%7Ba%7D_%7B2014Q4%7D%20=%20%5Chat%7Bx%7D_%7B2014Q4%7D%20/%20%5Chat%7BF%7D_%7B2013Q4%7D"></p>
+<p>Without seasonality, level estimate = <img src="https://latex.codecogs.com/png.latex?%5Chat%7Ba%7D_%7B2014Q4%7D%20=%20(%5Chat%7Ba%7D_%7B2014Q3%7D+%5Chat%7Bb%7D_%7B2014Q34%7D)"></p>
 <table class="table">
 <colgroup>
-<col style="width: 12%">
 <col style="width: 9%">
-<col style="width: 10%">
-<col style="width: 3%">
-<col style="width: 7%">
-<col style="width: 10%">
-<col style="width: 7%">
 <col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 2%">
+<col style="width: 5%">
+<col style="width: 13%">
 <col style="width: 11%">
-<col style="width: 19%">
+<col style="width: 10%">
+<col style="width: 14%">
+<col style="width: 16%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -240,11 +303,11 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 <th></th>
 <th>x</th>
 <th></th>
-<th>a^</th>
-<th>b^</th>
-<th>F^</th>
-<th>x^</th>
-<th>F^t‐P</th>
+<th><img src="https://latex.codecogs.com/png.latex?%5Chat%7Ba%7D"></th>
+<th><img src="https://latex.codecogs.com/png.latex?%5Chat%7Bb%7D"></th>
+<th><img src="https://latex.codecogs.com/png.latex?%5Chat%7BF%7D"></th>
+<th><img src="https://latex.codecogs.com/png.latex?%5Chat%7Bx%7D"></th>
+<th><img src="https://latex.codecogs.com/png.latex?%5Chat%7Ba%7D_%7Bt-P%7D"></th>
 </tr>
 </thead>
 <tbody>
@@ -286,7 +349,7 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 </tr>
 </tbody>
 </table>
-<p><strong>Q3. The model was run at the end of 2014Q4. It provided you with the most recent estimates of each pattern. A) The estimate for level, a^2014Q4 was 1065.5. What is value of alpha? B) Estimate of trend, b^2014Q4 = 42.9, what is value of beta? C) Estimate of seasonality is F^2014Q4 = 1.239</strong></p>
+<p><strong>Q3. The model was run at the end of 2014Q4. It provided you with the most recent estimates of each pattern. A) The estimate for level, <img src="https://latex.codecogs.com/png.latex?%5Chat%7Ba%7D_%7B2014Q4%7D"> was 1065.5. What is value of alpha? B) Estimate of trend, <img src="https://latex.codecogs.com/png.latex?%5Chat%7Bb%7D_%7B2014Q4%7D"> = 42.9, what is value of beta? C) Estimate of seasonality is <img src="https://latex.codecogs.com/png.latex?%5Chat%7BF%7D_%7B2014Q4%7D"> = 1.239</strong></p>
 <table class="table">
 <colgroup>
 <col style="width: 15%">
@@ -310,27 +373,27 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 </thead>
 <tbody>
 <tr class="odd">
-<td>a^2014Q4</td>
+<td><img src="https://latex.codecogs.com/png.latex?%5Chat%7Ba%7D_%7B2014Q4%7D"></td>
 <td>1065.5</td>
-<td>1065.5</td>
+<td>1065.5<img src="https://latex.codecogs.com/png.latex?=%5Calpha%20%5Cleft(%5Cfrac%7B1100%7D%7B1.25%7D%5Cright)%20+(1-%5Calpha)(1052+46.2)"></td>
 <td>1100</td>
 <td>1052 46.2</td>
 <td>Alpha</td>
 <td>0.15</td>
 </tr>
 <tr class="even">
-<td>b^2014Q4</td>
+<td><img src="https://latex.codecogs.com/png.latex?%5Chat%7Bb%7D_%7B2014Q4%7D"></td>
 <td>42.9</td>
-<td>42.9</td>
+<td>42.9<img src="https://latex.codecogs.com/png.latex?=%5Cbeta(1.065.5-1052)+(1-%5Cbeta)46.2"></td>
 <td>1065.5 1052</td>
 <td>1 46.2</td>
 <td>Beta</td>
 <td>0.1</td>
 </tr>
 <tr class="odd">
-<td>F^2014Q4</td>
+<td><img src="https://latex.codecogs.com/png.latex?%5Chat%7BF%7D_%7B2014Q4%7D"></td>
 <td>1.239</td>
-<td>1.239</td>
+<td>1.239<img src="https://latex.codecogs.com/png.latex?=%5Cgamma%20%5Cleft(%5Cfrac%7B1100%7D%7B1065.5%7D%5Cright)%20+(1-%5Cgamma)1.25"></td>
 <td>1100</td>
 <td>1 1.25</td>
 <td>Gamma</td>
@@ -338,24 +401,16 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 </tr>
 </tbody>
 </table>
-<p><img src="fortunewalla.net/posts/cs10-extractinginitialparametersexistingholtwinter/media/1dd2047fca0296e1ba89ab06abbf8836.png" class="quarto-discovered-preview-image img-fluid"></p>
-<p>1</p>
-<p><img src="fortunewalla.net/posts/cs10-extractinginitialparametersexistingholtwinter/media/b6cddab510efc0454f4ee4e458f6e88e.png" class="img-fluid"></p>
-<p><strong>Q4. What is your forecast for demand for the 1st quarter of 2015? That is a^2014Q4,2015Q1?</strong></p>
-<p>x^2014Q4,2015Q1 =(a^2014Q1 + b^2014Q1 ) F^2014Q4</p>
-<p>We have the unnormalized seasonality factor, F^2014Q4 = 1.239</p>
+<p><strong>Q4. What is your forecast for demand for the 1st quarter of 2015? That is <img src="https://latex.codecogs.com/png.latex?%5Chat%7Ba%7D_%7B2014Q4,2015Q1%7D">?</strong></p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Chat%7Bx%7D_%7B2014Q4,2015Q1%7D%20=(%5Chat%7Ba%7D_%7B2014Q1%7D%20+%20%5Chat%7Bb%7D_%7B2014Q1%7D)%20%5Chat%7BF%7D_%7B2014Q4%7D"></p>
+<p>We have the unnormalized seasonality factor, <img src="https://latex.codecogs.com/png.latex?%5Chat%7BF%7D_%7B2014Q4%7D%20=%201.239"></p>
 <p>Since the sum of the most recent season estimates (0.500, 0.750, 1.500, and 1.239 for Q1, Q2, Q3, and</p>
-<p>Q4) adds up to 3.98912, , we need to normalize F^2014Q4 before we use it in our calculations. We use the formula</p>
-<p>^ ^</p>
-<blockquote class="blockquote">
-<p>^</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>∑</p>
-</blockquote>
-<p>So we have F^2014Q1 = 0.500*(4.000/3.989) = 0.50136</p>
-<p>x^2014Q4,2015Q1 =(a^2014Q1 + b^2014Q1 ) F^2014Q1 x^2014Q4,2015Q1 = (1065.5 + 42.9)(0.501) = 555.3084 = 555.31</p>
-<p>. If you did not normalize the seasonality factor you would have gotten = (1065.5 + 42.9)(0.500) = 554.20. Normalizing the seasonality factors prevents the estimates from drifting. In this case, it is a small drift ‐ but over time it would grow.</p>
+<p>Q4) adds up to 3.98912, , we need to normalize <img src="https://latex.codecogs.com/png.latex?%5Chat%7BF%7D_%7B2014Q4%7D"> before we use it in our calculations. We use the formula</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Chat%7BF%7D_%7Biadj%7D=%5Chat%7BF%7D_%7Biold%7D%5Cfrac%7BP%7D%7B%5Csum%7B%5Chat%7BF%7D_%7Bi%7D%7D%7D%0A"></p>
+<p>So we have <img src="https://latex.codecogs.com/png.latex?%5Chat%7BF%7D_%7B2014Q1%7D%20=%200.500*(4.000/3.989)%20=%200.50136"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Chat%7Bx%7D_%7B2014Q4,2015Q1%7D%20=(%5Chat%7Ba%7D_%7B2014Q1%7D%20+%20%5Chat%7Bb%7D_%7B2014Q1%7D)%20%5Chat%7BF%7D_%7B2014Q1%7D"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Chat%7Bx%7D_%7B2014Q4,2015Q1%7D%20=%20(1065.5%20+%2042.9)(0.501)%20=%20555.3084%20=%20555.31"></p>
+<p>If you did not normalize the seasonality factor you would have gotten = (1065.5 + 42.9)(0.500) = 554.20. Normalizing the seasonality factors prevents the estimates from drifting. In this case, it is a small drift ‐ but over time it would grow.</p>
 
 
 </section>
@@ -380,10 +435,10 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 <h1>Introduction</h1>
 <p>You are the lead demand planner for Beers Looking At You, Kid (or BLAYK) a restaurant that features sandwiches, appetizers, and, of course, beer. The restaurant is known for its very fresh beer so the management tries to monitor beer consumption by each shift. You have been tasked to look at how the beer consumption is being forecasted in order to improve the quality and lower the costs of having fresh beer.</p>
 <p>There are four shifts in each day the restaurant is open:</p>
-<p>Shift 1from 11 AM to 2 PM</p>
-<p>Shift 2from 2 PM to 5 PM</p>
-<p>Shift 3from 5 PM to 8 PM</p>
-<p>Shift 4from 8 PM to 11 PM</p>
+<p>Shift 1 from 11 AM to 2 PM</p>
+<p>Shift 2 from 2 PM to 5 PM</p>
+<p>Shift 3 from 5 PM to 8 PM</p>
+<p>Shift 4 from 8 PM to 11 PM</p>
 <p>The fields in the spreadsheet are:</p>
 <p>Time Period (t) – a sequential numbering of each shift in your data from 1 to 120</p>
 <p>Date – the date of the record</p>
@@ -400,16 +455,11 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 <section id="assuming-no-trend" class="level3">
 <h3 class="anchored" data-anchor-id="assuming-no-trend">Assuming no trend</h3>
 <p>With no trend the seasonality factors (SF) need not be normalized each season.</p>
-<blockquote class="blockquote">
 <p>SF per period = total sales per shift / (total sales per month/no. of periods)</p>
-</blockquote>
 <p>Also</p>
-<blockquote class="blockquote">
 <p>SF per period = total sales per shift / average no. of sales per period</p>
-</blockquote>
 <p>Mathematically we can express it as</p>
-<p>∑ D t i</p>
-<p>∑ D /P</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AF_%7Bt%7D=%5Cfrac%7B%5Csum_%7Bt=1%7D%5E%7Bn%7D%20D%7D%7B(%5Csum_%7Bt=1%7D%5E%7Bn%7D%20D_%7Bt%7D)/P%7D%0A"></p>
 </section>
 <section id="centered-moving-average-method-cma" class="level3">
 <h3 class="anchored" data-anchor-id="centered-moving-average-method-cma">Centered Moving Average Method (CMA)</h3>
@@ -419,51 +469,41 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 <p>MABottom is the average of Shift 2,3,4 &amp; 5</p>
 <p>MA_Avgi is the average of MATop &amp; MABottom.</p>
 <p>Each Fi is the xi/MA_Avgi except the first two &amp; last two of the time series. The first two &amp; last two Fi are calculated by first &amp; the last MA_Avg values respectively.</p>
-<table>
-<thead>
-<tr class="header">
-<th>Time</th>
-</tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-<blockquote class="blockquote">
-<p>Perio d (t)</p>
-</blockquote>
-<p>Date</p>
-<p>Shift</p>
-<blockquote class="blockquote">
-<p>Number</p>
-</blockquote>
-<p>Pints Sold, xi</p>
-<p>MATop</p>
-<p>MABottom</p>
-<p>MA_Avg</p>
-<blockquote class="blockquote">
-<p>i</p>
-</blockquote>
-<p>Fi</p>
-<p>&nbsp;</p>
 <table class="table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 7%">
+<col style="width: 16%">
+<col style="width: 18%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 4%">
+</colgroup>
 <thead>
 <tr class="header">
-<th>1</th>
-<th>1‐Jun</th>
-<th>1</th>
-<th>357</th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th>1.363897</th>
-<th></th>
-<th></th>
-<th></th>
+<th>Time Period d(t)</th>
+<th>Date</th>
+<th>Shift Number</th>
+<th>Pints Sold, xi</th>
+<th>MATop</th>
+<th>MABottom</th>
+<th>MA_Avg i</th>
+<th>Fi</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
+<td>1</td>
+<td>1‐Jun</td>
+<td>1</td>
+<td>357</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
 <td>2</td>
 <td>1‐Jun</td>
 <td>2</td>
@@ -472,12 +512,8 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 <td></td>
 <td></td>
 <td></td>
-<td>0.187202</td>
-<td></td>
-<td></td>
-<td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>3</td>
 <td>1‐Jun</td>
 <td>3</td>
@@ -486,12 +522,8 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 <td>264</td>
 <td>262</td>
 <td></td>
-<td>0.924546</td>
-<td></td>
-<td></td>
-<td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>4</td>
 <td>1‐Jun</td>
 <td>4</td>
@@ -500,12 +532,8 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 <td>264</td>
 <td>264</td>
 <td></td>
-<td>1.481762</td>
-<td></td>
-<td></td>
-<td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>5</td>
 <td>2‐Jun</td>
 <td>1</td>
@@ -514,12 +542,8 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 <td>264</td>
 <td>264</td>
 <td></td>
-<td>1.41221</td>
-<td></td>
-<td></td>
-<td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>6</td>
 <td>2‐Jun</td>
 <td>2</td>
@@ -528,12 +552,8 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 <td>269</td>
 <td>266</td>
 <td></td>
-<td>0.187705</td>
-<td></td>
-<td></td>
-<td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>7</td>
 <td>2‐Jun</td>
 <td>3</td>
@@ -542,12 +562,8 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 <td>269</td>
 <td>269</td>
 <td></td>
-<td>0.904607</td>
-<td></td>
-<td></td>
-<td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>8</td>
 <td>2‐Jun</td>
 <td>4</td>
@@ -556,20 +572,11 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 <td>269</td>
 <td>269</td>
 <td></td>
-<td>1.518846</td>
-<td></td>
-<td></td>
-<td></td>
 </tr>
 </tbody>
 </table>
 <p>Now if the assumption is incorrect &amp; then is a small trend, then the sum of the factors will not add up to number of periods in a season. i.e P = 4 Hence a correction is required in the form and we simply multiply each of your Seasonality Factors by</p>
-<blockquote class="blockquote">
-<p>P</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>∑</p>
-</blockquote>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cfrac%7BP%7D%7B%5Csum_%7Bi=1%7D%5E%7Bn%7D%20F_%7Bi%7D%7D%0A"></p>
 <p>Once all the Fi are calculated, we average them according to Shift Number. The summary is in the table.</p>
 <table class="table">
 <colgroup>
@@ -638,68 +645,61 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 <section id="holtwinter-model-levelseasonalitytrend" class="level2">
 <h2 class="anchored" data-anchor-id="holtwinter-model-levelseasonalitytrend">Holt­Winter Model (level+seasonality+trend)</h2>
 <p><strong>Level &amp; Trend:</strong></p>
-<p>Running a linear regression we get the equation. y = 0.812x + 262.6</p>
+<p>Running a linear regression we get the equation.</p>
+<p>y = 0.812x + 262.6</p>
 <p>From the regression equation we get a level of about 263 pints of beer per shift with an trend of 0.8 additional pints per time period. i.e.</p>
 <p>The regression gives you an estimated level of 265 pints per each shift with a trend of 0.80 additional pints per time period. This means that the sales of beer is increasing about 3.2 pints per day. Hence there is a positive trend trend.</p>
 <p><img src="fortunewalla.net/posts/cs09-forecastingseasonaltrendsblayk/a23739094719aa4968faaf829fddb96c.png" class="img-fluid"></p>
 <section id="seasonality" class="level3">
 <h3 class="anchored" data-anchor-id="seasonality">Seasonality</h3>
 <p>This involves estimating the initial values of the level and trend “de‐seasoning” the actual demand by the Seasonality Factors we just found. Part of the data used to calculate the normalized seasonality factors.</p>
-<table>
-<thead>
-<tr class="header">
-<th><strong>Time Period</strong> <strong>(t)</strong></th>
-<th><strong>Date</strong></th>
-<th><strong>Shift</strong></th>
-</tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-<blockquote class="blockquote">
-<p><strong>Number</strong></p>
-</blockquote>
-<p><strong>Pints Sold</strong></p>
-<p><strong>MATop</strong></p>
-<p><strong>MABotto m</strong></p>
-<p><strong>MA_Avg</strong></p>
-<p><strong>Fi</strong></p>
-<p><strong>SUM of each season</strong></p>
-<p><strong>Fi Normalized</strong></p>
-<p><strong>Normali zed Sum</strong></p>
 <table class="table">
 <colgroup>
-<col style="width: 4%">
+<col style="width: 11%">
+<col style="width: 5%">
+<col style="width: 10%">
 <col style="width: 9%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 6%">
 <col style="width: 4%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
 <col style="width: 13%">
-<col style="width: 17%">
-<col style="width: 17%">
-<col style="width: 4%">
-<col style="width: 4%">
+<col style="width: 10%">
+<col style="width: 11%">
+<col style="width: 1%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>1</th>
-<th>1‐Jun</th>
-<th>1</th>
-<th>357</th>
-<th></th>
-<th></th>
-<th></th>
-<th>1.363897</th>
-<th>3.957406897</th>
-<th>1.378576309</th>
-<th>4</th>
-<th></th>
+<th><strong>Time Period (t)</strong></th>
+<th><strong>Date</strong></th>
+<th><strong>Shift Number</strong></th>
+<th><strong>Pints Sold</strong></th>
+<th><strong>MATop</strong></th>
+<th><strong>MABottom</strong></th>
+<th><strong>MA_Avg</strong></th>
+<th><strong>Fi</strong></th>
+<th><strong>SUM of each season</strong></th>
+<th><strong>Fi Normalized</strong></th>
+<th><strong>Normalized Sum</strong></th>
+<th>—</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
+<td>1</td>
+<td>1‐Jun</td>
+<td>1</td>
+<td>357</td>
+<td></td>
+<td></td>
+<td></td>
+<td>1.363897</td>
+<td>3.957406897</td>
+<td>1.378576309</td>
+<td>4</td>
+<td></td>
+</tr>
+<tr class="even">
 <td>2</td>
 <td>1‐Jun</td>
 <td>2</td>
@@ -713,7 +713,7 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>3</td>
 <td>1‐Jun</td>
 <td>3</td>
@@ -727,7 +727,7 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 <td></td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>4</td>
 <td>1‐Jun</td>
 <td>4</td>
@@ -741,7 +741,7 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>5</td>
 <td>2‐Jun</td>
 <td>1</td>
@@ -755,7 +755,7 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 <td>4</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>6</td>
 <td>2‐Jun</td>
 <td>2</td>
@@ -769,7 +769,7 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>7</td>
 <td>2‐Jun</td>
 <td>3</td>
@@ -783,7 +783,7 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 <td></td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>8</td>
 <td>2‐Jun</td>
 <td>4</td>
@@ -797,7 +797,7 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td></td>
 <td></td>
 <td></td>
@@ -866,56 +866,51 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 <section id="initial-parameters" class="level3">
 <h3 class="anchored" data-anchor-id="initial-parameters">Initial Parameters</h3>
 <p>Assume that Alpha=0.15, Beta=0.06 &amp; gamma = 0.05</p>
-<p>,</p>
-<p>1</p>
-<p>1</p>
-<p>1</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Chat%7Bx%7D_%7Bt,t+%5Ctau%7D=(%5Chat%7Ba%7D_%7Bt%7D+%5Ctau%5Chat%7Bb%7D_%7Bt%7D)%5Chat%7BF%7D_%7Bt+%5Ctau-P%7D%0A"> <img src="https://latex.codecogs.com/png.latex?%0A%5Chat%7Ba%7D_%7Bt%7D=%5Calpha%5Cleft(%5Cfrac%7Bx_%7Bt%7D%7D%7B%5Chat%7BF%7D_%7Bt-P%7D%7D%5Cright)+(1-%5Calpha)(%5Chat%7Ba%7D_%7Bt-1%7D+%5Chat%7Bb%7D_%7Bt-1%7D)%0A"> <img src="https://latex.codecogs.com/png.latex?%0A%5Chat%7Bb%7D_%7Bt%7D=%5Cbeta(%5Chat%7Ba%7D_%7Bt%7D-%5Chat%7Ba%7D_%7Bt-1%7D)+(1-%5Cbeta)%5Chat%7Bb%7D_%7Bt-1%7D%0A"> <img src="https://latex.codecogs.com/png.latex?%0A%5Chat%7BF%7D_%7Bt%7D=%5Cgamma%20%5Cleft(%5Cfrac%7Bx_%7Bt%7D%7D%7B%5Chat%7Ba%7D_%7Bt%7D%7D%5Cright)+(1-%5Cgamma)%5Chat%7BF%7D_%7Bt-P%7D%0A"></p>
 <p>We have for the period 120, the following initial parameters,</p>
 <table class="table">
-<thead>
-<tr class="header">
-<th>Fs1</th>
-<th>1.402205906</th>
-<th></th>
-</tr>
-</thead>
 <tbody>
 <tr class="odd">
+<td>Fs1</td>
+<td>1.402205906</td>
+<td></td>
+</tr>
+<tr class="even">
 <td>Fs2</td>
 <td>0.185977102</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Fs3</td>
 <td>0.928395676</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Fs4</td>
 <td>1.483421316</td>
 <td></td>
 </tr>
-<tr class="even">
-<td>a^120</td>
+<tr class="odd">
+<td><img src="https://latex.codecogs.com/png.latex?%5Chat%7Ba%7D_%7B120%7D"></td>
 <td>360.04</td>
 <td>0.812*(120) + 262.6</td>
 </tr>
-<tr class="odd">
-<td>b^120</td>
+<tr class="even">
+<td><img src="https://latex.codecogs.com/png.latex?%5Chat%7Ba%7D_%7B120%7D"></td>
 <td>0.812</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Alpha</td>
 <td>0.15</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Beta</td>
 <td>0.06</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Gamma</td>
 <td>0.05</td>
 <td></td>
@@ -936,10 +931,10 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 <tr class="header">
 <th></th>
 <th><strong>Actual x(t)</strong></th>
-<th><strong>a^i</strong></th>
-<th><strong>b^ i</strong></th>
-<th><strong>F^i</strong></th>
-<th><strong>x^(t+4)</strong></th>
+<th><strong><img src="https://latex.codecogs.com/png.latex?%5Chat%7Ba%7D_%7Bi%7D"></strong></th>
+<th><strong><img src="https://latex.codecogs.com/png.latex?%5Chat%7Bb%7D_%7Bi%7D"></strong></th>
+<th><strong><img src="https://latex.codecogs.com/png.latex?%5Chat%7BF%7D_%7Bi%7D"></strong></th>
+<th><strong><img src="https://latex.codecogs.com/png.latex?%5Chat%7Bx%7D_%7Bt+4%7D"></strong></th>
 </tr>
 </thead>
 <tbody>
@@ -962,7 +957,7 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 </tbody>
 </table>
 <p>Using just the 122 forecast, the rest of the periods i.e.&nbsp;123, 124 &amp; 125 can be calculated using</p>
-<p>,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Chat%7Bx%7D_%7Bt,t+%5Ctau%7D=(%5Chat%7Ba%7D_%7Bt%7D+%5Ctau%5Chat%7Bb%7D_%7Bt%7D)%20%5Chat%7BF%7D_%7Bt+%5Ctau-P%7D%0A"></p>
 </section>
 </section>
 <section id="conclusion" class="level2">
@@ -990,15 +985,13 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>The demand data for a product has been shown in the table below. Compare the forecasts using a</p>
-<p>Moving Average with a period of 5 months, MA(5), and an Exponential smoothing Method with an α of</p>
-<p>0.33. For Exponential Smoothing use the midpoint of first 5 month range of the average as the initial Forecast. (Hint: the Exponential Smoothing Forecast will be initialized with a forecast of 4951 for April made in March.)</p>
+<p>The demand data for a product has been shown in the table below. Compare the forecasts using a Moving Average with a period of 5 months, MA(5), and an Exponential smoothing Method with an α of 0.33. For Exponential Smoothing use the midpoint of first 5 month range of the average as the initial Forecast. (Hint: the Exponential Smoothing Forecast will be initialized with a forecast of 4951 for April made in March.)</p>
 </section>
 <section id="visualization-of-raw-data" class="level2">
 <h2 class="anchored" data-anchor-id="visualization-of-raw-data">Visualization of raw data</h2>
 <p><img src="fortunewalla.net/posts/cs06-choiceofmovingaverageorexponential/fig1.jpg" class="quarto-discovered-preview-image img-fluid"></p>
-<section id="forecasting-with-5point-moving-average-simple-exponential-smoothing" class="level3">
-<h3 class="anchored" data-anchor-id="forecasting-with-5point-moving-average-simple-exponential-smoothing">Forecasting with 5­point moving average &amp; simple exponential smoothing</h3>
+<section id="forecasting-with-5-point-moving-average-simple-exponential-smoothing" class="level3">
+<h3 class="anchored" data-anchor-id="forecasting-with-5-point-moving-average-simple-exponential-smoothing">Forecasting with 5-point moving average &amp; simple exponential smoothing</h3>
 <p>Here we use α=1/3 for our exponential smoothing model</p>
 <p><img src="fortunewalla.net/posts/cs06-choiceofmovingaverageorexponential/fig2.jpg" class="img-fluid"></p>
 </section>
@@ -1059,12 +1052,12 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 <section id="simple-exponential-smoothing-ses" class="level2">
 <h2 class="anchored" data-anchor-id="simple-exponential-smoothing-ses">Simple Exponential Smoothing (SES)</h2>
 <p>We know that SES assumes stationary demand. i.e.&nbsp;it forecasts does not take into account trends or seasonalities. Even so, we would still like to know the effect of using SES on the forecasts.</p>
-<p>Underlying model: xt = a + et</p>
-<p>Forecasting model: x^t,t+1 = α xt + (1 – α) x^t‐1,t</p>
-<p>Where x^t,t+1 is forecast for the next period, xt is the present actual demand and x^t,t‐1 is forecast for the previous period.</p>
+<p>Underlying model: <img src="https://latex.codecogs.com/png.latex?x_%7Bt%7D%20=%20a%20+%20e_%7Bt%7D"></p>
+<p>Forecasting model: <img src="https://latex.codecogs.com/png.latex?%5Chat%7Bx%7D_%7Bt,t+1%7D%20=%20%5Calpha%20x_%7Bt%7D%20+%20(1%20%E2%80%93%20%5Calpha)%20%5Chat%7Bx%7D_%7Bt-1,t%7D"></p>
+<p>Where <img src="https://latex.codecogs.com/png.latex?%5Chat%7Bx%7D_%7Bt,t+1%7D"> is forecast for the next period, <img src="https://latex.codecogs.com/png.latex?x_%7Bt%7D"> is the present actual demand and <img src="https://latex.codecogs.com/png.latex?%5Chat%7Bx%7D_%7Bt-1,t%7D"> is forecast for the previous period.</p>
 <p>Initialization of the parameters</p>
 <p>There are many ways of doing this. We can take the centered average for the first 4 or 5 periods. We can also take the average of the first 3, 4 or 5 periods depending on the data.</p>
-<p>We take a^4,5=205.25</p>
+<p>We take <img src="https://latex.codecogs.com/png.latex?%5Chat%7Ba%7D_%7B4,5%7D">=205.25</p>
 <p>We take α=0.15</p>
 <p>Using the above model, the forecast for period 25 is around 654 bars. Also the forecast for period</p>
 <p>30 will also be the same i.e.&nbsp;654 since the model assumes stationary demand.</p>
@@ -1074,12 +1067,16 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 <h2 class="anchored" data-anchor-id="holts-model-hm">Holt’s Model (HM)</h2>
 <p><img src="fortunewalla.net/posts/cs07-forecastingforsugarbonbon/fig2.jpg" class="img-fluid"></p>
 <p>Since the data shows a positive trend, we use HM which assumes level &amp; trend.</p>
-<p>Underlying model: xt = a + bt + et</p>
-<p>Forecasting model: x^t,t+τ = a^t + τ*b^t Updating Component:</p>
-<p>a^t = α xt + (1 – α) x^t‐1,t b^t = β (a^t ‐ a^t‐1) + (1 – β) b^t‐1</p>
+<p>Underlying model: <img src="https://latex.codecogs.com/png.latex?x_%7Bt%7D%20=%20a%20+%20bt%20+%20e_%7Bt%7D"></p>
+<p>Forecasting model: <img src="https://latex.codecogs.com/png.latex?%5Chat%7Bx%7D_%7Bt,t+%5Ctau%7D%20=%20%5Chat%7Ba%7D_%7Bt%7D+%5Ctau%20%5Chat%7Bb%7D_%7Bt%7D"></p>
+<p>Updating Component:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Chat%7Ba%7D_%7Bt%7D=%5Calpha%20%5Chat%7Bx%7D_%7Bt%7D+%20(1-%5Calpha)%5Chat%7Bx%7D_%7Bt-1,t%7D"></p>
+<p>a^t = α xt + (1 – α) x^t‐1,t</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Chat%7Bb%7D_%7Bt%7D=%5Cbeta%20(%5Chat%7Ba%7D_%7Bt%7D-%5Chat%7Ba%7D_%7Bt-1%7D)+(1-%5Cbeta)%20%5Chat%7Bb%7D_%7Bt-1%7D"></p>
+<p>b^t = β (a^t ‐ a^t‐1) + (1 – β) b^t‐1</p>
 <p>Initialization of parameters</p>
 <p>We take α = 0.2 and β = 0.05</p>
-<p>We take a^t = 157.5 &amp; b^t = 19.1</p>
+<p>We take <img src="https://latex.codecogs.com/png.latex?%5Chat%7Ba%7D_%7Bt%7D"> = 157.5 &amp; <img src="https://latex.codecogs.com/png.latex?%5Chat%7Bb%7D_%7Bt%7D"> = 19.1</p>
 </section>
 <section id="comparison-of-models" class="level2">
 <h2 class="anchored" data-anchor-id="comparison-of-models">Comparison of models</h2>
@@ -1259,10 +1256,11 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 </section>
 <section id="visualization-of-all-the-models" class="level1">
 <h1>Visualization of all the models</h1>
-<p><img src="fortunewalla.net/posts/cs05-evaluationofstationarydemand/9240726888c2daf802a451c0bdf69dfa.png" class="quarto-discovered-preview-image img-fluid"></p>
+<p><img src="fortunewalla.net/posts/cs05-evaluationofstationarydemand/9240726888c2daf802a451c0bdf69dfa.jpg" class="quarto-discovered-preview-image img-fluid"></p>
 <section id="check-for-stationary-demand" class="level2">
 <h2 class="anchored" data-anchor-id="check-for-stationary-demand">Check for stationary demand</h2>
 <p>One way of doing is to determine the coefficient of variation (CV)</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0ACV=%5Cfrac%7BSTDEV(data)%7D%7BAVERAGE(data)%7D%0A"></p>
 <p>We get</p>
 <table class="table">
 <thead>
@@ -1608,8 +1606,8 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 </tbody>
 </table>
 <p><strong>Q5. Which of these three models is most appropriate for forecasting the January 2015 demand?</strong></p>
-<p>None. As shown above, the palm oil data shows a positive trend &amp; seasonality during the years. The</p>
-<p>Naïve model forecast for Jan 2015 is clearly different from the previous trends. While the cumulative &amp; naïve models are quite calm indicating they are forecasting demand closer to the average of the data. The main reason for this discrepancies is that the above three models assume a stationary demand that is very close to the level of the mean.</p>
+<p>None. As shown above, the palm oil data shows a positive trend &amp; seasonality during the years. The Naïve model forecast for Jan 2015 is clearly different from the previous trends. While the cumulative &amp; naïve models are quite calm indicating they are forecasting demand closer to the average of the data. The main reason for this discrepancies is that the above three models assume a stationary demand that is very close to the level of the mean.</p>
+<p><img src="fortunewalla.net/posts/cs01-suitabilityofstationarydemandmodels/fig4.png" class="img-fluid"></p>
 
 
 </section>
@@ -1639,6 +1637,7 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 <section id="visualization-of-the-raw-data" class="level1">
 <h1>Visualization of the raw data</h1>
 <p>Raw data &amp; forecasts supplied by the demand planner at Ordroid Devices</p>
+<p><img src="fortunewalla.net/posts/cs02-performancecharacteristics/fig1.jpg" class="quarto-discovered-preview-image img-fluid"></p>
 <p><strong>Calculate some different performance characteristics for the data sample given.</strong></p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AMD=%5Cfrac%7B%5Csum_%7Bi=1%7D%5E%7Bn%7D%20(Actual_%7Bi%7D-Forecast_%7Bi%7D)%7D%7Bn%7D%0A"> <img src="https://latex.codecogs.com/png.latex?%0AMAD=%5Cfrac%7B%5Csum_%7Bi=1%7D%5E%7Bn%7D%20%5Clvert%20Actual_%7Bi%7D-Forecast_%7Bi%7D%5Crvert%7D%7Bn%7D%0A"> <img src="https://latex.codecogs.com/png.latex?%0ARMSE=%5Csqrt%7B%5Cfrac%7B%5Csum_%7Bi=1%7D%5E%7Bn%7D%20(Actual_%7Bi%7D-Forecast_%7Bi%7D)%5E2%7D%7Bn%7D%7D%0A"> <img src="https://latex.codecogs.com/png.latex?%0AMPE=%5Cfrac%7B%5Csum_%7Bi=1%7D%5E%7Bn%7D%20%5Cfrac%7B%20(Actual_%7Bi%7D-Forecast_%7Bi%7D)%7D%7BActual_%7Bi%7D%7D%7D%7Bn%7D%0A"> <img src="https://latex.codecogs.com/png.latex?%0AMAPE=%5Cfrac%7B%5Csum_%7Bi=1%7D%5E%7Bn%7D%20%5Clvert%20%5Cfrac%7BActual_%7Bi%7D-Forecast_%7Bi%7D%7D%7BActual_%7Bi%7D%7D%5Crvert%7D%7Bn%7D%0A"></p>
 <div class="table-responsive">
@@ -1684,6 +1683,7 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 <p>Seasonality requires a whole cycle. There is not even one full year of data. So as of now, it is too early to fully evaluate seasonality. You need at least two full cycles to determine seasonality.</p>
 <p><strong>Q2. What can you say about the presence of a trend in the demand?</strong></p>
 <p>Although we don’t have a year’s worth of data, there seems to be a positive trend of about 10% increase in demand in the data or about 171 devices per month.</p>
+<p><img src="fortunewalla.net/posts/cs02-performancecharacteristics/fig2.jpg" class="img-fluid"></p>
 <p><strong>Q3. What can you say about the bias of the forecast?</strong></p>
 <p>A bias is a persistent tendency to over or under predict. These forecasts are not persistent in either. In fact, of the six periods, half are over forecast and half are under forecast. So, there does not appear to be any bias in the forecast.</p>
 <p><strong>Q4. What can you say about the accuracy of the forecast?</strong></p>
@@ -1782,10 +1782,10 @@ Q30. Anything you wish to share about your experiences that most people don’t 
 <p><strong>1) ODBC DSN Source Setup:</strong> Please read the previous article about setting up MSSQL to accept remote connections. Make sure you setup the DSN to connect with SQL Server for your OS. Your institution/organization System Administrator should help you out with this. This is the procedure for Windows OS: <a href="http://broadwin.com/Manual/EngMan/23.3.3_Create_an_ODBC_DSN_to_SQL_Server.htm" class="uri">http://broadwin.com/Manual/EngMan/23.3.3_Create_an_ODBC_DSN_to_SQL_Server.htm</a></p>
 <p><strong>2) SAS/ACCESS Interfaces availability:</strong> Before starting make sure your SAS installation contains the SAS/ACCESS Interface tools to connect with external databases.</p>
 <p><strong>SOURCE CODE:</strong></p>
-<pre><code>Proc setinit noalias;
+<pre class="sas"><code>Proc setinit noalias;
 Run;</code></pre>
 <p><strong>OUTPUT:</strong> Partial output shown below.</p>
-<pre><code>NOTE: PROCEDURE SETINIT used (Total process time):
+<pre class="sas"><code>NOTE: PROCEDURE SETINIT used (Total process time):
 real time 0.04 seconds
 cpu time 0.00 seconds
 Product Expiration Dates:
@@ -3913,97 +3913,6 @@ run;</code></pre>
   <category>sas</category>
   <guid>fortunewalla.net/posts/05-howtofindnoofobssas/index.html</guid>
   <pubDate>Sat, 15 Mar 2014 18:30:00 GMT</pubDate>
-</item>
-<item>
-  <title>Combinatorial analysis &amp; calculations using SAS functions – fact(), perm() and comb()</title>
-  <link>fortunewalla.net/posts/04-combinatorialfunctionsas/index.html</link>
-  <description><![CDATA[ 
-
-
-
-<p><em>Created on Friday, March 7th, 2014 at 5:56 am</em></p>
-<p>SAS provides several kinds of functions for doing combinatorial analysis and calculations. Three basic ones will be demonstrated here. <code>fact()</code>,<code>perm()</code> and <code>comb()</code>. All three functions return a missing value for the arguments they cannot compute.</p>
-<p><code>fact(n)</code> is the function for calculating the factorial <code>n!</code> of any non-negative number <code>n</code>.</p>
-<pre><code>275  data _null_;
-276  a=fact(-3);
-277  b=fact(0);
-278  c=fact(9);
-279  d=fact(170);*170! is the max calculable by this particular computer.;
-280  e=fact(171);
-281  f=fact(1000);
-282  put _all_;
-283  run;</code></pre>
-<p>The output is given by:</p>
-<pre><code>NOTE: Invalid argument to function FACT at line 276 column 3.
-NOTE: Invalid argument to function FACT at line 280 column 3.
-NOTE: Invalid argument to function FACT at line 281 column 3.
-a=. b=1 c=362880 d=7.257416E306 e=. f=. _ERROR_=1 _N_=1
-a=. b=1 c=362880 d=7.257416E306 e=. f=. _ERROR_=1 _N_=1
-NOTE: Mathematical operations could not be performed at the following places. The results of the
-      operations have been set to missing values.
-      Each place is given by: (Number of times) at (Line):(Column).
-      1 at 276:3   1 at 280:3   1 at 281:3
-NOTE: DATA statement used (Total process time):</code></pre>
-<p>Similarly for permutation of <code>n</code> objects taken <code>r</code> at a time (where <code>n&gt;r</code>), we have the <code>perm(n,r)</code>. A single argument in the <code>perm()</code> function will calculate the factorial of the argument.</p>
-<pre><code>384  data _null_;
-385  a=perm(3,3);
-386  b=perm(2,5);
-387  c=perm(5,2);
-388  d=perm(5,4);
-389  e=perm(1660,170);
-390  f=perm(4);
-391  put _all_;
-392  run;</code></pre>
-<p>The output is given by</p>
-<pre><code>NOTE: Argument 2 to function PERM at line 386 column 3 is invalid.
-NOTE: Invalid argument to function PERM at line 389 column 3.
-a=6 b=. c=20 d=120 e=. f=24 _ERROR_=1 _N_=1
-a=6 b=. c=20 d=120 e=. f=24 _ERROR_=1 _N_=1
-NOTE: Mathematical operations could not be performed at the following places. The results of the
-      operations have been set to missing values.
-      Each place is given by: (Number of times) at (Line):(Column).
-      1 at 386:3   1 at 389:3
-NOTE: DATA statement used (Total process time):</code></pre>
-<p>Similarly for combination of <code>n</code> objects taken <code>r</code> at a time (where <code>n&gt;r</code>), we have the <code>comb(n,r)</code>. The <code>comb()</code> function requires two arguments.</p>
-<pre><code>433  data _null_;
-434  a=comb(3,3);
-435  b=comb(2,5);
-436  c=comb(5,2);
-437  d=comb(5,4);
-438  e=comb(9960,170);
-439  f=comb(1,0);
-440  put _all_;
-441  run;</code></pre>
-<p>The output is given by:</p>
-<pre><code>NOTE: Argument 2 to function COMB at line 435 column 3 is invalid.
-NOTE: Invalid argument to function COMB at line 438 column 3.
-a=1 b=. c=10 d=5 e=. f=1 _ERROR_=1 _N_=1
-a=1 b=. c=10 d=5 e=. f=1 _ERROR_=1 _N_=1
-NOTE: Mathematical operations could not be performed at the following places.
-      The results of the operations have been set to missing values.
-      Each place is given by: (Number of times) at (Line):(Column).
-      1 at 435:3   1 at 438:3</code></pre>
-<p>We have the logarithmic (natural) counterparts of the above three functions i.e.&nbsp;<code>lfact()</code>, <code>lperm()</code> and <code>lcomb()</code> The output is given below.</p>
-<pre><code>452  data _null_;
-453  a=lfact(10);
-454  b=lperm(10,5);
-455  c=lcomb(10,5);
-456  put _all_;
-457  run;
-
-a=15.104412573 b=10.31692083 c=5.5294290875 _ERROR_=0 _N_=1
-NOTE: DATA statement used (Total process time):
-      real time           0.00 seconds
-      cpu time            0.00 seconds</code></pre>
-
-
-
- ]]></description>
-  <category>article</category>
-  <category>datascience</category>
-  <category>sas</category>
-  <guid>fortunewalla.net/posts/04-combinatorialfunctionsas/index.html</guid>
-  <pubDate>Thu, 06 Mar 2014 18:30:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

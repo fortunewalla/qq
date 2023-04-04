@@ -21,13 +21,13 @@ costs of having fresh beer.
 
 There are four shifts in each day the restaurant is open:
 
-Shift 1from 11 AM to 2 PM
+Shift 1 from 11 AM to 2 PM
 
-Shift 2from 2 PM to 5 PM
+Shift 2 from 2 PM to 5 PM
 
-Shift 3from 5 PM to 8 PM
+Shift 3 from 5 PM to 8 PM
 
-Shift 4from 8 PM to 11 PM
+Shift 4 from 8 PM to 11 PM
 
 The fields in the spreadsheet are:
 
@@ -55,18 +55,17 @@ data or not, we find use two methods to find the seasonality factors.
 
 With no trend the seasonality factors (SF) need not be normalized each season.
 
->   SF per period = total sales per shift / (total sales per month/no. of
->   periods)
+SF per period = total sales per shift / (total sales per month/no. of periods)
 
 Also
 
->   SF per period = total sales per shift / average no. of sales per period
+SF per period = total sales per shift / average no. of sales per period
 
 Mathematically we can express it as
 
-∑ D t i
-
-∑ D /P
+$$
+F_{t}=\frac{\sum_{t=1}^{n} D}{(\sum_{t=1}^{n} D_{t})/P}
+$$
 
 ### Centered Moving Average Method (CMA) 
 
@@ -86,34 +85,9 @@ Each Fi is the xi/MA_Avgi except the first two & last two of the time series.
 The first two & last two Fi are calculated by first & the last MA_Avg values
 respectively.
 
-| Time |
-|------|
-
-
->   Perio d (t)
-
-Date
-
-Shift
-
->   Number
-
-Pints Sold, xi
-
-MATop
-
-MABottom
-
-MA_Avg
-
->   i
-
-Fi
-
- 
-
+| Time Period d(t) | Date | Shift Number | Pints Sold, xi | MATop | MABottom | MA_Avg i | Fi |
+|------------------|------|--------------|----------------|-------|----------|----------|----|
 | 1 | 1‐Jun | 1 | 357 |     |     |     |   | 1.363897 |   |   |   |
-|---|-------|---|-----|-----|-----|-----|---|----------|---|---|---|
 | 2 | 1‐Jun | 2 | 49  |     |     |     |   | 0.187202 |   |   |   |
 | 3 | 1‐Jun | 3 | 242 | 260 | 264 | 262 |   | 0.924546 |   |   |   |
 | 4 | 1‐Jun | 4 | 391 | 264 | 264 | 264 |   | 1.481762 |   |   |   |
@@ -127,9 +101,9 @@ factors will not add up to number of periods in a season. i.e P = 4 Hence a
 correction is required in the form and we simply multiply each of your
 Seasonality Factors by
 
->   P
-
->   ∑
+$$
+\frac{P}{\sum_{i=1}^{n} F_{i}}
+$$
 
 Once all the Fi are calculated, we average them according to Shift Number. The
 summary is in the table.
@@ -147,7 +121,9 @@ summary is in the table.
 
 **Level & Trend:**
 
-Running a linear regression we get the equation. y = 0.812x + 262.6
+Running a linear regression we get the equation.
+
+y = 0.812x + 262.6
 
 From the regression equation we get a level of about 263 pints of beer per shift
 with an trend of 0.8 additional pints per time period. i.e.
@@ -164,31 +140,11 @@ trend.
 This involves estimating the initial values of the level and trend
 “de‐seasoning” the actual demand by the Seasonality Factors we just found. Part
 of the data used to calculate the normalized seasonality factors.
+  
 
-| **Time Period**  **(t)**  | **Date**  | **Shift**  |
-|---------------------------|-----------|------------|
-
-
->   **Number**
-
-**Pints Sold**
-
-**MATop**
-
-**MABotto m**
-
-**MA_Avg**
-
-**Fi**
-
-**SUM of each season**
-
-**Fi Normalized**
-
-**Normali zed Sum**
-
+| **Time Period (t)** | **Date** | **Shift Number** | **Pints Sold** | **MATop** | **MABottom** | **MA_Avg** | **Fi** | **SUM of each season** | **Fi Normalized** | **Normalized Sum** |---|
+|---------------------|----------|------------------|----------------|-----------|--------------|------------|--------|------------------------|-------------------|--------------------|---|
 | 1 | 1‐Jun | 1 | 357 |     |     |     | 1.363897 | 3.957406897 | 1.378576309 | 4 |   |
-|---|-------|---|-----|-----|-----|-----|----------|-------------|-------------|---|---|
 | 2 | 1‐Jun | 2 | 49  |     |     |     | 0.187202 | 3.957406897 | 0.189216356 |   |   |
 | 3 | 1‐Jun | 3 | 242 | 260 | 264 | 262 | 0.924546 | 3.957406897 | 0.934497106 |   |   |
 | 4 | 1‐Jun | 4 | 391 | 264 | 264 | 264 | 1.481762 | 3.957406897 | 1.497710229 |   |   |
@@ -212,23 +168,29 @@ So taking the average of the all the normalized factors we get,
 
 Assume that Alpha=0.15, Beta=0.06 & gamma = 0.05
 
-,
-
-1
-
-1
-
-1
+$$
+\hat{x}_{t,t+\tau}=(\hat{a}_{t}+\tau\hat{b}_{t})\hat{F}_{t+\tau-P}
+$$
+$$
+\hat{a}_{t}=\alpha\left(\frac{x_{t}}{\hat{F}_{t-P}}\right)+(1-\alpha)(\hat{a}_{t-1}+\hat{b}_{t-1})
+$$
+$$
+\hat{b}_{t}=\beta(\hat{a}_{t}-\hat{a}_{t-1})+(1-\beta)\hat{b}_{t-1}
+$$
+$$
+\hat{F}_{t}=\gamma \left(\frac{x_{t}}{\hat{a}_{t}}\right)+(1-\gamma)\hat{F}_{t-P}
+$$
 
 We have for the period 120, the following initial parameters,
 
-| Fs1    | 1.402205906 |                      |
+|        |             |                      |
 |--------|-------------|----------------------|
+| Fs1    | 1.402205906 |                      |
 | Fs2    | 0.185977102 |                      |
 | Fs3    | 0.928395676 |                      |
 | Fs4    | 1.483421316 |                      |
-| a\^120 | 360.04      | 0.812\*(120) + 262.6 |
-| b\^120 | 0.812       |                      |
+| $\hat{a}_{120}$ | 360.04      | 0.812\*(120) + 262.6 |
+| $\hat{a}_{120}$ | 0.812       |                      |
 | Alpha  | 0.15        |                      |
 | Beta   | 0.06        |                      |
 | Gamma  | 0.05        |                      |
@@ -236,19 +198,18 @@ We have for the period 120, the following initial parameters,
 Using above data we can start forecasting for the coming periods 122 i.e. July 2
 Shift 2
 
-|     | **Actual x(t)**  | **a\^i**    | **b\^ i**   | **F\^i**    | **x\^(t+4)**        |
+|     | **Actual x(t)**  | **$\hat{a}_{i}$**    | **$\hat{b}_{i}$**   | **$\hat{F}_{i}$**    | **$\hat{x}_{t+4}$**        |
 |-----|------------------|-------------|-------------|-------------|---------------------|
 | 120 | 557              | 360         | 0.81        |             |                     |
 | 121 | 520              | 362.3151378 | 0.900308265 | 1.403856344 | 513.694 (for t=125) |
 
-Using just the 122 forecast, the rest of the periods i.e. 123, 124 & 125 can be
-calculated using
+Using just the 122 forecast, the rest of the periods i.e. 123, 124 & 125 can be calculated using
 
-,
+$$
+\hat{x}_{t,t+\tau}=(\hat{a}_{t}+\tau\hat{b}_{t}) \hat{F}_{t+\tau-P}
+$$
 
 ## Conclusion 
 
-As observed above, the data about beer consumption follows seasonality & has a
-positive trend. This can be modeled using the Holt‐Winter Model. Of course,
-error analysis must be done to tweak the model especially the seasonality
-factors.
+As observed above, the data about beer consumption follows seasonality & has a positive trend. This can be modeled using the Holt‐Winter Model. Of course,
+error analysis must be done to tweak the model especially the seasonality factors.

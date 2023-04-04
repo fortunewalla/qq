@@ -50,12 +50,12 @@ should help you out with this. This is the procedure for Windows OS:
 **2) SAS/ACCESS Interfaces availability:** Before starting make sure your SAS installation contains the SAS/ACCESS Interface tools to connect with external databases.
 
 **SOURCE CODE:**
-```
+```sas
 Proc setinit noalias;
 Run;
 ```
 **OUTPUT:** Partial output shown below.
-```
+```sas
 NOTE: PROCEDURE SETINIT used (Total process time):
 real time 0.04 seconds
 cpu time 0.00 seconds
