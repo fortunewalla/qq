@@ -43,7 +43,8 @@ Current Work & Projects:
 
 * Review of paper "A comprehensive overview of software product management challenges"
 
-* df
+* Jira Product Discovery Workflows
 
+* Exploring Inclusive Design for new HCI through the metaverse
 
 Below is a list of all work done and ongoing projects.
