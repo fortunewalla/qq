@@ -32,7 +32,9 @@ By Rabindranath Tagore / রবীন্দ্রনাথ ঠাকুর
 
 *Explore product management, data science, & the metaverse.*
 
-![](index.jpg){fig-alt="'Laila and Majnun at School', Folio from a Khamsa (Quintet) of Nizami of Ganja. Calligrapher Ja'far Baisunghuri Iranian. Author Nizami A.H. 835/ 1431–32 CE " width="300" fig-align="center" }
+<!--![](index.jpg){fig-alt="'Laila and Majnun at School', Folio from a Khamsa (Quintet) of Nizami of Ganja. Calligrapher Ja'far Baisunghuri Iranian. Author Nizami A.H. 835/ 1431–32 CE " width="300" fig-align="center" }-->
+
+[![](glider.svg){fig-alt="Portrait of a young Indian scholar, Mughal miniature by Mir Sayyid Ali, c. 1550." width="200px" fig-align="center" }](http://www.catb.org/~esr/hacker-emblem/)
 
 ::: {.text-center}
 :::

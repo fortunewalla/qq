@@ -24,6 +24,8 @@ about:
 
 ![](intro.jpg){fig-alt="Portrait of a young Indian scholar, Mughal miniature by Mir Sayyid Ali, c. 1550." width="300px" fig-align="center" }
 
+<!--![](glider.svg){fig-alt="Portrait of a young Indian scholar, Mughal miniature by Mir Sayyid Ali, c. 1550." width="100px" fig-align="center" }-->
+
 *“Turn yourself not away from three best things: Good Thought, Good Word, and Good Deed.” \~ [Zarathushtra](https://www.britannica.com/biography/Zarathustra)*
 
 The website content is divided into four main types:
