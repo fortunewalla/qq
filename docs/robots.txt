@@ -1,1 +1,1 @@
-Sitemap: fortunewalla.net/sitemap.xml
+Sitemap: /sitemap.xml

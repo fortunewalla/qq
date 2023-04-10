@@ -5,7 +5,7 @@ website:
   title: "L'Œuvre"
   #title: "Oeuvre"
   #site-url: "http://localhost:3221/"
-  site-url: "fortunewalla.net"
+  site-url: "/"
   favicon: favicon.png
   google-analytics: "G-T2KJQMELJT"
   
